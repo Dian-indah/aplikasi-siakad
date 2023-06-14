@@ -1,0 +1,197 @@
+   create table siswa(
+id_siswa int not null auto_increment,
+kode_mapel varchar(255) not null,
+nama_mapel varchar(255) not null,
+
+kelas_id int not null
+);
+
+create table tahun_ajar(
+id_tahun int NOT NULL AUTO_INCREMENT primary key,
+tahun_ajar int not null
+);
+
+create table tingkat_kelas(
+id_tingkat_kelas int not null auto_increment primary key,
+tingkat_kelas int not null
+);
+
+create table jenis_nilai(
+id_jenis_nilai int not null auto_increment primary key,
+jenis_nilai int not null
+);
+
+create table kelas(
+id_kelas int not null auto_increment primary key,
+nama varchar(255) not null,
+id_tahun int not null,
+id_tingkat_kelas int not null
+);
+
+create table guru(
+id_guru int not null auto_increment primary key,
+username varchar(255) not null,
+password varchar(255) not null,
+nama varchar(255) not null,
+nik varchar(16) not null,
+no_kk varchar(16) not null,
+email varchar(255),
+no_telp varchar(20) not null,
+alamat varchar(255) not null,
+jk varchar(20) not null,
+agama varchar(20) not null,
+nuptk varchar(50),
+nip varchar(50),
+tempat_lahir varchar(255) not null,
+tanggal_lahir date not null,
+status_kepegawaian varchar(100) not null,
+sk_pengangkatan varchar(100),
+tmt_pengangkatan date not null,
+lembaga_pengangakatan varchar(255) not null,
+pangkat_golongan varchar(255),
+sumber_gaji varchar(255) not null,
+jenis_ptk varchar(255) not null,
+npwp varchar(255),
+nama_npwp varchar(255),
+kewarganegaraan varchar(255) not null,
+nama_ibu_kandung varchar(255) not null,
+status_perkawinan varchar(20) not null,
+nama_pasangan varchar(255),
+nip_pasangan varchar(255),
+pekerjaan_pasangan varchar(255),
+lisensi_kepsek varchar(5) not null,
+pernah_diklat varchar(5) not null,
+keahlian_braille varchar(5) not null,
+keahlian_bahasa_isyarat varchar(5) not null,
+bank varchar(200),
+no_rekening varchar(255),
+nama_rekening varchar(255)
+);
+
+create table siswa(
+id_siswa int not null auto_increment primary key,
+nipd varchar(255) not null,
+username varchar(255) not null,
+password varchar(10) not null,
+nama varchar(255) not null,
+nisn varchar(16) not null,
+alamat varchar(255) not null,
+jk varchar(20) not null,
+tempat_lahir varchar(255) not null,
+tanggal_lahir date not null,
+nik varchar(16) not null,
+no_kk varchar(16) not null,
+email varchar(255),
+no_telp varchar(20) not null,
+agama varchar(20) ,
+jenis_tinggal varchar(255) ,
+transportasi varchar(255),
+skhun varchar(100) not null,
+penerima_kpps varchar(10) not null,
+no_kpps varchar(255) not null,
+nama_ayah varchar(255) not null,
+bulan_lahir_ayah varchar(20) not null,
+pendidikan_ayah varchar(255),
+pekerjaan_ayah varchar(255),
+penghasilan_ayah varchar(100),
+nik_ayah varchar(16),
+nama_ibu varchar(255) not null,
+bulan_lahir_ibu varchar(20) not null,
+pendidikan_ibu varchar(255),
+pekerjaan_ibu varchar(255),
+penghasilan_ibu varchar(100),
+nik_ibu varchar(16),
+nama_wali varchar(255) not null,
+bulan_lahir_wali varchar(20) not null,
+pendidikan_wali varchar(255),
+pekerjaan_wali varchar(255),
+penghasilan_wali varchar(100),
+nik_wali varchar(16),
+no_peserta_un varchar(100),
+no_seri_ijazah varchar(100),
+penerima_kip varchar(5) not null,
+nomor_kip varchar(100),
+nama_kip varchar(255),
+no_regis_akta varchar(255),
+bank varchar(100),
+no_rekening varchar(200),
+nama_rekening varchar(200),
+layak_pip varchar(5) not null,
+alasan_pip varchar(255),
+kebutuhan_khusus varchar(255),
+sekolah_asal varchar(255) not null,
+anak_ke int not null,
+jml_saudara int not null,
+berat_badan int,
+tinggi_badan int,
+jarak_ke_sekolah int
+);
+
+create table ortu(
+id_ortu int not null auto_increment primary key,
+username varchar(255) not null,
+password varchar(10) not null,
+no_hp varchar(20),
+siswa_id int not null
+);
+
+create table admin(
+id_admin int not null auto_increment primary key,
+username varchar(255) not null,
+password varchar(20) not null,
+nama varchar(255) not null,
+no_hp varchar(20) not null,
+email varchar(255) not null,
+jk varchar(10) not null,
+tempat_lahir varchar(255) not null,
+tanggal_lahir date not null,
+alamat varchar(255) not null,
+status_kepegawaian varchar(10) not null
+);
+
+create table aspirasi(
+id_aspirasi int not null auto_increment primary key,
+ortu_id int not null,
+isi_aspirasi varchar(255) not null
+);
+
+create table mapel(
+id_mapel int not null auto_increment primary key,
+kode_mapel int not null,
+nama_mapel varchar(255) not null,
+kurikulum varchar(255) not null,
+status_kurikulum varchar(255) not null,
+kompetensi_keahlian varchar(255) not null,
+nama_ptk varchar(100) not null,
+guru_id int not null
+);
+
+create table nilai(
+id_nilai int not null auto_increment primary key,
+jenis_nilai int not null,
+mapel_id int not null,
+kelas_siswa_id int not null,
+nilai int not null
+);
+
+create table kehadiran(
+id_kehadiran int not null auto_increment primary key,
+kelas_siswa_id int not null,
+tanggal date not null,
+status varchar(10) not null
+);
+
+create table kelas_siswa(
+id_kelas_siswa int not null auto_increment primary key,
+kelas_id int not null,
+nilai_id int not null,
+kehadiran_id int not null,
+siswa_id int not null,
+nama varchar(20) not null
+);
+
+pakai enum untuk mengisi value dalam satu field
+
+hasMany = 1 to many
+belongsTo = many to 1
+belongsTo == belongsTo
