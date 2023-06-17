@@ -53,7 +53,7 @@
 			href="src/plugins/datatables/css/responsive.bootstrap4.min.css"
 		/>
 		<link rel="stylesheet" type="text/css" href="vendors/styles/style.css" />
-
+  	
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script
 			async
@@ -217,10 +217,8 @@
 				</div>
 			</div>
 			<div class="menu-block customscroll">
-				<div class="sidebar-menu">
-					{{-- @include('Layouts.sidebarGuru') --}}
-					{{-- @include('Layouts.sidebarSiswa') --}}
-					@include('Layouts.sidebarAdmin')
+				<div class="sidebar-menu">					
+					@include('Layouts.sidebar')
 				</div>
 			</div>
 		</div>

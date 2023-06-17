@@ -14,9 +14,17 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        return view('sisor.menu');
     }
 
+    public function nilai(){
+        return view('sisor.nilai');
+    }
+
+    public function kehadiran()
+    {
+        return view('sisor.kehadiran');
+    }
     /**
      * Show the form for creating a new resource.
      *

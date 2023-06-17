@@ -3,7 +3,7 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+		<title>SIAKAD</title>
 
 		<!-- Site favicon -->
 		<link
@@ -103,15 +103,16 @@
 							<div class="login-title">
 								<h2 class="text-center text-primary">Login To Siakad</h2>
 							</div>
-							<form role="form" action="{{ route('auth.login') }}" method="post">
+							<form role="form" action="{{route('auth')}}" method="post">
+								@csrf
 								<div class="select-role">									
 								</div>
 								<div class="input-group custom">
 									<input
-										type="text"
+										type="email"
 										class="form-control form-control-lg"
-										name="username" id="username"
-										placeholder="Username"
+										name="email" id="email"
+										placeholder="Email" autofocus required
 									/>
 									<div class="input-group-append custom">
 										<span class="input-group-text"
@@ -119,6 +120,19 @@
 										></span>
 									</div>
 								</div>
+								{{-- <div class="input-group custom">
+									<input
+										type="text"
+										class="form-control form-control-lg"
+										name="username" id="username"
+										placeholder="Username"  required
+									/>
+									<div class="input-group-append custom">
+										<span class="input-group-text"
+											><i class="icon-copy dw dw-user1"></i
+										></span>
+									</div>
+								</div> --}}
 								<div class="input-group custom">
 									<input
 										type="password"
@@ -158,10 +172,7 @@
 											use code for form submit
 											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
 										-->
-											<button
-												class="btn btn-primary btn-lg btn-block"											
-												>Login</button
-											>
+										<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
 										</div>
 										<div
 											class="font-16 weight-600 pt-10 pb-10 text-center"

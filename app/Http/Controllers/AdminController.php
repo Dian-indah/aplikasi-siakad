@@ -14,9 +14,38 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        return view('Admin.menu');
     }
 
+    public function aspirasi()
+    {
+        return view('Admin.aspirasi');
+    }
+
+    public function pegawai()
+    {
+        return view('Admin.pegawai');
+    }
+    public function guru()
+    {
+        return view('Admin.guru');
+    }
+    public function kelasSiswa()
+    {
+        return view('Admin.KelasSiswa');
+    }
+    public function mapel()
+    {
+        return view('Admin.Mapel');
+    }
+    public function ortu()
+    {
+        return view('Admin.Ortu');
+    }
+    public function Siswa()
+    {
+        return view('Admin.Siswa');
+    }
     /**
      * Show the form for creating a new resource.
      *
