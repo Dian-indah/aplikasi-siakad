@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MapelController;
+use App\Http\Controllers\OrtuController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,7 +15,7 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'authenticate'])->name('auth');
 
 
-// Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth:siswa')->group(function () {
 
@@ -26,14 +29,22 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/menuAdmin', [AdminController::class, 'index'])->name('menuAdmin');
     Route::get('/aspirasiAdmin', [AdminController::class, 'aspirasi'])->name('aspirasiAdmin');
     Route::get('/guruAdmin', [AdminController::class, 'guru'])->name('guruAdmin');
-    Route::get('/mapelAdmin', [AdminController::class, 'mapel'])->name('mapelAdmin');
+    Route::get('/mapelAdmin', [MapelController::class, 'index'])->name('mapelAdmin');
+    Route::post('/tambahMapel', [MapelController::class, 'store'])->name('tambahMapel');
     Route::get('/siswaAdmin', [AdminController::class, 'siswa'])->name('siswaAdmin');
     Route::get('/ortuAdmin', [AdminController::class, 'ortu'])->name('ortuAdmin');
-    Route::get('/pegawaiAdmin', [AdminController::class, 'pegawai'])->name('pegawaiAdmin');
-    Route::get('/siswaAdmin', [AdminController::class, 'siswa'])->name('siswaAdmin');
-    Route::get('/kelasSiswaAdmin', [AdminController::class, 'siswa'])->name('kelasSiswaAdmin');
+    Route::get('/pegawaiAdmin', [AdminController::class, 'pegawai'])->name('pegawaiAdmin'); 
+    Route::get('/kelasSiswaAdmin', [AdminController::class, 'siswa'])->name('kelasSiswaAdmin'); 
+    Route::get('/kurikulum', [KurikulumController::class, 'index'])->name('kurikulum'); 
 });
 
+Route::middleware('auth:guru')->group(function () {
+    Route::get('/menuGuru', [GuruController::class, 'index'])->name('menuGuru');
+});
+
+Route::middleware('auth:ortu')->group(function () {
+    Route::get('/menuOrtu', [OrtuController::class, 'index'])->name('menuOrtu');
+});
 
 // Route::get('/', LandingPageController::class)->name('login');
 

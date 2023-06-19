@@ -36,7 +36,7 @@ class AdminController extends Controller
     }
     public function mapel()
     {
-        return view('Admin.Mapel');
+        return view('mapel.showMapel');
     }
     public function ortu()
     {
@@ -45,6 +45,14 @@ class AdminController extends Controller
     public function Siswa()
     {
         return view('Admin.Siswa');
+    }
+    public function tambahMapel()
+    {
+        return view('Admin.tambahMapel');
+    }
+    public function kurikulum()
+    {
+        return view('Admin.kurikulum');
     }
     /**
      * Show the form for creating a new resource.

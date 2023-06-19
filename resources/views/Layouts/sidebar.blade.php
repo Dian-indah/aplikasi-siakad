@@ -5,6 +5,33 @@
                 <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
             </a>
         </li>
+        <li class="dropdown">
+            <a href="javascript:;" class="dropdown-toggle">
+                <span class="micon bi bi-archive"></span
+                ><span class="mtext">Master Data</span>
+            </a>
+            <ul class="submenu">                
+                <li><a href="{{ route('kurikulum') }}">Master Kurikulum</a></li>                          
+                <li><a href="#">Master Kelas</a></li>
+                <li><a href="#">Jenis Kelas</a></li>             
+            </ul>
+            
+        </li>
+        <li>
+            <a href="#" class="dropdown-toggle no-arrow">
+                <span class="micon dw dw-chat-1"></span><span class="mtext">Tahun Ajar</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="dropdown-toggle no-arrow">
+                <span class="micon dw dw-chat-1"></span><span class="mtext">Kelas</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('kurikulum') }}" class="dropdown-toggle no-arrow">
+                <span class="micon dw dw-chat-1"></span><span class="mtext">Kurikulum</span>
+            </a>
+        </li>
         <li>
             <a href="{{ route('aspirasiAdmin') }}" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Aspirasi</span>
@@ -56,10 +83,9 @@
             <a href="{{ route('kehadiranSiswa') }}" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-calendar-4"></span><span class="mtext">Kehadiran</span>
             </a>
-        </li>
-    @endif
+        </li>    
 
-    {{-- @elseif (Auth::guard('ortu')->check())
+    @elseif (Auth::guard('ortu')->check())
         <li>
             <a href="/menu" class="dropdown-toggle no-arrow">
                 <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
@@ -80,34 +106,33 @@
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Aspirasi</span>
             </a>
         </li>
-    @endif --}}
-{{-- 
-    @elseif (Auth::guard('ortu')->check())
+
+    @elseif (Auth::guard('guru')->check())
         <li>
-            <a href="/guru menu" class="dropdown-toggle no-arrow">
+            <a href="#" class="dropdown-toggle no-arrow">
                 <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
             </a>
         </li>
         <li>
-            <a href="/lihat aspirasi" class="dropdown-toggle no-arrow">
+            <a href="#" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Aspirasi</span>
             </a>
         </li>
         <li>
-            <a href="/guru nilai" class="dropdown-toggle no-arrow">
+            <a href="#" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-notebook"></span><span class="mtext">Nilai</span>
             </a>
         </li>
         <li>
-            <a href="/guru kehadiran" class="dropdown-toggle no-arrow">
+            <a href="#" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-calendar-4"></span><span class="mtext">Kehadiran</span>
             </a>
         </li>
         <li>
-            <a href="/guru profil" class="dropdown-toggle no-arrow">
+            <a href="#" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-user-12"></span><span class="mtext">Profil</span>
             </a>
         </li>
-    @endif --}}
+    @endif
 
 </ul>

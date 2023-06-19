@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
        $credentials = $request->validate([
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
@@ -30,18 +30,26 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->intended(route('menuSiswa'));
             // dd('berhasil login!Siswa');
+        }elseif (Auth::guard('guru')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('menuGuru'));
+            // dd('berhasil login!Siswa');
+        }elseif (Auth::guard('ortu')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('menuOrtu'));
+            // dd('berhasil login!Siswa');
         }
 
         return back()->with('loginError', 'Login Failed!');
     }
-    // public function logout()
-    // {
-    //     Auth::logout();
+    public function logout()
+    {
+        Auth::logout();
 
-    //     request()->session()->invalidate();
+        request()->session()->invalidate();
 
-    //     request()->session()->regenerateToken();
+        request()->session()->regenerateToken();
 
-    //     return redirect('login');
-
+        return redirect('/');
+    }
 }

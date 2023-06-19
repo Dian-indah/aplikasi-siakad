@@ -109,10 +109,10 @@
 								</div>
 								<div class="input-group custom">
 									<input
-										type="email"
+										type="text"
 										class="form-control form-control-lg"
-										name="email" id="email"
-										placeholder="Email" autofocus required
+										name="username" id="username"
+										placeholder="Username" autofocus required
 									/>
 									<div class="input-group-append custom">
 										<span class="input-group-text"

@@ -50,6 +50,16 @@ return [
             'driver' => 'session',
             'provider' => 'admin',
         ],
+
+        'guru' => [
+            'driver' => 'session',
+            'provider' => 'guru',
+        ],
+
+        'ortu' => [
+            'driver' => 'session',
+            'provider' => 'ortu',
+        ],
     ],
 
     /*
@@ -83,6 +93,16 @@ return [
         'users' => [
             'driver' => 'database',
             'table' => 'users',
+        ],
+
+        'guru' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Guru::class,
+        ],
+
+        'ortu' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Ortu::class,
         ],
     ],
 
