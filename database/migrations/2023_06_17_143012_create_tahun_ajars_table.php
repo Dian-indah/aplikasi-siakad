@@ -16,6 +16,7 @@ class CreateTahunAjarsTable extends Migration
         Schema::create('tahunAjar', function (Blueprint $table) {
             $table->id();
             $table->string('tahunAjar');
+            $table->string('semester');
             $table->timestamps();
         });
     }

@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class TahunAjar extends Model
 {
-    use HasFactory;
+    public $timestamps = false;
+    public $table = "tahunAjar";
+    protected $fillable = [     
+        'tahunAjar', 
+        'semester',
+    ];
 }

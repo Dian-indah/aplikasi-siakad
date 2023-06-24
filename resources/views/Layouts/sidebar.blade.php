@@ -2,24 +2,12 @@
     @if (Auth::guard('admin')->check())
         <li>
             <a href="{{ route('menuAdmin') }}" class="dropdown-toggle no-arrow">
-                <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
+                <span class="micon fa fa-home"></span><span class="mtext">Menu</span>
             </a>
-        </li>
-        <li class="dropdown">
-            <a href="javascript:;" class="dropdown-toggle">
-                <span class="micon bi bi-archive"></span
-                ><span class="mtext">Master Data</span>
-            </a>
-            <ul class="submenu">                
-                <li><a href="{{ route('kurikulum') }}">Master Kurikulum</a></li>                          
-                <li><a href="#">Master Kelas</a></li>
-                <li><a href="#">Jenis Kelas</a></li>             
-            </ul>
-            
-        </li>
+        </li>       
         <li>
-            <a href="#" class="dropdown-toggle no-arrow">
-                <span class="micon dw dw-chat-1"></span><span class="mtext">Tahun Ajar</span>
+            <a href="{{ route('tahunAjar') }}" class="dropdown-toggle no-arrow">
+                <span class="micon fa fa-calendar-check-o"></span><span class="mtext">Tahun Ajar</span>
             </a>
         </li>
         <li>
@@ -29,12 +17,12 @@
         </li>
         <li>
             <a href="{{ route('kurikulum') }}" class="dropdown-toggle no-arrow">
-                <span class="micon dw dw-chat-1"></span><span class="mtext">Kurikulum</span>
+                <span class="micon fa fa-sticky-note-o"></span><span class="mtext">Kurikulum</span>
             </a>
         </li>
         <li>
             <a href="{{ route('aspirasiAdmin') }}" class="dropdown-toggle no-arrow">
-                <span class="micon dw dw-chat-1"></span><span class="mtext">Aspirasi</span>
+                <span class="micon fa fa-comments-o"></span><span class="mtext">Aspirasi</span>
             </a>
         </li>
         <li>
@@ -44,7 +32,7 @@
         </li>
         <li>
             <a href="{{ route('mapelAdmin') }}" class="dropdown-toggle no-arrow">
-                <span class="micon dw dw-calendar-4"></span><span class="mtext">Mata Pelajaran</span>
+                <span class="micon fa fa-calendar-o"></span><span class="mtext">Mata Pelajaran</span>
             </a>
         </li>
         <li>
@@ -64,14 +52,14 @@
         </li>
         <li>
             <a href="{{ route('kelasSiswaAdmin') }}" class="dropdown-toggle no-arrow">
-                <span class="micon dw dw-book"></span><span class="mtext">Kelas Siswa</span>
+                <span class="micon fa fa-university"></span><span class="mtext">Kelas Siswa</span>
             </a>
         </li>   
 
     @elseif (Auth::guard('siswa')->check())
         <li>
             <a href="{{ route('menuSiswa') }}" class="dropdown-toggle no-arrow">
-                <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
+                <span class="micon fa fa-home"></span><span class="mtext">Menu</span>
             </a>
         </li>
         <li>

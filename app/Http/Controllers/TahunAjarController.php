@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TahunAjar;
-use App\Http\Requests\StoreTahunAjarRequest;
-use App\Http\Requests\UpdateTahunAjarRequest;
+use Illuminate\Http\Request;
 
 class TahunAjarController extends Controller
 {
@@ -15,8 +14,27 @@ class TahunAjarController extends Controller
      */
     public function index()
     {
-        //
+        $data = TahunAjar::all();
+        return view('Admin.tahunAjar', compact('data'));
     }
+
+    public function simpanTahunAjar(Request $request)
+    {
+        $request->validate([
+            'tahunAjar' => 'required',
+            'semester' => 'required',
+        ]);
+
+        $Id = TahunAjar::create([
+            'tahunAjar' => $request->post('tahunAjar'),
+            'semester' => $request->post('semester'),
+        ]);
+
+        return redirect()
+            ->route('tahunAjar');
+            // ->with('success', 'data Kurikulum telah ditambahkan');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -24,17 +42,6 @@ class TahunAjarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTahunAjarRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTahunAjarRequest $request)
     {
         //
     }
@@ -60,19 +67,7 @@ class TahunAjarController extends Controller
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTahunAjarRequest  $request
-     * @param  \App\Models\TahunAjar  $tahunAjar
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTahunAjarRequest $request, TahunAjar $tahunAjar)
-    {
-        //
-    }
-
+ 
     /**
      * Remove the specified resource from storage.
      *

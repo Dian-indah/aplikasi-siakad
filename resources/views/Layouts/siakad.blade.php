@@ -20,9 +20,12 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="vendors/styles/core.css" />
     <link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css" />
-    <link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" type="text/css" href="src/plugins/datatables/css/responsive.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="plugins/sweetalert2/sweetalert2.css" />
     <link rel="stylesheet" type="text/css" href="vendors/styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css" />
+    <link rel="stylesheet" type="text/css" href="plugins/datatables/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="plugins/datatables/css/responsive.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
@@ -156,9 +159,13 @@
 
     <div class="left-side-bar">
         <div class="brand-logo">
-            <a href="index.html">
-                <img src="vendors/images/siakad.png" alt="" class="dark-logo" />
-                <img src="vendors/images/siakad.png" alt="" class="light-logo" />
+            <a href="#">
+                <img src="vendors/images/smk-light.svg" class="light-logo" width="50px" height="50px"
+                    alt="" />
+                <img src="vendors/images/smk-light.svg" class="dark-logo" width="50px" height="50px"
+                    alt="" />
+                <img src="vendors/images/siakad-dark.svg" alt="" class="dark-logo" />
+                <img src="vendors/images/siakad-light.svg" alt="" class="light-logo" />
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
                 <i class="ion-close-round"></i>
@@ -181,20 +188,27 @@
     </div>
     {{-- End content --}}
     <!-- js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="plugins/sweetalert2/sweet-alert.init.js"></script>
+    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="plugins/toastr/toastr.min.js"></script>
     <script src="vendors/scripts/core.js"></script>
     <script src="vendors/scripts/script.min.js"></script>
     <script src="vendors/scripts/process.js"></script>
     <script src="vendors/scripts/layout-settings.js"></script>
-    <script src="src/plugins/apexcharts/apexcharts.min.js"></script>
-    <script src="src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-    <script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-    <script src="src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+    {{-- <script src="plugins/sweetalert2/sweetalert2.all.js"></script> --}}
+    <script src="plugins/apexcharts/apexcharts.min.js"></script>
+    <script src="plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables/js/responsive.bootstrap4.min.js"></script>
     <script src="vendors/scripts/dashboard.js"></script>
+
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"
             style="display: none; visibility: hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    @yield('js')
 </body>
 
 </html>

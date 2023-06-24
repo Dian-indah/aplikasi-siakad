@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-9 col-sm-9">
                     <div class="title">
-                        <h4>Daftar Kurikulum</h4>
+                        <h4>Daftar Tahun Ajar</h4>
                     </div>
                 </div>
             </div>
@@ -24,18 +24,20 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Nama Kurikulum</th>
+                            <th scope="col">Tahun Ajar</th>
+                            <th scope="col">Semester</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>                                                                                               
-                        @foreach ($data as $row)                        
+                    <tbody>
+                        @foreach ($data as $row)
                             <tr>
-                                <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{ $row->namaKurikulum }}</td>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $row->tahunAjar }}</td>
+                                <td>{{ $row->semester }}</td>
                                 <td class="text-center">
-                                    {{-- <a href="/detail nilai" class="btn btn-info" type="button">
-                                        <i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a> --}}
+                                    <a href="#" class="btn btn-info" type="button">
+                                        <i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a>
                                     <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-warning editKurikulum"
                                         type="button">
                                         <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
@@ -45,12 +47,12 @@
                                         onsubmit="return confirm(
                                             'Yakin Ingin hapus data ?')"
                                             >
-                                        @csrf                                     
-                                        <button id="sa-warning" class="btn btn-danger"><i class="fa fa-trash" ></i> Hapus</button>
+                                        @csrf --}}
+                                    {{-- id="sa-warning" --}}
+                                    {{-- <button  class="btn btn-danger"><i class="fa fa-trash" ></i> Hapus</button>
                                     </form> --}}
-                                    <button id="sa-warning" class="btn btn-danger"><i class="fa fa-trash" ></i> Hapus</button>
                                 </td>
-                            </tr>                                                                          
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -62,32 +64,37 @@
     <!-- Start tambah modal -->
     <div class="modal fade" id="small-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header ">
+                <div class="modal-header">
                     <h4 class="modal-title" id="myLargeModalLabel">
-                        Nama Kurikulum
+                        Tambah Data
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         ×
                     </button>
                 </div>
-                <form action="{{ route('tambahKurikulum') }}" method="POST">
+                <form action="{{ route('tambahTahunAjar') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group row">
+                        <div class="form-group ">
                             <div class="col-sm-12 col-md-12">
-                                <input id="namaKurikulum" name="namaKurikulum" class="form-control" type="text"
-                                    required />
-                                <!-- error message untuk content -->
-                                @error('namaKurikulum')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <label for="tahunAjar">Tahun Ajar</label>
+                                <input id="tahunAjar" name="tahunAjar" placeholder="Tahun Ajar" class="form-control" type="text" required />
+                            </div>
+                            <div class="col-sm-12 col-md-12">
+                                <label for="semester">Semester</label>
+                                <div class="col-sm-12 col-md-12">
+									<select id="semester" name="semester" class="custom-select col-12" required>
+										<option disabled selected="">Pilih..</option>
+										<option value="Ganjil">Ganjil</option>
+										<option value="Genap">Genap</option>								
+									</select>
+								</div>
+                                {{-- <input placeholder="Semester" class="form-control" type="text" required /> --}}
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group">
                             <div class="col-sm-12 col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
@@ -101,7 +108,7 @@
     {{-- end modal tambah --}}
 
     <!-- Start edit modal -->
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    {{-- <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
@@ -133,11 +140,11 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- end edit tambah --}}
 @endsection
 @section('js')
-    <script>
+    {{-- <script>
         $('body').on('click', '.editKurikulum', function() { //editKurikulum ada di class
             var id = $(this).data(
                 'id'
@@ -156,5 +163,5 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 @endsection

@@ -7,6 +7,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\OrtuController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\TahunAjarController;
+use App\Models\TahunAjar;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,7 +37,18 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/ortuAdmin', [AdminController::class, 'ortu'])->name('ortuAdmin');
     Route::get('/pegawaiAdmin', [AdminController::class, 'pegawai'])->name('pegawaiAdmin'); 
     Route::get('/kelasSiswaAdmin', [AdminController::class, 'siswa'])->name('kelasSiswaAdmin'); 
+
+    // Kurikulum
     Route::get('/kurikulum', [KurikulumController::class, 'index'])->name('kurikulum'); 
+    Route::post('/kurikulum/tambahKurikulum', [KurikulumController::class, 'store'])->name('tambahKurikulum'); 
+    // Route::get('/kurikulum/editKurikulum/{id}', [KurikulumController::class, 'editKurikulum'])->name('editKurikulum'); 
+    Route::get('/kurikulum/editKurikulum/{id}', [KurikulumController::class, 'getById'])->name('editKurikulum'); 
+    Route::post('/kurikulum/updateKurikulum', [KurikulumController::class, 'updateKurikulum'])->name('updateKurikulum'); 
+    Route::post('/kurikulum/delete/{id}', [KurikulumController::class, 'destroy'])->name('deleteKurikulum'); 
+
+    //Tahun Ajar
+    Route::get('/tahunAjar', [TahunAjarController::class, 'index'])->name('tahunAjar'); 
+    Route::post('/tahunAjar/tambahTahunAjar', [TahunAjarController::class, 'simpanTahunAjar'])->name('tambahTahunAjar'); 
 });
 
 Route::middleware('auth:guru')->group(function () {
@@ -155,4 +168,4 @@ Route::middleware('auth:ortu')->group(function () {
 // Route::view('welcome', 'welcome');
 // Route::view('table', 'table');
 // Route::view('modals', 'modals');
-// Route::view('form', 'form');
+Route::view('form', 'form');
