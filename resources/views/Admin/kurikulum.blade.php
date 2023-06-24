@@ -28,10 +28,10 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>                                                                                               
-                        @foreach ($data as $row)                        
+                    <tbody>
+                        @foreach ($data as $row)
                             <tr>
-                                <th scope="row">{{$loop->iteration}}</th>
+                                <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $row->namaKurikulum }}</td>
                                 <td class="text-center">
                                     {{-- <a href="/detail nilai" class="btn btn-info" type="button">
@@ -39,18 +39,18 @@
                                     <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-warning editKurikulum"
                                         type="button">
                                         <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
-                                    {{-- <a href="{{route ('deleteKurikulum/'$row->id)}}" class="btn btn-info" type="button">
-                                            <i class="icon-copy dw dw-email-2 fa-sm"></i> Delete</a> --}}
-                                    {{-- <form action="{{ route('deleteKurikulum', $row->id) }}" method="POST" class="d-inline"
-                                        onsubmit="return confirm(
-                                            'Yakin Ingin hapus data ?')"
+                            
+                                    <form action="{{ route('deleteKurikulum', $row->id) }}" method="POST" class="d-inline"
+                                        {{-- onsubmit="return confirm(
+                                            'Yakin Ingin hapus data ?')" --}}
                                             >
                                         @csrf                                     
-                                        <button id="sa-warning" class="btn btn-danger"><i class="fa fa-trash" ></i> Hapus</button>
-                                    </form> --}}
-                                    <button id="sa-warning" class="btn btn-danger"><i class="fa fa-trash" ></i> Hapus</button>
-                                </td>
-                            </tr>                                                                          
+                                        <a href="javascript:;" id="btn-hapus" data-id="<?= $row->id ?>" class="btn btn-danger" ><i class="fa fa-trash" ></i> Hapus</a>
+                                    </form>
+                                    {{-- <button " class="btn btn-danger"><i class="fa fa-trash"></i>
+                                        Hapus</button>
+                                </td> --}}
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -141,7 +141,7 @@
         $('body').on('click', '.editKurikulum', function() { //editKurikulum ada di class
             var id = $(this).data(
                 'id'
-                ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
+            ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
             $.ajax({
                 url: "{{ url('/kurikulum/editKurikulum') }}" + '/' + id,
                 type: 'get',
@@ -155,6 +155,31 @@
                     $('#idKurikulum').val(data.data.id);
                 }
             });
+        });
+
+        $(document).on('click', '#btn-hapus', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            swal({
+                    title: "Apakah Yakin Dihapus?",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Ya!",
+                    showCancelButton: true,
+                },
+                function() {
+                    alert('test');
+                    // $.ajax({
+                    //     type: "POST",
+                    //     url: "{{ url('/kurikulum/delete') }}" + '/' + id,
+                    //     data: {
+                    //         id: id
+                    //     },
+                    //     success: function(data) {
+                    //         //
+                    //     }
+                    // });
+                });
         });
     </script>
 @endsection

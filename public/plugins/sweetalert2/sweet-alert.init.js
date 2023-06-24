@@ -47,48 +47,25 @@
         });
 
         //Warning Message
-        // $('#sa-warning').click(function () {
-        //     swal({
-        //         title: 'Apakah yakin ingin menghapus?',
-        //         text: "You won't be able to revert this!",
-        //         type: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonClass: 'btn btn-success',
-        //         cancelButtonClass: 'btn btn-danger',
-        //         confirmButtonText: 'Yes, delete it!'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //           Swal.fire(
-        //             'Deleted!',
-        //             'Your file has been deleted.',
-        //             'success'
-        //           )
-        //         }
-        //     })
-        // });
-
-        $('#sa-warning').click(function (e) {
-            alert('test');
-            // e.preventDefault();
-            // var id = $(this).data('id');
-            // swal({
-            //         title: "Apakah Yakin Ingin Menghapus?",
-            //         type: "error",
-            //         confirmButtonClass: "btn-danger",
-            //         confirmButtonText: "Ya",
-            //         showCancelButton: true,
-            //     },
-            //     function() {
-            //         $.ajax({
-            //             type: "POST",
-            //             url: "{{url('/destroy')}}",
-            //             data: {id:id},
-            //             success: function (data) {
-            //                           //
-            //                 }         
-            //         });
-            // });
-        });
+        $('#sa-warning').click(function () {
+            swal({
+                title: 'Apakah yakin ingin menghapus?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                  )
+                }
+            })
+        });    
 
         //Custom Position Message
         $('#sa-custom-position').click(function () {

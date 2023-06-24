@@ -43,14 +43,13 @@
                                         <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
                                     {{-- <a href="{{route ('deleteKurikulum/'$row->id)}}" class="btn btn-info" type="button">
                                             <i class="icon-copy dw dw-email-2 fa-sm"></i> Delete</a> --}}
-                                    {{-- <form action="{{ route('deleteKurikulum', $row->id) }}" method="POST" class="d-inline"
+                                     <form action="{{ route('deleteKurikulum', $row->id) }}" method="POST" class="d-inline"
                                         onsubmit="return confirm(
                                             'Yakin Ingin hapus data ?')"
                                             >
-                                        @csrf --}}
-                                    {{-- id="sa-warning" --}}
-                                    {{-- <button  class="btn btn-danger"><i class="fa fa-trash" ></i> Hapus</button>
-                                    </form> --}}
+                                        @csrf                              
+                                    <button  class="btn btn-danger"><i class="fa fa-trash" ></i> Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
