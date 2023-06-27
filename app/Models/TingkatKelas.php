@@ -5,14 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TahunAjar extends Model
+class TingkatKelas extends Model
 {
-    public $timestamps = false;
-    public $table = "tahunAjar";
-    protected $fillable = [     
-        'tahunAjar', 
-        'semester',
-    ];
+    use HasFactory;
+    public $table = "tingkatKelas";
 
     public function kelas()
     {

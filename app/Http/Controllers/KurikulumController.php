@@ -59,10 +59,11 @@ class KurikulumController extends Controller
 
     public function destroy($id)
     {
+       
         $kurikulum = Kurikulum::findOrFail($id);
         $kurikulum->delete();
 
-        // return response()->json(['success' => true]);
-        return back()->with('berhasil', 'Berhasil Dihapus');
+        return response()->json(['success' => true]);
+        // return back()->with('berhasil', 'Berhasil Dihapus');
     }
 }

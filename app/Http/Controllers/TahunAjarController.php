@@ -35,6 +35,39 @@ class TahunAjarController extends Controller
             // ->with('success', 'data Kurikulum telah ditambahkan');
     }
 
+    public function getById($id)
+    {
+        $ta = TahunAjar::find($id);
+        $response['success'] = true;
+        $response['data'] = $ta;
+        return response()->json($response);
+    }
+
+    public function updateTahunAjar(Request $request)
+    {
+        $id = $request->idTahunAjar;
+          $data = TahunAjar::find($id)         
+          ->update([
+            //'kode' => $request->kode,
+            'tahunAjar' => $request->tahunAjar,
+            'semester' => $request->semester,
+          ]);  
+
+          return redirect()
+            ->route('tahunAjar');
+            // ->with('success', 'data Kurikulum telah ditambahkan');
+    }
+
+    public function destroy($id)
+    {
+       
+        $kurikulum = tahunAjar::findOrFail($id);
+        $kurikulum->delete();
+
+        return response()->json(['success' => true]);
+        // return back()->with('berhasil', 'Berhasil Dihapus');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -64,17 +97,6 @@ class TahunAjarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(TahunAjar $tahunAjar)
-    {
-        //
-    }
- 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TahunAjar  $tahunAjar
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TahunAjar $tahunAjar)
     {
         //
     }

@@ -8,6 +8,7 @@ use App\Http\Controllers\MapelController;
 use App\Http\Controllers\OrtuController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAjarController;
+use App\Http\Controllers\KelasController;
 use App\Models\TahunAjar;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,12 @@ Route::middleware('auth:admin')->group(function () {
     //Tahun Ajar
     Route::get('/tahunAjar', [TahunAjarController::class, 'index'])->name('tahunAjar'); 
     Route::post('/tahunAjar/tambahTahunAjar', [TahunAjarController::class, 'simpanTahunAjar'])->name('tambahTahunAjar'); 
+    Route::get('/tahunAjar/editTahunAjar/{id}', [TahunAjarController::class, 'getById'])->name('editTahunAjar'); 
+    Route::post('/tahunAjar/updateTahunAjar', [TahunAjarController::class, 'updateTahunAjar'])->name('updateTahunAjar'); 
+    Route::post('/tahunAjar/delete/{id}', [TahunAjarController::class, 'destroy'])->name('deleteTahunAjar');
+
+    //Kelas atau ruang kelas
+    Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
 });
 
 Route::middleware('auth:guru')->group(function () {

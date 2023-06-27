@@ -11,7 +11,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="dropdown-toggle no-arrow">
+            <a href="{{ route('kelas') }}" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Kelas</span>
             </a>
         </li>
