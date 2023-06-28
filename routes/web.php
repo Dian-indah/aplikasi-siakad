@@ -56,6 +56,9 @@ Route::middleware('auth:admin')->group(function () {
 
     //Kelas atau ruang kelas
     Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
+    Route::post('/kelas/tambahKelas', [KelasController::class, 'simpanKelas'])->name('tambahKelas'); 
+    Route::get('/kelas/editKelas/{id}', [KelasController::class, 'getById'])->name('editKelas'); 
+    Route::post('/kelas/updateKelas', [KelasController::class, 'updateKelas'])->name('updateKelas'); 
 });
 
 Route::middleware('auth:guru')->group(function () {

@@ -24,10 +24,11 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
+                            <th scope="col">ID</th>
                             <th scope="col">Nama Ruang Kelas</th>
-                            <th scope="col">Nama Ruang Kelas</th>
-                            <th scope="col">Nama Ruang Kelas</th>
-                            <th scope="col">Nama Ruang Kelas</th>
+                            <th scope="col">Tingkat Kelas</th>
+                            <th scope="col">Tahun Ajar</th>
+                            <th scope="col">Semester</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -35,17 +36,18 @@
                         @foreach ($data as $row)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $row->id }}</td>
                                 <td>{{ $row->namaKelas }}</td>
-                                <td>{{ $row->tingkatKelas->tingkatKelas }}</td>
-                                <td>{{ $row->tahunAjar->tahunAjar }}</td>
-                                <td>{{ $row->tahunAjar->semester }}</td>
+                                <td>{{ $row->tingkatKelas }}</td>
+                                <td>{{ $row->tahunAjar }}</td>
+                                <td>{{ $row->semester }}</td>
                                 <td class="text-center">
                                     {{-- <a href="/detail nilai" class="btn btn-info" type="button">
                                         <i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a> --}}
-                                    <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-warning editKurikulum"
+                                    <a href="javascript:;" data-id="<?= $row->id ?>" id="editKelas" class="btn btn-warning "
                                         type="button"> <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
-                                    <a href="javascript:;" id="btn-hapus" data-id="<?= $row->id ?>"
-                                        class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                    <a href="javascript:;" id="btn-hapus" class="btn btn-danger"><i class="fa fa-trash"></i>
+                                        Hapus</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -57,31 +59,53 @@
     </div>
 
     <!-- Start tambah modal -->
-    {{-- <div class="modal fade" id="small-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div class="modal fade" id="small-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header ">
                     <h4 class="modal-title" id="myLargeModalLabel">
-                        Nama Kurikulum
+                        Tambah Kelas
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         ×
                     </button>
                 </div>
-                <form action="{{ route('tambahKurikulum') }}" method="POST">
+                <form action="{{ route('tambahKelas') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <input id="namaKurikulum" name="namaKurikulum" class="form-control" type="text"
-                                    required />
-                                <!-- error message untuk content -->
-                                @error('namaKurikulum')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <label for="namaKelas">Tingkat Kelas</label>
+                                <input id="namaKelas" name="namaKelas" class="form-control" type="text"
+                                    placeholder="Nama Kelas" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="tingkatKelasId">Tingkat Kelas</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select id="tingkatKelasId" name="tingkatKelasId" class="custom-select col-12" required>
+                                        <option disabled selected="">Pilih..</option>
+                                        @foreach ($tingkatkelas as $row)
+                                            <option value="{{ $row->id }}">{{ $row->tingkatKelas }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="tahunAjarId">Tahun Ajar</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select id="tahunAjarId" name="tahunAjarId" class="custom-select col-12" required>
+                                        <option disabled selected="">Pilih..</option>
+                                        @foreach ($tahunajar as $row)
+                                            <option value="{{ $row->id }}">{{ $row->tahunAjar }} {{ $row->semester }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -89,35 +113,64 @@
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </div>
-
                     </div>
                 </form>
             </div>
         </div>
-    </div> --}}
+    </div>
     {{-- end modal tambah --}}
 
     <!-- Start edit modal -->
-    {{-- <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header ">
                     <h4 class="modal-title" id="myLargeModalLabel">
-                        Nama Kurikulum
+                        Nama Kelas
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         ×
                     </button>
                 </div>
-                <form action="{{ route('updateKurikulum') }}" method="POST">
+                <form action="{{ route('updateKelas') }}" method="POST">
                     @csrf
                     <div class="modal-body">
+                        <input type="text" id="idKelas" name="idKelas">
                         <div class="form-group row">
-                            <input type="text" name="idKurikulum" id="idKurikulum" hidden />
                             <div class="col-sm-12 col-md-12">
-                                <input id="editNamaKurikulum" name="editNamaKurikulum" class="form-control" type="text"
-                                    required />
+                                <label for="namaKelas">Tingkat Kelas</label>
+                                <input id="editNamaKelas" name="editNamaKelas" class="form-control" type="text"
+                                    placeholder="Nama Kelas" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="tingkatKelasId">Tingkat Kelas</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select id="editTingkatKelasId" name="editTingkatKelasId"
+                                        class="custom-select col-12" required>
+                                        <option disabled selected="">Pilih..</option>
+                                        @foreach ($tingkatkelas as $row)
+                                            <option value="{{ $row->id }}">{{ $row->tingkatKelas }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="tahunAjarId">Tahun Ajar</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select id="editTahunAjarId" name="editTahunAjarId" class="custom-select col-12"
+                                        required>
+                                        <option disabled selected="">Pilih..</option>
+                                        @foreach ($tahunajar as $row)
+                                            <option value="{{ $row->id }}">{{ $row->tahunAjar }}
+                                                {{ $row->semester }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -125,35 +178,35 @@
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </div>
-
                     </div>
                 </form>
             </div>
         </div>
-    </div> --}}
-    {{-- end edit tambah --}}
+    </div>
+    {{-- end edit --}}
 @endsection
 @section('js')
     <script>
         // Edit Data
-        // $('body').on('click', '.editKurikulum', function() { //editKurikulum ada di class
-        //     var id = $(this).data(
-        //         'id'
-        //     ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
-        //     $.ajax({
-        //         url: "{{ url('/kurikulum/editKurikulum') }}" + '/' + id,
-        //         type: 'get',
-        //         dataType: 'json',
-        //         data: {},
-        //         beforeSend: function() {},
-        //         success: function(data) {
-        //             // console.log(data.data)
-        //             $('#editmodal').modal('show'); //menampilkan modal
-        //             $('#editNamaKurikulum').val(data.data.namaKurikulum);
-        //             $('#idKurikulum').val(data.data.id);
-        //         }
-        //     });
-        // });
+        $(document).on('click', '#editKelas', function() { //editKelas ada di class           
+            alert("test");
+            // var id = $(this).data('id'); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
+            // $.ajax({                                
+            //     url: "{{ url('/kelas/editKelas') }}" + '/' + id,
+            //     type: 'get',
+            //     dataType: 'json',
+            //     data: {},
+            //     beforeSend: function() {},
+            //     success: function(data) {
+            //         // console.log(data.data)
+            //         $('#editmodal').modal('show'); //menampilkan modal
+            //         $('#editNamaKelas').val(data.data.namaKelas);
+            //         $('#editTahunAjarId').val(data.data.tahunAjarId);
+            //         $('#editTingkatKelasId').val(data.data.tingkatKelasId);
+            //         $('#idKelas').val(data.data.id);
+            //     }
+            // });
+        });
         // Hapus Data
         // $(document).on('click', '#btn-hapus', function(e) {
         //     e.preventDefault();

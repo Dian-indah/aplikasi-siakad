@@ -28,11 +28,6 @@ class KurikulumController extends Controller
             // ->with('success', 'data Kurikulum telah ditambahkan');
     }
 
-    public function editKurikulum($id)
-    {
-        $kur = Kurikulum::find($id);
-        return view('Admin.kurikulum', compact('kur'));
-    }
     
     public function getById($id)
     {

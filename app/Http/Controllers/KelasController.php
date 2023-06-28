@@ -9,87 +9,67 @@ use App\Models\TahunAjar;
 
 class KelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $model;
+
+    public function __construct()
+    {       
+        $this->model = new Kelas();
+
+    }
     public function index()
+    {     
+        $data = $this->model->getKelas();
+        $tingkatkelas = $this->model->getAllTingkatKelas();
+        $tahunajar = $this->model->getAllTahunAjar();
+        return view('kelas.index', compact('data','tingkatkelas','tahunajar'));       
+    }  
+
+    public function simpanKelas(Request $request)
     {
-        $kelas = Kelas::all();
-        $tahunAjar = TahunAjar::all();
-        $tingkatKelas = TingkatKelas::all();
-        $data = [
-            'kelas' => Kelas::all(),
-            'tahunAjar' => TahunAjar::all(),
-            'tingkatKelas' => TingkatKelas::all(),
-        ];
-        return view('kelas.index', compact('data'));
+        $request->validate([
+            'namaKelas' => 'required',
+            'tahunAjarId' => 'required',
+            'tingkatKelasId' => 'required',
+        ]);
+        // dd($request->all());
+        
+
+        $Id = Kelas::create([
+            'namaKelas' => $request->post('namaKelas'),
+            'tahunAjarId' => $request->post('tahunAjarId'),
+            'tingkatKelasId' => $request->post('tingkatKelasId'),                     
+        ]);
+
+        return redirect()
+            ->route('kelas');
+            // ->with('success', 'data Kurikulum telah ditambahkan');
+    }    
+ 
+    public function getById($id)
+    {
+        $kel = Kelas::find($id);
+        $response['success'] = true;
+        $response['data'] = $kel;
+        // dd($response)
+        return response()->json($response);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function updateKelas(Request $request)
     {
-        //
+        $id = $request->idKurikulum;
+          $data = Kelas::find($id)
+          // Satuan::where('id', $id)
+          ->update([
+            //'kode' => $request->kode,
+            'namaKelas' => $request->editNamaKelas,
+            'tahunAjarId' => $request->editTahunAjar,
+            'tingkatKelas' => $request->editTingkatKelas,
+          ]); 
+
+          return redirect()
+            ->route('kelas');
+            // ->with('success', 'data Kurikulum telah ditambahkan');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+ 
 }
