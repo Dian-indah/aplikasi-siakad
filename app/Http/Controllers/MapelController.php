@@ -27,6 +27,8 @@ class MapelController extends Controller
 
     public function simpanMapel(Request $request)
     {
+
+        // dd($request);
         $request->validate([
             'kodeMapel' => 'required',
             'namaMapel' => 'required',
