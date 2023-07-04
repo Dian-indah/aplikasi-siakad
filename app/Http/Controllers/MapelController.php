@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kurikulum;
 use Illuminate\Http\Request;
 use App\Models\Mapel;
-use TingkatKelas;
 
 class MapelController extends Controller
 {
@@ -51,6 +49,34 @@ class MapelController extends Controller
 
         return redirect()
         ->route('mapel');
+    }
+
+    public function getById($id)
+    {
+        $mapel = Mapel::find($id);
+        $response['success'] = true;
+        $response['data'] = $mapel;
+        return response()->json($response);
+    }
+
+    public function updateMapel(Request $request)
+    {
+        $id = $request->idMapel;
+          $data = Mapel::find($id)     
+          ->update([
+            //'kode' => $request->kode,
+            'kodeMapel' => $request->editNamaKelas,
+            'namaMapel' => $request->editNamaKelas,            
+            'tingkatKelasId' => $request->editTingkatKelas,
+            'kurikulumId' => $request->editKurikulum,
+            'statusKurikulum' => $request->editStatusKurikulum,
+            'kompetensiKeahlian' => $request->editKompetensiKeahlian,
+            'namaPtk' => $request->editNamaPtk,
+          ]); 
+
+          return redirect()
+            ->route('mapel');
+            // ->with('success', 'data Kurikulum telah ditambahkan');
     }
     
 }

@@ -180,23 +180,23 @@
                         <input type="text" id="idKelas" name="idKelas" hidden>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="kodeMapel">Kode Mapel</label>
-                                <input id="kodeMapel" name="kodeMapel" class="form-control" type="text"
+                                <label for="editKodeMapel">Kode Mapel</label>
+                                <input id="editKodeMapel" name="editKodeMapel" class="form-control" type="text"
                                     placeholder="Kode Mapel" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="namaMapel">Nama Mapel</label>
-                                <input id="namaMapel" name="namaMapel" class="form-control" type="text"
+                                <label for="editNamaMapel">Nama Mapel</label>
+                                <input id="editNamaMapel" name="editNamaMapel" class="form-control" type="text"
                                     placeholder="Nama Mapel" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="tingkatKelasId">Tingkat Kelas</label>
+                                <label for="editTingkatKelasId">Tingkat Kelas</label>
                                 <div class="col-sm-12 col-md-12">
-                                    <select id="tingkatKelasId" name="tingkatKelasId" class="custom-select col-12"
+                                    <select id="editTingkatKelasId" name="editTingkatKelasId" class="custom-select col-12"
                                         required>
                                         <option disabled selected="">Pilih..</option>
                                         @foreach ($tingkatKelas as $row)
@@ -208,9 +208,9 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="kurikulumId">Kurikulum</label>
+                                <label for="editKurikulumId">Kurikulum</label>
                                 <div class="col-sm-12 col-md-12">
-                                    <select id="kurikulumId" name="kurikulumId" class="custom-select col-12" required>
+                                    <select id="editKurikulumId" name="editKurikulumId" class="custom-select col-12" required>
                                         <option disabled selected="">Pilih..</option>
                                         @foreach ($kurikulum as $row)
                                             <option value="{{ $row->id }}">{{ $row->namaKurikulum }}
@@ -222,22 +222,22 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="statusKurikulum">Status Kurikulum</label>
-                                <input id="statusKurikulum" name="statusKurikulum" class="form-control" type="text"
+                                <label for="editStatusKurikulum">Status Kurikulum</label>
+                                <input id="editStatusKurikulum" name="editStatusKurikulum" class="form-control" type="text"
                                     placeholder="Status Kurikulum" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="kompetensiKeahlian">Kompetensi Keahlian</label>
-                                <input id="kompetensiKeahlian" name="kompetensiKeahlian" class="form-control"
+                                <label for="editKompetensiKeahlian">Kompetensi Keahlian</label>
+                                <input id="editKompetensiKeahlian" name="editKompetensiKeahlian" class="form-control"
                                     type="text" placeholder="Kompetensi Keahlian" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="namaPtk">Nama PTK</label>
-                                <input id="namaPtk" name="namaPtk" class="form-control" type="text"
+                                <label for="editNamaPtk">Nama PTK</label>
+                                <input id="editNamaPtk" name="editNamaPtk" class="form-control" type="text"
                                     placeholder="Nama PTK" required />
                             </div>
                         </div>
@@ -260,7 +260,7 @@
             var id = $(this).data('id'); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
             $.ajax({                                
                 // console.log(id);
-                url: "{{ url('/kelas/editMapel') }}" + '/' + id,
+                url: "{{ url('/mapel/editMapel') }}" + '/' + id,
                 type: 'get',
                 dataType: 'json',
                 data: {},
@@ -268,9 +268,13 @@
                 success: function(data) {
                     // console.log(data.data)
                     $('#editmodal').modal('show'); //menampilkan modal
+                    $('#editKodeMapel').val(data.data.kodeMapel);
                     $('#editNamaMapel').val(data.data.namaMapel);
-                    $('#editTahunAjar').val(data.data.tahunAjarId);
-                    $('#editTingkatKelas').val(data.data.tingkatKelasId);
+                    $('#editTingkatKelasId').val(data.data.tingkatKelasId);
+                    $('#editKurikulumId').val(data.data.kurikulumId);
+                    $('#editStatusKurikulum').val(data.data.statusKurikulum);
+                    $('#editKompetensiKeahlian').val(data.data.kompetensiKeahlian);
+                    $('#editNamaPtk').val(data.data.namaPtk);
                     $('#idKelas').val(data.data.id);
                 }
             });

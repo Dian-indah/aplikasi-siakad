@@ -27,7 +27,7 @@ class Mapel extends Model
     public function getMapel()
     {
         $q = DB::select("
-        SELECT mapel.kodeMapel kodeMapel, mapel.namaMapel namaMapel,
+        SELECT mapel.id id, mapel.kodeMapel kodeMapel, mapel.namaMapel namaMapel,
         mapel.statusKurikulum statusKurikulum, mapel.kompetensiKeahlian kompetensiKeahlian,
         mapel.namaPtk namaPtk, tingkatKelas.tingkatKelas tingkatKelas, 
         kurikulum.namaKurikulum namaKurikulum FROM mapel
