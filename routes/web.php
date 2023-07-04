@@ -32,17 +32,19 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/menuAdmin', [AdminController::class, 'index'])->name('menuAdmin');
     Route::get('/aspirasiAdmin', [AdminController::class, 'aspirasi'])->name('aspirasiAdmin');
     Route::get('/guruAdmin', [AdminController::class, 'guru'])->name('guruAdmin');
-    Route::get('/mapelAdmin', [MapelController::class, 'index'])->name('mapelAdmin');
-    Route::post('/tambahMapel', [MapelController::class, 'store'])->name('tambahMapel');
+    // Route::post('/tambahMapel', [MapelController::class, 'store'])->name('tambahMapel');
     Route::get('/siswaAdmin', [AdminController::class, 'siswa'])->name('siswaAdmin');
     Route::get('/ortuAdmin', [AdminController::class, 'ortu'])->name('ortuAdmin');
     Route::get('/pegawaiAdmin', [AdminController::class, 'pegawai'])->name('pegawaiAdmin'); 
     Route::get('/kelasSiswaAdmin', [AdminController::class, 'siswa'])->name('kelasSiswaAdmin'); 
 
+    //Mapel
+    Route::get('/mapel', [MapelController::class, 'index'])->name('mapel');
+    Route::post('/tambahMapel', [MapelController::class, 'simpanMapel'])->name('tambahMapel');
+
     // Kurikulum
     Route::get('/kurikulum', [KurikulumController::class, 'index'])->name('kurikulum'); 
     Route::post('/kurikulum/tambahKurikulum', [KurikulumController::class, 'store'])->name('tambahKurikulum'); 
-    // Route::get('/kurikulum/editKurikulum/{id}', [KurikulumController::class, 'editKurikulum'])->name('editKurikulum'); 
     Route::get('/kurikulum/editKurikulum/{id}', [KurikulumController::class, 'getById'])->name('editKurikulum'); 
     Route::post('/kurikulum/updateKurikulum', [KurikulumController::class, 'updateKurikulum'])->name('updateKurikulum'); 
     Route::post('/kurikulum/delete/{id}', [KurikulumController::class, 'destroy'])->name('deleteKurikulum'); 
@@ -59,6 +61,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/kelas/tambahKelas', [KelasController::class, 'simpanKelas'])->name('tambahKelas'); 
     Route::get('/kelas/editKelas/{id}', [KelasController::class, 'getById'])->name('editKelas'); 
     Route::post('/kelas/updateKelas', [KelasController::class, 'updateKelas'])->name('updateKelas'); 
+    Route::post('/kelas/delete/{id}', [KelasController::class, 'destroy'])->name('deleteKelas');
 });
 
 Route::middleware('auth:guru')->group(function () {

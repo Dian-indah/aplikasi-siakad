@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TingkatKelas;
 use App\Models\Kelas;
-use App\Models\TahunAjar;
 
 class KelasController extends Controller
 {
@@ -47,28 +45,37 @@ class KelasController extends Controller
  
     public function getById($id)
     {
-        $kel = Kelas::find($id);
+        $kur = Kelas::find($id);
         $response['success'] = true;
-        $response['data'] = $kel;
-        // dd($response)
+        $response['data'] = $kur;
         return response()->json($response);
     }
 
     public function updateKelas(Request $request)
     {
-        $id = $request->idKurikulum;
-          $data = Kelas::find($id)
-          // Satuan::where('id', $id)
+        $id = $request->idKelas;
+          $data = Kelas::find($id)     
           ->update([
             //'kode' => $request->kode,
             'namaKelas' => $request->editNamaKelas,
             'tahunAjarId' => $request->editTahunAjar,
-            'tingkatKelas' => $request->editTingkatKelas,
+            'tingkatKelasId' => $request->editTingkatKelas,
           ]); 
 
           return redirect()
             ->route('kelas');
             // ->with('success', 'data Kurikulum telah ditambahkan');
+    }
+
+    public function destroy($id)
+    {
+       
+        $kelas = Kelas::findOrFail($id);
+        $kelas->delete();
+
+
+        return response()->json(['success' => true]);
+        // return back()->with('berhasil', 'Berhasil Dihapus');
     }
 
  

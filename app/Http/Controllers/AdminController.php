@@ -44,7 +44,7 @@ class AdminController extends Controller
     }
     public function Siswa()
     {
-        return view('Admin.Siswa');
+        return view('siswa.index');
     }
     public function tambahMapel()
     {

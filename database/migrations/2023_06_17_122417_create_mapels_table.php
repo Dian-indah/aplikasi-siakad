@@ -16,12 +16,12 @@ class CreateMapelsTable extends Migration
         Schema::create('mapel', function (Blueprint $table) {
             $table->id();
             $table->string('kodeMapel');
-            $table->string('namaMapel');
-            $table->string('kelas');
-            $table->string('kurikulum');
+            $table->string('namaMapel');      
             $table->string('statusKurikulum');
             $table->string('kompetensiKeahlian');
             $table->string('namaPtk');
+            $table->foreignId('tingkatKelasId')->constrained('tingkatKelas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('kurikulumId')->constrained('kurikulum')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -46,7 +46,7 @@
                                         <i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a> --}}
                                     <a href="javascript:;" data-id="<?= $row->id ?>" id="editKelas" class="btn btn-warning "
                                         type="button"> <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
-                                    <a href="javascript:;" id="btn-hapus" class="btn btn-danger"><i class="fa fa-trash"></i>
+                                    <a href="javascript:;" data-id="<?= $row->id ?>" id="btn-hapus" class="btn btn-danger"><i class="fa fa-trash"></i>
                                         Hapus</a>
                                 </td>
                             </tr>
@@ -123,7 +123,7 @@
     <!-- Start edit modal -->
     <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header ">
                     <h4 class="modal-title" id="myLargeModalLabel">
@@ -136,7 +136,7 @@
                 <form action="{{ route('updateKelas') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <input type="text" id="idKelas" name="idKelas">
+                        <input type="text" id="idKelas" name="idKelas" hidden>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="namaKelas">Tingkat Kelas</label>
@@ -148,7 +148,7 @@
                             <div class="col-sm-12 col-md-12">
                                 <label for="tingkatKelasId">Tingkat Kelas</label>
                                 <div class="col-sm-12 col-md-12">
-                                    <select id="editTingkatKelasId" name="editTingkatKelasId"
+                                    <select id="editTingkatKelas" name="editTingkatKelas"
                                         class="custom-select col-12" required>
                                         <option disabled selected="">Pilih..</option>
                                         @foreach ($tingkatkelas as $row)
@@ -162,7 +162,7 @@
                             <div class="col-sm-12 col-md-12">
                                 <label for="tahunAjarId">Tahun Ajar</label>
                                 <div class="col-sm-12 col-md-12">
-                                    <select id="editTahunAjarId" name="editTahunAjarId" class="custom-select col-12"
+                                    <select id="editTahunAjar" name="editTahunAjar" class="custom-select col-12"
                                         required>
                                         <option disabled selected="">Pilih..</option>
                                         @foreach ($tahunajar as $row)
@@ -188,57 +188,57 @@
 @section('js')
     <script>
         // Edit Data
-        $(document).on('click', '#editKelas', function() { //editKelas ada di class           
-            alert("test");
-            // var id = $(this).data('id'); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
-            // $.ajax({                                
-            //     url: "{{ url('/kelas/editKelas') }}" + '/' + id,
-            //     type: 'get',
-            //     dataType: 'json',
-            //     data: {},
-            //     beforeSend: function() {},
-            //     success: function(data) {
-            //         // console.log(data.data)
-            //         $('#editmodal').modal('show'); //menampilkan modal
-            //         $('#editNamaKelas').val(data.data.namaKelas);
-            //         $('#editTahunAjarId').val(data.data.tahunAjarId);
-            //         $('#editTingkatKelasId').val(data.data.tingkatKelasId);
-            //         $('#idKelas').val(data.data.id);
-            //     }
-            // });
+        $(document).on('click', '#editKelas', function() { //editKelas ada di class                      
+            var id = $(this).data('id'); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
+            $.ajax({                                
+                // console.log(id);
+                url: "{{ url('/kelas/editKelas') }}" + '/' + id,
+                type: 'get',
+                dataType: 'json',
+                data: {},
+                beforeSend: function() {},
+                success: function(data) {
+                    // console.log(data.data)
+                    $('#editmodal').modal('show'); //menampilkan modal
+                    $('#editNamaKelas').val(data.data.namaKelas);
+                    $('#editTahunAjar').val(data.data.tahunAjarId);
+                    $('#editTingkatKelas').val(data.data.tingkatKelasId);
+                    $('#idKelas').val(data.data.id);
+                }
+            });
         });
         // Hapus Data
-        // $(document).on('click', '#btn-hapus', function(e) {
-        //     e.preventDefault();
-        //     var id = $(this).data('id');
-        //     swal({
-        //             title: "Apakah Yakin Dihapus?",
-        //             type: "error",
-        //             confirmButtonClass: "btn-danger",
-        //             confirmButtonText: "Ya!",
-        //             showCancelButton: true,
-        //         }, )
-        //         .then(function(e) {
-        //             if (e.value == true) {
-        //                 $.ajaxSetup({
-        //                     headers: {
-        //                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //                     }
-        //                 });
-        //                 $.ajax({
-        //                     type: "POST",
-        //                     url: "{{ url('/kurikulum/delete') }}" + '/' + id,
-        //                     data: {
-        //                         id: id
-        //                     },
-        //                     success: function(data) {
-        //                         if (data.success == true) {
-        //                             window.location.reload();
-        //                         }
-        //                     }
-        //                 });
-        //             }
-        //         })
-        // });
+        $(document).on('click', '#btn-hapus', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            swal({
+                    title: "Apakah Yakin Dihapus?",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Ya!",
+                    showCancelButton: true,
+                }, )
+                .then(function(e) {
+                    if (e.value == true) {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ url('/kelas/delete') }}" + '/' + id,
+                            data: {
+                                id: id
+                            },
+                            success: function(data) {
+                                if (data.success == true) {
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    }
+                })
+        });
     </script>
 @endsection

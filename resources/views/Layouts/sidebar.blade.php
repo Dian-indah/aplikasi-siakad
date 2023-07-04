@@ -9,32 +9,32 @@
             <a href="{{ route('tahunAjar') }}" class="dropdown-toggle no-arrow">
                 <span class="micon fa fa-calendar-check-o"></span><span class="mtext">Tahun Ajar</span>
             </a>
-        </li>
-        <li>
-            <a href="{{ route('kelas') }}" class="dropdown-toggle no-arrow">
-                <span class="micon dw dw-chat-1"></span><span class="mtext">Kelas</span>
-            </a>
-        </li>
+        </li>        
         <li>
             <a href="{{ route('kurikulum') }}" class="dropdown-toggle no-arrow">
                 <span class="micon fa fa-sticky-note-o"></span><span class="mtext">Kurikulum</span>
             </a>
         </li>
         <li>
-            <a href="{{ route('aspirasiAdmin') }}" class="dropdown-toggle no-arrow">
-                <span class="micon fa fa-comments-o"></span><span class="mtext">Aspirasi</span>
+            <a href="{{ route('kelas') }}" class="dropdown-toggle no-arrow">
+                <span class="micon dw dw-chat-1"></span><span class="mtext">Kelas</span>
             </a>
-        </li>
+        </li>  
+        <li>
+            <a href="{{ route('mapel') }}" class="dropdown-toggle no-arrow">
+                <span class="micon fa fa-calendar-o"></span><span class="mtext">Mata Pelajaran</span>
+            </a>
+        </li>      
         <li>
             <a href="{{ route('guruAdmin') }}" class="dropdown-toggle no-arrow">
                 <span class="micon fa fa-vcard"></span><span class="mtext">Guru</span>
             </a>
-        </li>
+        </li>       
         <li>
-            <a href="{{ route('mapelAdmin') }}" class="dropdown-toggle no-arrow">
-                <span class="micon fa fa-calendar-o"></span><span class="mtext">Mata Pelajaran</span>
+            <a href="{{ route('kelasSiswaAdmin') }}" class="dropdown-toggle no-arrow">
+                <span class="micon fa fa-university"></span><span class="mtext">Kelas Siswa</span>
             </a>
-        </li>
+        </li> 
         <li>
             <a href="{{ route('siswaAdmin') }}" class="dropdown-toggle no-arrow">
                 <span class="micon fa fa-graduation-cap"></span><span class="mtext">Siswa</span>
@@ -49,12 +49,12 @@
             <a href="{{ route('pegawaiAdmin') }}" class="dropdown-toggle no-arrow">
                 <span class="micon fa fa-user-secret"></span><span class="mtext">Administrator</span>
             </a>
-        </li>
+        </li>        
         <li>
-            <a href="{{ route('kelasSiswaAdmin') }}" class="dropdown-toggle no-arrow">
-                <span class="micon fa fa-university"></span><span class="mtext">Kelas Siswa</span>
+            <a href="{{ route('aspirasiAdmin') }}" class="dropdown-toggle no-arrow">
+                <span class="micon fa fa-comments-o"></span><span class="mtext">Aspirasi</span>
             </a>
-        </li>   
+        </li>  
 
     @elseif (Auth::guard('siswa')->check())
         <li>

@@ -14,10 +14,11 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return view('sisor.menu');
+        $data = Siswa::all();
+        return view('siswa.index', compact('data'));
     }
 
-    public function nilai(){
+    public function nilai(){ 
         return view('sisor.nilai');
     }
 
