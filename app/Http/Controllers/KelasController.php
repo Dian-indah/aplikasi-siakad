@@ -14,6 +14,7 @@ class KelasController extends Controller
         $this->model = new Kelas();
 
     }
+    
     public function index()
     {     
         $data = $this->model->getKelas();
@@ -28,9 +29,7 @@ class KelasController extends Controller
             'namaKelas' => 'required',
             'tahunAjarId' => 'required',
             'tingkatKelasId' => 'required',
-        ]);
-        // dd($request->all());
-        
+        ]);           
 
         $Id = Kelas::create([
             'namaKelas' => $request->post('namaKelas'),

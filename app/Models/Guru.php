@@ -10,11 +10,40 @@ class Guru extends Authenticatable
 {
     public $timestamps = false;
     public $table = "guru";
-    protected $fillable = [
-        'name',
-        'username',
-        'password',  
-        'email' 
+    protected $fillable = [    
+        'username',               
+        'nik',
+        'noKk',
+        'nuptk',
+        'jenkel',
+        'tempatLahir',
+        'tanggalLahir',
+        'nip',
+        'notelp',
+        'email',
+        'statusKepegawaian',
+        'skPengangkatan',
+        'tmpPengangkatan',
+        'lembagaPengangkatan',
+        'sumberGaji',
+        'jenisPtk',
+        'npwp',
+        'namaNpwp',
+        'agama',
+        'alamat',
+        'kewarganegaraan',
+        'ibuKandung',
+        'statusPerkawinan',
+        'namaPasangan',
+        'nipPasangan',
+        'pekerjaanPasangan',
+        'lisensiKepsek',
+        'diklatKepegawaian',
+        'keahlianBraile',
+        'keahlianBahasaIsyarat',
+        'bank',
+        'norek',
+        'namaRek',
     ];
 
     protected $hidden = [
