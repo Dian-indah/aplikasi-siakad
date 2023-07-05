@@ -56,11 +56,11 @@
                                 <td>{{ $row->statusKurikulum }}</td>
                                 <td>{{ $row->kompetensiKeahlian }}</td>
                                 <td>{{ $row->namaPtk }}</td>
-                                <td class="text-center">
-                                    <a href="/detail nilai" class="btn btn-info" type="button"><i
-                                            class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a>
+                                <td class="text-center">                                 
                                     <a href="javascript:;" data-id="<?= $row->id ?>" id="editMapel" class="btn btn-warning" type="button"><i class="icon-copy fa fa-edit"
-                                            aria-hidden="true"></i> Edit</a>
+                                            aria-hidden="true"></i></a>
+                                            <a href="javascript:;" data-id="<?= $row->id ?>" id="btn-hapus" class="btn btn-danger"><i class="fa fa-trash"></i>
+                                                </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -167,8 +167,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header ">
-                    <h4 class="modal-title" id="myLargeModalLabel">
-                        Nama Mata Pelajaran
+                    <h4 class="modPal-title" id="myLargeModalLabel">
+                        Edit Nama Mata Pelajaran
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         ×
@@ -177,7 +177,7 @@
                 <form action="{{ route('updateMapel') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <input type="text" id="idKelas" name="idKelas" hidden>
+                        <input type="text" id="idMapel" name="idMapel" hidden>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="editKodeMapel">Kode Mapel</label>
@@ -275,42 +275,42 @@
                     $('#editStatusKurikulum').val(data.data.statusKurikulum);
                     $('#editKompetensiKeahlian').val(data.data.kompetensiKeahlian);
                     $('#editNamaPtk').val(data.data.namaPtk);
-                    $('#idKelas').val(data.data.id);
+                    $('#idMapel').val(data.data.id);
                 }
             });
         });
         // Hapus Data
-        // $(document).on('click', '#btn-hapus', function(e) {
-        //     e.preventDefault();
-        //     var id = $(this).data('id');
-        //     swal({
-        //             title: "Apakah Yakin Dihapus?",
-        //             type: "error",
-        //             confirmButtonClass: "btn-danger",
-        //             confirmButtonText: "Ya!",
-        //             showCancelButton: true,
-        //         }, )
-        //         .then(function(e) {
-        //             if (e.value == true) {
-        //                 $.ajaxSetup({
-        //                     headers: {
-        //                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //                     }
-        //                 });
-        //                 $.ajax({
-        //                     type: "POST",
-        //                     url: "{{ url('/kelas/delete') }}" + '/' + id,
-        //                     data: {
-        //                         id: id
-        //                     },
-        //                     success: function(data) {
-        //                         if (data.success == true) {
-        //                             window.location.reload();
-        //                         }
-        //                     }
-        //                 });
-        //             }
-        //         })
-        // });
+        $(document).on('click', '#btn-hapus', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            swal({
+                    title: "Apakah Yakin Dihapus?",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Ya!",
+                    showCancelButton: true,
+                }, )
+                .then(function(e) {
+                    if (e.value == true) {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ url('/mapel/delete') }}" + '/' + id,
+                            data: {
+                                id: id
+                            },
+                            success: function(data) {
+                                if (data.success == true) {
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    }
+                })
+        });
     </script>
 @endsection

@@ -65,10 +65,10 @@ class MapelController extends Controller
           $data = Mapel::find($id)     
           ->update([
             //'kode' => $request->kode,
-            'kodeMapel' => $request->editNamaKelas,
-            'namaMapel' => $request->editNamaKelas,            
-            'tingkatKelasId' => $request->editTingkatKelas,
-            'kurikulumId' => $request->editKurikulum,
+            'kodeMapel' => $request->editKodeMapel,
+            'namaMapel' => $request->editNamaMapel,            
+            'tingkatKelasId' => $request->editTingkatKelasId,
+            'kurikulumId' => $request->editKurikulumId,
             'statusKurikulum' => $request->editStatusKurikulum,
             'kompetensiKeahlian' => $request->editKompetensiKeahlian,
             'namaPtk' => $request->editNamaPtk,
@@ -77,6 +77,17 @@ class MapelController extends Controller
           return redirect()
             ->route('mapel');
             // ->with('success', 'data Kurikulum telah ditambahkan');
+    }
+
+    public function destroy($id)
+    {
+       
+        $mapel = Mapel::findOrFail($id);
+        $mapel->delete();
+
+
+        return response()->json(['success' => true]);
+        // return back()->with('berhasil', 'Berhasil Dihapus');
     }
     
 }

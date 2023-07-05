@@ -43,6 +43,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/tambahMapel', [MapelController::class, 'simpanMapel'])->name('tambahMapel');
     Route::get('/mapel/editMapel/{id}', [MapelController::class, 'getById'])->name('editMapel'); 
     Route::post('/mapel/updateMapel', [MapelController::class, 'updateMapel'])->name('updateMapel');
+    Route::post('/mapel/delete/{id}', [MapelController::class, 'destroy'])->name('deleteMapel'); 
 
     // Kurikulum
     Route::get('/kurikulum', [KurikulumController::class, 'index'])->name('kurikulum'); 
