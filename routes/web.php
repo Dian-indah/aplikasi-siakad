@@ -31,8 +31,6 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::get('/menuAdmin', [AdminController::class, 'index'])->name('menuAdmin');
     Route::get('/aspirasiAdmin', [AdminController::class, 'aspirasi'])->name('aspirasiAdmin');
-    Route::get('/guruAdmin', [AdminController::class, 'guru'])->name('guruAdmin');
-    // Route::post('/tambahMapel', [MapelController::class, 'store'])->name('tambahMapel');
     Route::get('/siswaAdmin', [AdminController::class, 'siswa'])->name('siswaAdmin');
     Route::get('/ortuAdmin', [AdminController::class, 'ortu'])->name('ortuAdmin');
     Route::get('/pegawaiAdmin', [AdminController::class, 'pegawai'])->name('pegawaiAdmin'); 
@@ -65,6 +63,12 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/kelas/editKelas/{id}', [KelasController::class, 'getById'])->name('editKelas'); 
     Route::post('/kelas/updateKelas', [KelasController::class, 'updateKelas'])->name('updateKelas'); 
     Route::post('/kelas/delete/{id}', [KelasController::class, 'destroy'])->name('deleteKelas');
+
+    //Guru
+    Route::get('/masterGuru', [GuruController::class, 'index'])->name('masterGuru');
+    Route::get('/guru/showGuruById/{id}', [GuruController::class, 'showGuruById'])->name('showGuruById');
+    Route::get('/guru/editGuru/{id}', [GuruController::class, 'editGuru'])->name('editGuru'); 
+    Route::post('/guru/updateGuru', [GuruController::class, 'updateGuru'])->name('updateGuru'); 
 });
 
 Route::middleware('auth:guru')->group(function () {

@@ -25,7 +25,7 @@ class CreateGurusTable extends Migration
             $table->date('tanggalLahir');
             $table->string('nip');
             $table->string('notelp');
-            $table->email('email')->unique();
+            $table->string('email')->unique();
             $table->string('statusKepegawaian');
             $table->string('skPengangkatan');
             $table->string('tmpPengangkatan');

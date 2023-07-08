@@ -22,12 +22,5 @@ class Admin extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    public function getGuru()
-    {
-        $q = DB::select("
-        SELECT * from guru
-        ");
-        return $q;
-    }
+    
 }

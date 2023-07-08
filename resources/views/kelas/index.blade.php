@@ -44,9 +44,10 @@
                                 <td class="text-center">
                                     {{-- <a href="/detail nilai" class="btn btn-info" type="button">
                                         <i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a> --}}
-                                    <a href="javascript:;" data-id="<?= $row->id ?>" id="editKelas" class="btn btn-warning "
+                                    <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-warning " id="editKelas"
                                         type="button"> <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
-                                    <a href="javascript:;" data-id="<?= $row->id ?>" id="btn-hapus" class="btn btn-danger"><i class="fa fa-trash"></i>
+                                    <a href="javascript:;" data-id="<?= $row->id ?>" id="btn-hapus"
+                                        class="btn btn-danger"><i class="fa fa-trash"></i>
                                         Hapus</a>
                                 </td>
                             </tr>
@@ -148,8 +149,8 @@
                             <div class="col-sm-12 col-md-12">
                                 <label for="tingkatKelasId">Tingkat Kelas</label>
                                 <div class="col-sm-12 col-md-12">
-                                    <select id="editTingkatKelas" name="editTingkatKelas"
-                                        class="custom-select col-12" required>
+                                    <select id="editTingkatKelas" name="editTingkatKelas" class="custom-select col-12"
+                                        required>
                                         <option disabled selected="">Pilih..</option>
                                         @foreach ($tingkatkelas as $row)
                                             <option value="{{ $row->id }}">{{ $row->tingkatKelas }}</option>
@@ -189,8 +190,9 @@
     <script>
         // Edit Data
         $(document).on('click', '#editKelas', function() { //editKelas ada di class                      
-            var id = $(this).data('id'); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
-            $.ajax({                                
+            var id = $(this).data(
+            'id'); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
+            $.ajax({
                 // console.log(id);
                 url: "{{ url('/kelas/editKelas') }}" + '/' + id,
                 type: 'get',

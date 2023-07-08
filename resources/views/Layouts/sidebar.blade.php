@@ -26,7 +26,7 @@
             </a>
         </li>      
         <li>
-            <a href="{{ route('guruAdmin') }}" class="dropdown-toggle no-arrow">
+            <a href="{{ route('masterGuru') }}" class="dropdown-toggle no-arrow">
                 <span class="micon fa fa-vcard"></span><span class="mtext">Guru</span>
             </a>
         </li>       
