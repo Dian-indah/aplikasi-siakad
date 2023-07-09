@@ -15,6 +15,7 @@
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
                 <form action="{{ route('updateGuru')}}" method="POST">
+                    @csrf
                     <input value="{{ $guru->id }}" id="idGuru" name="idGuru" hidden />
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">

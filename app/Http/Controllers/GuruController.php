@@ -26,7 +26,12 @@ class GuruController extends Controller
     public function editGuru($id)
     {
         $guru = Guru::find($id);
-        return view('Guru.editGuru', compact('guru'));
+        return view('guru.editGuru', compact('guru'));
+    }
+
+    public function tambahGuru()
+    {      
+        return view('guru.tambahGuru');
     }
 
     public function showGuruById($id)
@@ -112,16 +117,17 @@ class GuruController extends Controller
             'norek' => $request->post('norek'),
             'namaRek' => $request->post('namaRek'),
         ]);
+        // dd($Id);
 
         return redirect()
-            ->route('guru');
+            ->route('masterGuru');
         // ->with('success', 'data Kurikulum telah ditambahkan');
     }
 
     public function updateGuru(Request $request)
     {
         $id = $request->idGuru;
-        $data = Guru::find($id)
+        $data = Guru::where('id',$id)
             ->update([
                 'username' => $request->username,
                 'password' => Hash::make($request['password']),
@@ -157,10 +163,10 @@ class GuruController extends Controller
                 'bank' => $request->bank,
                 'norek' => $request->norek,
                 'namaRek' => $request->namaRek,                
-            ]);         
+            ]);      
+            // dd($data)   ;
 
-        return redirect()
-            ->route('masterGuru');
+            return redirect()->route('masterGuru');
         // ->with('success', 'data Kurikulum telah ditambahkan');
     }
 }

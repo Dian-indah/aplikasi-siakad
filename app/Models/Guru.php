@@ -11,6 +11,7 @@ class Guru extends Authenticatable
 { 
     public $timestamps = false;
     public $table = "guru";
+    protected $primaryKey = 'id';
     protected $fillable = [    
         'username',               
         'nik',
@@ -45,6 +46,7 @@ class Guru extends Authenticatable
         'bank',
         'norek',
         'namaRek',
+        'password',
     ];
 
     protected $hidden = [

@@ -66,6 +66,8 @@ Route::middleware('auth:admin')->group(function () {
 
     //Guru
     Route::get('/masterGuru', [GuruController::class, 'index'])->name('masterGuru');
+    Route::post('/guru/simpanGuru', [GuruController::class, 'simpanGuru'])->name('simpanGuru'); 
+    Route::get('/guru/tambahGuru', [GuruController::class, 'tambahGuru'])->name('tambahGuru'); 
     Route::get('/guru/showGuruById/{id}', [GuruController::class, 'showGuruById'])->name('showGuruById');
     Route::get('/guru/editGuru/{id}', [GuruController::class, 'editGuru'])->name('editGuru'); 
     Route::post('/guru/updateGuru', [GuruController::class, 'updateGuru'])->name('updateGuru'); 
