@@ -19,6 +19,7 @@ class Siswa extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->string('nisn');
+            $table->string('nipd');
             $table->string('jenkel');
             $table->string('tempatLahir');
             $table->date('tanggalLahir');

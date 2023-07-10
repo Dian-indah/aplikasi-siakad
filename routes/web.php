@@ -30,8 +30,7 @@ Route::middleware('auth:siswa')->group(function () {
 Route::middleware('auth:admin')->group(function () {
 
     Route::get('/menuAdmin', [AdminController::class, 'index'])->name('menuAdmin');
-    Route::get('/aspirasiAdmin', [AdminController::class, 'aspirasi'])->name('aspirasiAdmin');
-    Route::get('/siswaAdmin', [AdminController::class, 'siswa'])->name('siswaAdmin');
+    Route::get('/aspirasiAdmin', [AdminController::class, 'aspirasi'])->name('aspirasiAdmin');    
     Route::get('/ortuAdmin', [AdminController::class, 'ortu'])->name('ortuAdmin');
     Route::get('/pegawaiAdmin', [AdminController::class, 'pegawai'])->name('pegawaiAdmin'); 
     Route::get('/kelasSiswaAdmin', [AdminController::class, 'siswa'])->name('kelasSiswaAdmin'); 
@@ -71,6 +70,12 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/guru/showGuruById/{id}', [GuruController::class, 'showGuruById'])->name('showGuruById');
     Route::get('/guru/editGuru/{id}', [GuruController::class, 'editGuru'])->name('editGuru'); 
     Route::post('/guru/updateGuru', [GuruController::class, 'updateGuru'])->name('updateGuru'); 
+
+    //Siswa
+    Route::get('/masterSiswa', [SiswaController::class, 'index'])->name('masterSiswa');
+    Route::get('/siswa/showSiswaById/{id}', [SiswaController::class, 'showSiswaById'])->name('showSiswaById');
+    Route::post('/siswa/simpanSiswa', [SiswaController::class, 'simpanSiswa'])->name('simpanSiswa'); 
+    Route::get('/siswa/tambahSiswa', [SiswaController::class, 'tambahSiswa'])->name('tambahSiswa'); 
 });
 
 Route::middleware('auth:guru')->group(function () {

@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="pull-right col-md-2 col-sm-2">
-                    <a href="{{route('tambahGuru')}}" data-target="showDataGuru" class="btn btn-success btn-sm scroll-click"><i
+                    <a href="{{route()}}" data-target="showDataGuru" class="btn btn-success btn-sm scroll-click"><i
                             class="icon-copy fa fa-plus" aria-hidden="true"></i> Tambah Data</a>
                 </div>
             </div>

@@ -12,12 +12,13 @@ class Siswa extends Authenticatable
 {
     public $timestamps = false;
     public $table = "siswa";
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
-        'username',
-        'password',   
+        'username',       
         'email',
         'nisn',
+        'nipd',
         'jenkel',
         'tempatLahir',
         'tanggalLahir',
@@ -66,7 +67,8 @@ class Siswa extends Authenticatable
         'jmlSaudara',
         'bb',
         'tb',
-        'jarakSekolah'
+        'jarakSekolah', 
+        'password', 
     ];
 
     protected $hidden = [
@@ -74,5 +76,20 @@ class Siswa extends Authenticatable
         'remember_token',
     ];
  
+    public function getAllSiswa()
+    {
+        $q = DB::select("
+        SELECT * from siswa
+        ");
+        return $q;
+    }
+
+    public function getTingkatKelas()
+    {
+        $q = DB::select("
+        SELECT * FROM tingkatKelas
+        ");
+        return $q;
+    }
 
 }

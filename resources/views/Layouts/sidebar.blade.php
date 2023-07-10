@@ -36,7 +36,7 @@
             </a>
         </li> 
         <li>
-            <a href="{{ route('siswaAdmin') }}" class="dropdown-toggle no-arrow">
+            <a href="{{ route('masterSiswa') }}" class="dropdown-toggle no-arrow">
                 <span class="micon fa fa-graduation-cap"></span><span class="mtext">Siswa</span>
             </a>
         </li>

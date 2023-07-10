@@ -47,80 +47,20 @@ class GuruController extends Controller
         $request->validate([
             'username' => 'required',
             'password' => 'required',
-            'nik' => 'required',
-            'noKk' => 'required',
-            'nuptk' => 'required',
-            'jenkel' => 'required',
-            'tempatLahir' => 'required',
-            'tanggalLahir' => 'required',
-            'nip' => 'required',
-            'notelp' => 'required',
             'email' => 'required',
-            'statusKepegawaian' => 'required',
-            'skPengangkatan' => 'required',
-            'tmpPengangkatan' => 'required',
-            'lembagaPengangkatan' => 'required',
-            'sumberGaji' => 'required',
-            'jenisPtk' => 'required',
-            'npwp' => 'required',
-            'namaNpwp' => 'required',
-            'agama' => 'required',
-            'alamat' => 'required',
-            'kewarganegaraan' => 'required',
-            'ibuKandung' => 'required',
-            'statusPerkawinan' => 'required',
-            'namaPasangan' => 'required',
-            'nipPasangan' => 'required',
-            'pekerjaanPasangan' => 'required',
-            'lisensiKepsek' => 'required',
-            'diklatKepegawaian' => 'required',
-            'keahlianBraile' => 'required',
-            'keahlianBahasaIsyarat' => 'required',
-            'bank' => 'required',
-            'norek' => 'required',
-            'namaRek' => 'required',
+            
         ]);
 
         $Id = Guru::create([
             'username' => $request->post('username'),
-            'password' => Hash::make($request['password']),
-            'nik' => $request->post('nik'),
-            'noKk' => $request->post('noKk'),
-            'nuptk' => $request->post('nuptk'),
-            'jenkel' => $request->post('jenkel'),
-            'tempatLahir' => $request->post('tempatLahir'),
-            'tanggalLahir' => $request->post('tanggalLahir'),
-            'nip' => $request->post('nip'),
-            'notelp' => $request->post('notelp'),
             'email' => $request->post('email'),
-            'statusKepegawaian' => $request->post('statusKepegawaian'),
-            'skPengangkatan' => $request->post('skPengangkatan'),
-            'tmpPengangkatan' => $request->post('tmpPengangkatan'),
-            'lembagaPengangkatan' => $request->post('lembagaPengangkatan'),
-            'sumberGaji' => $request->post('sumberGaji'),
-            'jenisPtk' => $request->post('jenisPtk'),
-            'npwp' => $request->post('npwp'),
-            'namaNpwp' => $request->post('namaNpwp'),
-            'agama' => $request->post('agama'),
-            'alamat' => $request->post('alamat'),
-            'kewarganegaraan' => $request->post('kewarganegaraan'),
-            'ibuKandung' => $request->post('ibuKandung'),
-            'statusPerkawinan' => $request->post('statusPerkawinan'),
-            'namaPasangan' => $request->post('namaPasangan'),
-            'nipPasangan' => $request->post('nipPasangan'),
-            'pekerjaanPasangan' => $request->post('pekerjaanPasangan'),
-            'lisensiKepsek' => $request->post('lisensiKepsek'),
-            'diklatKepegawaian' => $request->post('diklatKepegawaian'),
-            'keahlianBraile' => $request->post('keahlianBraile'),
-            'keahlianBahasaIsyarat' => $request->post('keahlianBahasaIsyarat'),
-            'bank' => $request->post('bank'),
-            'norek' => $request->post('norek'),
-            'namaRek' => $request->post('namaRek'),
+            'password' => Hash::make($request['password']),
+            
         ]);
-        // dd($Id);
+        dd($Id);
 
-        return redirect()
-            ->route('masterGuru');
+        // return redirect()
+        //     ->route('masterGuru');
         // ->with('success', 'data Kurikulum telah ditambahkan');
     }
 
