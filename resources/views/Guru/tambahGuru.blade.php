@@ -279,20 +279,20 @@
     });
   </script> --}}
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('#statusPerkawinan').change(function() {
-      if ($(this).val() === 'Belum Kawin') {
-        $('#namaPasangan').prop('disabled', true).val('-');
-        $('#nipPasangan').prop('disabled', true).val('-');
-        $('#pekerjaanPasangan').prop('disabled', true).val('-');
-      } else {
-        $('#namaPasangan').prop('disabled', false);
-        $('#nipPasangan').prop('disabled', false);
-        $('#pekerjaanPasangan').prop('disabled', false);
-      }
-    });
-  });
-</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#statusPerkawinan').change(function() {
+                if ($(this).val() === 'Belum Kawin') {
+                    $('#namaPasangan').prop('disabled', true).val('-');
+                    $('#nipPasangan').prop('disabled', true).val('-');
+                    $('#pekerjaanPasangan').prop('disabled', true).val('-');
+                } else {
+                    $('#namaPasangan').prop('disabled', false);
+                    $('#nipPasangan').prop('disabled', false);
+                    $('#pekerjaanPasangan').prop('disabled', false);
+                }
+            });
+        });
+    </script>
 @endsection

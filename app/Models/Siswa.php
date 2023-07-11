@@ -15,67 +15,35 @@ class Siswa extends Authenticatable
     protected $primaryKey = 'id';
     protected $fillable = [
         'name',
-        'username',       
-        'email',
-        'nisn',
-        'nipd',
-        'jenkel',
-        'tempatLahir',
-        'tanggalLahir',
-        'nik',
-        'noKk',
-        'noHp',
-        'agama',
-        'alamat',
-        'jenisTinggal',
-        'trasportasi',
-        'skhun',
-        'penerimaKpps',
-        'noKpps',
-        'namaAyah',
-        'tanggalLahirAyah',
-        'pendidikanAyah',
-        'pekerjaanAyah',
-        'penghasilanAyah',
-        'nikAyah',
-        'namaIbu',
-        'tanggalLahirIbu',
-        'pendidikanIbu',
-        'pekerjaanIbu',
-        'penghasilanIbu',
-        'nikIbu',
-        'namaWali',
-        'tanggalLahirWali',
-        'pendidikanWali',
-        'pekerjaanWali',
-        'penghasilanWali',
-        'nikWali',
-        'noUn',
-        'noSeriIjazah',
-        'penerimaKip',
-        'noKip',
-        'namaKip',
-        'noReqAkta',
-        'bank',
-        'noRekening',
-        'namaRekening',
-        'layakPip',
-        'alasanPip',
-        'kebutuhanKhusus',
-        'sekolahAsal',
-        'anak',
-        'jmlSaudara',
-        'bb',
-        'tb',
-        'jarakSekolah', 
-        'password', 
+        'username',
+        'email',         
+        'password',         
+        'nisn',         
+        'nipd',         
+        'jenkel',         
+        'tempatLahir',         
+        'tanggalLahir',         
+        'nik',         
+        'noKk',         
+        'noHp',         
+        'agama',         
+        'alamat',         
+        'jenisTinggal',         
+        'trasportasi',         
+        'skhun',         
+        'penerimaKpps',         
+        'noKpps',         
+        'namaAyah',         
+        'tanggalLahirAyah',         
+        'pendidikanAyah',         
+        'pekerjaanAyah',         
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
- 
+
     public function getAllSiswa()
     {
         $q = DB::select("
@@ -83,13 +51,11 @@ class Siswa extends Authenticatable
         ");
         return $q;
     }
-
-    public function getTingkatKelas()
+    public function getAllTingkatKelas()
     {
         $q = DB::select("
-        SELECT * FROM tingkatKelas
+        SELECT * from tingkatKelas
         ");
         return $q;
     }
-
 }
