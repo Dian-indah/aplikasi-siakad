@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
+
+use App\Exports\GuruExport;
+use App\Imports\GuruImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+
 use App\Models\Guru;
 use App\Http\Requests\StoreGuruRequest;
 use App\Http\Requests\UpdateGuruRequest;
@@ -41,6 +48,44 @@ class GuruController extends Controller
         $response['success'] = true;
         $response['data'] = $guru;
         return response()->json($response);
+    }
+
+    public function guruExport()
+    {
+        return Excel::download(new GuruExport,'guru.xlsx');
+    }
+
+    public function guruImportExcel(Request $request)
+    {
+        // validasi
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+		// menangkap file excel
+		$file = $request->file('file');
+ 
+		// membuat nama file unik
+		$nama_file = rand().$file->getClientOriginalName();
+ 
+		// upload ke folder file_siswa di dalam folder public
+		$file->move('dataGuru',$nama_file);
+ 
+		// import data
+		Excel::import(new GuruImport, public_path('/dataGuru/'.$nama_file));
+ 
+		// notifikasi dengan session
+		Session::flash('sukses','Data Siswa Berhasil Diimport!');
+ 
+		// alihkan halaman kembali
+		return redirect('masterGuru');
+
+        // $file = $request->file('file');
+        // $namaFile = $file->getClientOriginalName();
+        // $file->move('dataGuru',$namaFile);
+
+        // Excel::import(new GuruImport, public_path('/dataGuru/',$namaFile));
+        // return redirect('masterGuru');
     }
 
     public function simpanGuru(Request $request)

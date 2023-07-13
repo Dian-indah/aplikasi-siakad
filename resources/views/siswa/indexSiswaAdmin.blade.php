@@ -27,7 +27,7 @@
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
                 <div class="pull-right col-md-2 col-sm-2">
-                    <a href="{{route('tambahSiswa')}}" class="btn btn-success btn-sm"><i class="icon-copy fa fa-plus"
+                    <a href="{{ route('tambahSiswa') }}" class="btn btn-success btn-sm"><i class="icon-copy fa fa-plus"
                             aria-hidden="true"></i> Tambah Data</a>
                 </div> <br><br>
                 <table class="table table-bordered">
@@ -54,7 +54,7 @@
                                 <td class="text-center">
                                     <a href="#" data-id="<?= $row->id ?>" class="btn btn-info" id="tampilSiswa"
                                         type="button"><i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a>
-                                    <a href="#" class="btn btn-warning " id="editSiswa" type="button"> <i
+                                    <a href="{{ url('/siswa/editSiswa/'.$row->id)}}" class="btn btn-warning " id="editSiswa" type="button"> <i
                                             class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
                                 </td>
                             </tr>
@@ -90,7 +90,7 @@
                                 <input id="nipd" name="nipd" class="form-control" type="text" disabled />
                             </div>
                         </div>
-                    </div>                   
+                    </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Nama Lengkap</label>
@@ -119,8 +119,7 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">Tempat Lahir</label>
                             <div class="col-sm-12 col-md-12">
-                                <input id="tempatLahir" name="tempatLahir" class="form-control" disabled
-                                    type="text" />
+                                <input id="tempatLahir" name="tempatLahir" class="form-control" disabled type="text" />
                             </div>
                         </div>
                     </div>
@@ -386,6 +385,8 @@
                             </div>
                         </div>
                     </div>
+                    {{-- Kelengkapan Data Siswaa --}}
+                    <div class="col-sm-12 col-md-12 pd-20 text-center h4 text-blue">Kelengkapan Data Siswa</div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Nomor Peserta Ujian Nasional</label>
@@ -612,7 +613,7 @@
                     $('#jmlSaudara').val(data.data.jmlSaudara);
                     $('#bb').val(data.data.bb);
                     $('#tb').val(data.data.tb);
-                    $('#jarakSekolah').val(data.data.jarakSekolah);               
+                    $('#jarakSekolah').val(data.data.jarakSekolah);
                     $('#nipd').val(data.data.nipd);
                 }
             });

@@ -70,12 +70,16 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/guru/showGuruById/{id}', [GuruController::class, 'showGuruById'])->name('showGuruById');
     Route::get('/guru/editGuru/{id}', [GuruController::class, 'editGuru'])->name('editGuru'); 
     Route::post('/guru/updateGuru', [GuruController::class, 'updateGuru'])->name('updateGuru'); 
+    Route::get('/guru/exportGuru', [GuruController::class, 'guruExport'])->name('exportGuru'); 
+    Route::post('/guru/importGuru', [GuruController::class, 'guruImportExcel'])->name('importGuru'); 
 
     //Siswa
     Route::get('/masterSiswa', [SiswaController::class, 'index'])->name('masterSiswa');
     Route::get('/siswa/showSiswaById/{id}', [SiswaController::class, 'showSiswaById'])->name('showSiswaById');
     Route::post('/siswa/simpanSiswa', [SiswaController::class, 'simpanSiswa'])->name('simpanSiswa'); 
     Route::get('/siswa/tambahSiswa', [SiswaController::class, 'tambahSiswa'])->name('tambahSiswa'); 
+    Route::get('/siswa/editSiswa/{id}', [SiswaController::class, 'editSiswa'])->name('editSiswa'); 
+    Route::post('/siswa/updateSiswa', [SiswaController::class, 'updateSiswa'])->name('updateSiswa'); 
 });
 
 Route::middleware('auth:guru')->group(function () {

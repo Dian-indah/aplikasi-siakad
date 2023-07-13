@@ -10,14 +10,23 @@
                     </div>
                 </div>
                 <div class="pull-right col-md-2 col-sm-2">
-                    <a href="{{route('tambahGuru')}}" data-target="showDataGuru" class="btn btn-success btn-sm scroll-click"><i
-                            class="icon-copy fa fa-plus" aria-hidden="true"></i> Tambah Data</a>
+                    <a href="{{ route('tambahGuru') }}" data-target="showDataGuru"
+                        class="btn btn-success btn-sm scroll-click"><i class="icon-copy fa fa-plus" aria-hidden="true"></i>
+                        Tambah Data</a>
                 </div>
             </div>
         </div>
         {{-- Content bawah --}}
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
+                <div class="card-header">
+                    <a href="{{ route('exportGuru') }}" class="btn btn-success">Export Excel</a>
+                    <!-- Button trigger modal -->
+                    <a class="btn btn-primary text-white" data-toggle="modal" data-target="#exampleModal">
+                        Import Excel
+                    </a>
+
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -40,10 +49,11 @@
                                 <td>{{ $row->notelp }}</td>
                                 <td>{{ $row->email }}</td>
                                 <td class="text-center">
-                                    <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-info" id="tampilGuru" 
+                                    <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-info" id="tampilGuru"
                                         type="button"><i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a>
-                                    <a href="{{ url('/guru/editGuru/'.$row->id)}}" class="btn btn-warning " id="editGuru"
-                                        type="button"> <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>                                    
+                                    <a href="{{ url('/guru/editGuru/' . $row->id) }}" class="btn btn-warning "
+                                        id="editGuru" type="button"> <i class="icon-copy fa fa-edit"
+                                            aria-hidden="true"></i> Edit</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -53,7 +63,34 @@
         </div>
         {{-- end content bawah --}}
     </div>
+    {{-- Modal Import Excel --}}
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('importGuru') }}" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="file" name="file" required="required">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Selesai</button>
+                        <button type="submit" class="btn btn-primary">Import</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- end Modal Import Excel --}}
     <!-- Start tampil modal -->
     <div class="modal fade" id="showDataGuru" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
@@ -78,7 +115,7 @@
                                     placeholder="Nama" />
                             </div>
                         </div>
-                    </div>                  
+                    </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">NIK</label>
@@ -92,8 +129,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">Nomor KK</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="noKk" name="noKk" placeholder="Nomor KK" disabled
-                                    type="text" />
+                                <input class="form-control" id="noKk" name="noKk" placeholder="Nomor KK"
+                                    disabled type="text" />
                             </div>
                         </div>
                     </div>
@@ -146,8 +183,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">No Telepon</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="notelp" name="notelp" placeholder="No Telepon" disabled
-                                    type="text" />
+                                <input class="form-control" id="notelp" name="notelp" placeholder="No Telepon"
+                                    disabled type="text" />
                             </div>
                         </div>
                     </div>
@@ -201,7 +238,7 @@
                             <label class="col-sm-12 col-md-12 col-form-label">Sumber Gaji</label>
                             <div class="col-sm-12 col-md-12">
                                 <input class="form-control" id="sumberGaji" name="sumberGaji" placeholder="Sumber Gaji"
-                                   disabled type="text" />
+                                    disabled type="text" />
                             </div>
                         </div>
                     </div>
@@ -210,7 +247,7 @@
                             <label class="col-sm-12 col-md-12 col-form-label">Jenis PTK</label>
                             <div class="col-sm-12 col-md-12">
                                 <input class="form-control" id="jenisPtk" name="jenisPtk" placeholder="Jenis PTK"
-                                   disabled type="text" />
+                                    disabled type="text" />
                             </div>
                         </div>
                     </div>
@@ -218,8 +255,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">NPWP</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" id="npwp" name="npwp" placeholder="NPWP"
-                                   disabled type="text" />
+                                <input class="form-control" id="npwp" name="npwp" placeholder="NPWP" disabled
+                                    type="text" />
                             </div>
                         </div>
                     </div>
@@ -227,8 +264,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Nama Wajib Pajak</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="namaNpwp" name="namaNpwp"
-                                  disabled  placeholder="Nama Wajib Pajak" type="text" />
+                                <input class="form-control" id="namaNpwp" name="namaNpwp" disabled
+                                    placeholder="Nama Wajib Pajak" type="text" />
                             </div>
                         </div>
                     </div>
@@ -244,7 +281,7 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">Alamat</label>
                             <div class="col-sm-12 col-md-12">
-                                <textarea class="form-control" id="alamat" name="alamat" disabled  placeholder="Ketik disini"></textarea>
+                                <textarea class="form-control" id="alamat" name="alamat" disabled placeholder="Ketik disini"></textarea>
                             </div>
                         </div>
                     </div>
@@ -271,7 +308,7 @@
                             <label class="col-sm-12 col-md-12 col-form-label">Status Perkawinan</label>
                             <div class="col-sm-12 col-md-12">
                                 <input class="form-control" id="statusPerkawinan" disabled name="statusPerkawinan"
-                                     disabled type="text" />
+                                    disabled type="text" />
                             </div>
                         </div>
                     </div>
@@ -279,8 +316,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Nama Suami/Istri</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="namaPasangan" name="namaPasangan"
-                                    disabled placeholder="Nama Suami/Istri" type="text" />
+                                <input class="form-control" id="namaPasangan" name="namaPasangan" disabled
+                                    placeholder="Nama Suami/Istri" type="text" />
                             </div>
                         </div>
                     </div>
@@ -288,8 +325,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">NIP Suami/Istri</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="nipPasangan" name="nipPasangan"
-                                    disabled placeholder="NIP Suami/Istri" type="text" />
+                                <input class="form-control" id="nipPasangan" name="nipPasangan" disabled
+                                    placeholder="NIP Suami/Istri" type="text" />
                             </div>
                         </div>
                     </div>
@@ -297,8 +334,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Pekerjaan Suami/Istri</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="pekerjaanPasangan" name="pekerjaanPasangan"
-                                    disabled placeholder="Pekerjaan Suami/Istri" type="text" />
+                                <input class="form-control" id="pekerjaanPasangan" name="pekerjaanPasangan" disabled
+                                    placeholder="Pekerjaan Suami/Istri" type="text" />
                             </div>
                         </div>
                     </div>
@@ -306,8 +343,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Sudah Lisensi Kepala Sekolah</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="lisensiKepsek" name="lisensiKepsek"
-                                    disabled type="text" />
+                                <input class="form-control" id="lisensiKepsek" name="lisensiKepsek" disabled
+                                    type="text" />
                             </div>
                         </div>
                     </div>
@@ -315,8 +352,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Pernah Diklat Kepegawaian</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="diklatKepegawaian" name="diklatKepegawaian"
-                                    disabled type="text" />
+                                <input class="form-control" id="diklatKepegawaian" name="diklatKepegawaian" disabled
+                                    type="text" />
                             </div>
                         </div>
                     </div>
@@ -324,8 +361,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Keahlian Braille</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="keahlianBraile" name="keahlianBraile"
-                                    disabled type="text" />
+                                <input class="form-control" id="keahlianBraile" name="keahlianBraile" disabled
+                                    type="text" />
                             </div>
                         </div>
                     </div>
@@ -342,8 +379,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">Bank</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="bank" name="bank" placeholder="Bank"
-                                   disabled type="text" />
+                                <input class="form-control" id="bank" name="bank" placeholder="Bank" disabled
+                                    type="text" />
                             </div>
                         </div>
                     </div>
@@ -352,7 +389,7 @@
                             <label class="col-sm-12 col-md-12 col-form-label">No Rekening</label>
                             <div class="col-sm-12 col-md-12">
                                 <input class="form-control" id="norek" name="norek" placeholder="No Rekening"
-                                   disabled type="text" />
+                                    disabled type="text" />
                             </div>
                         </div>
                     </div>
@@ -360,8 +397,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Rekening Atas Nama</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="namaRek" name="namaRek"
-                                  disabled  placeholder="Rekening Atas Nama" type="text" />
+                                <input class="form-control" id="namaRek" name="namaRek" disabled
+                                    placeholder="Rekening Atas Nama" type="text" />
                             </div>
                         </div>
                     </div>
@@ -369,7 +406,7 @@
             </div>
         </div>
     </div>
-    {{-- end tampil modal --}}        
+    {{-- end tampil modal --}}
 @endsection
 @section('js')
     <script>
@@ -424,6 +461,11 @@
                     $('#namaRek').val(data.data.namaRek);
                 }
             });
-        });               
+        });
     </script>
+@endsection
+@section('js')
+    <script src="src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+    <script src="src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+    <script src="src/plugins/datatables/js/buttons.flash.min.js"></script>
 @endsection
