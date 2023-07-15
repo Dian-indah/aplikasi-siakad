@@ -20,7 +20,8 @@ class KelasController extends Controller
         $data = $this->model->getKelas();
         $tingkatkelas = $this->model->getAllTingkatKelas();
         $tahunajar = $this->model->getAllTahunAjar();
-        return view('kelas.index', compact('data','tingkatkelas','tahunajar'));       
+        $guru = $this->model->getAllGuru();
+        return view('kelas.index', compact('data','tingkatkelas','tahunajar','guru'));       
     }  
 
     public function simpanKelas(Request $request)
@@ -29,12 +30,14 @@ class KelasController extends Controller
             'namaKelas' => 'required',
             'tahunAjarId' => 'required',
             'tingkatKelasId' => 'required',
+            'guruId' => 'required',
         ]);           
 
         $Id = Kelas::create([
             'namaKelas' => $request->post('namaKelas'),
             'tahunAjarId' => $request->post('tahunAjarId'),
             'tingkatKelasId' => $request->post('tingkatKelasId'),                     
+            'guruId' => $request->post('guruId'),                     
         ]);
 
         return redirect()
@@ -59,6 +62,7 @@ class KelasController extends Controller
             'namaKelas' => $request->editNamaKelas,
             'tahunAjarId' => $request->editTahunAjar,
             'tingkatKelasId' => $request->editTingkatKelas,
+            'guruId' => $request->editGuru,
           ]); 
 
           return redirect()

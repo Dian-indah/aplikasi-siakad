@@ -5,8 +5,9 @@ namespace App\Imports;
 use App\Models\Guru;
 use \Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class GuruImport implements ToModel
+class GuruImport implements ToModel,WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,40 +16,41 @@ class GuruImport implements ToModel
     */
     public function model(array $row)
     {
+        // dd($row);
         return new Guru([
-            'username' => $row[1],          
-            'nik' => $row[2],          
-            'noKk' => $row[3],
-            'nuptk' => $row[4],
-            'jenkel' => $row[5],
-            'tempatLahir' => $row[6],
-            'tanggalLahir' => $row[7],
-            'nip' => $row[8],
-            'notelp' => $row[9],
-            'email' => $row[10],
-            'statusKepegawaian' => $row[11],
-            'skPengangkatan' => $row[12],
-            'tmpPengangkatan' => $row[13],
-            'lembagaPengangkatan' => $row[14],
-            'sumberGaji' => $row[15],
-            'jenisPtk' => $row[16],
-            'npwp' => $row[17],
-            'namaNpwp' => $row[18],
-            'agama' => $row[19],
-            'alamat' => $row[20],
-            'kewarganegaraan' => $row[21],
-            'ibuKandung' => $row[22],
-            'statusPerkawinan' => $row[23],
-            'namaPasangan' => $row[24],
-            'nipPasangan' => $row[25],
-            'pekerjaanPasangan' => $row[26],
-            'lisensiKepsek' => $row[27],
-            'diklatKepegawaian' => $row[28],
-            'keahlianBraile' => $row[29],
-            'keahlianBahasaIsyarat' => $row[30],
-            'bank' => $row[31],
-            'norek' => $row[32],
-            'namaRek' => $row[33],
+            'username' => $row['username'],          
+            'nik' => $row['nik'],          
+            'noKk' => $row['nomor_kk'],
+            'nuptk' => $row['nuptk'],
+            'jenkel' => $row['jenis_kelamin'],
+            'tempatLahir' => $row['tempat_lahir'],
+            'tanggalLahir' => $row['tanggal_lahir'],
+            'nip' => $row['nip'],
+            'notelp' => $row['no_telepon'],
+            'email' => $row['email'],
+            'statusKepegawaian' => $row['status_kepegawaian'],
+            'skPengangkatan' => $row['sk_pengangkatan'],
+            'tmpPengangkatan' => $row['tmp_pengangkatan'],
+            'lembagaPengangkatan' => $row['lembaga_pengangkatan'],
+            'sumberGaji' => $row['sumber_gaji'],
+            'jenisPtk' => $row['jenis_ptk'],
+            'npwp' => $row['npwp'],
+            'namaNpwp' => $row['nama_npwp'],
+            'agama' => $row['agama'],
+            'alamat' => $row['alamat'],
+            'kewarganegaraan' => $row['kewarganegaraan'],
+            'ibuKandung' => $row['ibu_kandung'],
+            'statusPerkawinan' => $row['status_perkawinan'],
+            'namaPasangan' => $row['nama_pasangan'],
+            'nipPasangan' => $row['nip_pasangan'],
+            'pekerjaanPasangan' => $row['pekerjaan_pasangan'],
+            'lisensiKepsek' => $row['lisensi_kepala_sekolah'],
+            'diklatKepegawaian' => $row['diklat_kepegawaian'],
+            'keahlianBraile' => $row['keahlian_braile'],
+            'keahlianBahasaIsyarat' => $row['keahlian_bahasa_isyarat'],
+            'bank' => $row['bank'],
+            'norek' => $row['no_rekening'],
+            'namaRek' => $row['nama_rekening'],
         ]);
     }
 }

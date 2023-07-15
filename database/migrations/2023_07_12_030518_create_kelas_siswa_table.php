@@ -14,7 +14,12 @@ class CreateKelasSiswaTable extends Migration
     public function up()
     {
         Schema::create('kelas_siswa', function (Blueprint $table) {
-            $table->id();
+            $table->id();           
+            $table->foreignId('kelasId')->constrained('kelas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('mapelId')->constrained('mapel')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('guruPengajar')->constrained('guru')->onDelete('cascade')->onUpdate('cascade');            
+            $table->foreignId('waliKelas')->constrained('guru')->onDelete('cascade')->onUpdate('cascade');            
+            $table->string('jumlahSiswa');
             $table->timestamps();
         });
     }

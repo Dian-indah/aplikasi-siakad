@@ -24,7 +24,7 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">ID</th>
+                            <th scope="col">Wali Kelas</th>
                             <th scope="col">Nama Ruang Kelas</th>
                             <th scope="col">Tingkat Kelas</th>
                             <th scope="col">Tahun Ajar</th>
@@ -36,7 +36,7 @@
                         @foreach ($data as $row)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $row->id }}</td>
+                                <td>{{ $row->username }}</td>
                                 <td>{{ $row->namaKelas }}</td>
                                 <td>{{ $row->tingkatKelas }}</td>
                                 <td>{{ $row->tahunAjar }}</td>
@@ -77,9 +77,22 @@
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="namaKelas">Tingkat Kelas</label>
+                                <label for="namaKelas">Nama Kelas</label>
                                 <input id="namaKelas" name="namaKelas" class="form-control" type="text"
                                     placeholder="Nama Kelas" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="guruId">Wali Kelas</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select id="guruId" name="guruId" class="custom-select col-12" required>
+                                        <option disabled selected="">Pilih..</option>
+                                        @foreach ($guru as $row)
+                                            <option value="{{ $row->id }}">{{ $row->username }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">

@@ -16,6 +16,7 @@ class CreateKelasTable extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->string('namaKelas');
+            $table->foreignId('guruId')->constrained('guru')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('tingkatKelasId')->constrained('tingkatKelas')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('tahunAjarId')->constrained('tahunAjar')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

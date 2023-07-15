@@ -15,12 +15,30 @@ class Admin extends Authenticatable
         'name',
         'username',
         'password',  
-        'email' 
+        'email',
+        'notelp',
+        'jenkel' ,
+        'tempatLahir',
+        'tglLahir',
+        'alamat',
+        'statusKepegawaian',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
+    public function getAllPegawai()
+    {
+        $q = DB::select("
+        SELECT * from admin
+        ");
+        return $q;
+    }
+    public function isAdmin()
+{
+    return $this->role === 'admin';
+}
     
 }

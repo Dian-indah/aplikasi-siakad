@@ -14,16 +14,19 @@ class Kelas extends Model
         'namaKelas',
         'tahunAjarId',
         'tingkatKelasId',  
+        'guruId',  
     ];
 
     public function getKelas()
     {
         $q = DB::select("
         SELECT kelas.id as id, kelas.namaKelas as namaKelas, tahunAjar.tahunAjar as tahunAjar,
-        tahunAjar.semester as semester, tingkatKelas.tingkatKelas as tingkatKelas FROM kelas 
+        tahunAjar.semester as semester, tingkatKelas.tingkatKelas as tingkatKelas,
+        guru.username as username FROM kelas 
         JOIN tahunAjar on tahunAjar.id = kelas.tahunAjarId
         JOIN tingkatKelas on tingkatKelas.id = kelas.tingkatKelasId
-        ORDER BY tahunAjar.tahunAjar asc , kelas.namaKelas asc
+        JOIN guru on guru.id = kelas.guruId
+        ORDER BY tahunAjar.tahunAjar desc , kelas.namaKelas asc
         ");
         return $q;
     }
@@ -40,6 +43,14 @@ class Kelas extends Model
     {
         $a = DB::select("
         select * from tingkatKelas;
+        ");
+        return $a;
+    }
+
+    public function getAllGuru()
+    {
+        $a = DB::select("
+        select * from guru;
         ");
         return $a;
     }

@@ -4,17 +4,107 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new Admin();
+    }
+
     public function index()
     {
-        return view('Admin.menu');
+        $pegawai = $this->model->getAllPegawai();       
+        return view('pegawai.index', compact('pegawai'));
+    }
+
+    public function showPegawaiById($id)
+    {
+        $pegawai = Admin::find($id);
+        $response['success'] = true;
+        $response['data'] = $pegawai;
+        return response()->json($response);
+    }
+    public function simpaPegawai(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'email' => 'required',
+            'notelp' => 'required',
+            'jenkel' => 'required',
+            'tempatLahir' => 'required',
+            'tglLahir' => 'required',
+            'alamat' => 'required',
+            'statusKepegawaian' => 'required',
+        ]);
+
+        $Id = Admin::create([
+            'name' => $request->post('name'),
+            'username' => $request->post('username'),
+            'password' => Hash::make($request['password']),
+            'email' => $request->post('email'),
+            'notelp' => $request->post('notelp'),
+            'jenkel' => $request->post('jenkel'),
+            'tempatLahir' => $request->post('tempatLahir'),
+            'tglLahir' => $request->post('tglLahir'),
+            'alamat' => $request->post('alamat'),
+            'statusKepegawaian' => $request->post('statusKepegawaian'),
+        ]);
+        // dd($Id);
+        return redirect()
+            ->route('pegawaiAdmin');
+        // ->with('success', 'data Kurikulum telah ditambahkan');
+    }
+
+    public function editPegawai($id)
+    {
+        $admin = Admin::find($id);
+        $response['success'] = true;
+        $response['data'] = $admin;
+        // dd($response);
+        return response()->json($response);
+    }
+    public function updatePegawai(Request $request)
+    {
+        $id = $request->idPegawai;
+        $data = Admin::where('id', $id)
+            ->update([
+                'name' => $request->post('name'),
+                'username' => $request->post('username'),
+                'password' => Hash::make($request['password']),
+                'email' => $request->post('email'),
+                'notelp' => $request->post('notelp'),
+                'jenkel' => $request->post('jenkel'),
+                'tempatLahir' => $request->post('tempatLahir'),
+                'tglLahir' => $request->post('tglLahir'),
+                'alamat' => $request->post('alamat'),
+                'statusKepegawaian' => $request->post('statusKepegawaian'),
+            ]);
+        // dd($data)   ;
+
+        return redirect()->route('pegawaiAdmin');
+        // ->with('success', 'data Kurikulum telah ditambahkan');
+    }
+    public function destroy(Admin $user)
+    {
+        // Memeriksa apakah pengguna yang sedang login adalah admin
+        if (Auth::user()->$this->model->isAdmin()) {
+            // Memeriksa apakah pengguna yang sedang login mencoba menghapus akunnya sendiri
+            if ($user->id === Auth::user()->id) {
+                return redirect()->back()->with('error', 'Tidak dapat menghapus akun admin sendiri.');
+            }
+            // Proses penghapusan akun
+            $user->delete();
+            return redirect()->route('pegawaiAdmin')->with('success', 'Akun pengguna telah dihapus.');
+        }
+        // Jika bukan admin, mungkin ada penanganan lain atau redirect
+        return redirect()->back()->with('error', 'Anda tidak memiliki izin untuk menghapus akun pengguna.');
     }
 
     public function aspirasi()
@@ -22,101 +112,8 @@ class AdminController extends Controller
         return view('Admin.aspirasi');
     }
 
-    public function pegawai()
-    {
-        return view('Admin.pegawai');
-    }
-    public function guru()
-    {
-        return view('Admin.guru');
-    }
-    public function kelasSiswa()
-    {
-        return view('Admin.KelasSiswa');
-    }
-    public function mapel()
-    {
-        return view('mapel.showMapel');
-    }
     public function ortu()
     {
         return view('Admin.Ortu');
-    }
-    public function Siswa()
-    {
-        return view('siswa.index');
-    }
-    public function tambahMapel()
-    {
-        return view('Admin.tambahMapel');
-    }
-    public function kurikulum()
-    {
-        return view('Admin.kurikulum');
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Admin $admin)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Admin $admin)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Admin $admin)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Admin $admin)
-    {
-        //
     }
 }

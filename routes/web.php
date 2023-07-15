@@ -9,6 +9,8 @@ use App\Http\Controllers\OrtuController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAjarController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\KelasSiswaController;
+use App\Models\KelasSiswa;
 use App\Models\TahunAjar;
 use Illuminate\Support\Facades\Route;
 
@@ -32,8 +34,18 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/menuAdmin', [AdminController::class, 'index'])->name('menuAdmin');
     Route::get('/aspirasiAdmin', [AdminController::class, 'aspirasi'])->name('aspirasiAdmin');    
     Route::get('/ortuAdmin', [AdminController::class, 'ortu'])->name('ortuAdmin');
-    Route::get('/pegawaiAdmin', [AdminController::class, 'pegawai'])->name('pegawaiAdmin'); 
-    Route::get('/kelasSiswaAdmin', [AdminController::class, 'siswa'])->name('kelasSiswaAdmin'); 
+    
+    //Pegawai
+    Route::get('/pegawaiAdmin', [AdminController::class, 'index'])->name('pegawaiAdmin'); 
+    Route::post('/pegawai/tambahPegawai', [AdminController::class, 'simpaPegawai'])->name('tambahPegawai');
+    Route::get('/pegawai/showPegawai/{id}', [AdminController::class, 'showPegawaiById'])->name('showPegawai'); 
+    Route::get('/pegawai/editPegawai/{id}', [AdminController::class, 'editPegawai'])->name('editPegawai');     
+    Route::post('/pegawai/updatePegawai', [AdminController::class, 'updatePegawai'])->name('updatePegawai'); 
+    Route::delete('/pegawai/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+
+    //KelasSiswa
+    Route::get('/kelasSiswa', [KelasSiswaController::class, 'index'])->name('kelasSiswa'); 
+    Route::post('/kelasSiswa/tambahKelas', [KelasSiswaController::class, 'simpan'])->name('tambahKelasSiswa'); 
 
     //Mapel
     Route::get('/mapel', [MapelController::class, 'index'])->name('mapel');
@@ -102,98 +114,6 @@ Route::middleware('auth:ortu')->group(function () {
 
 // Route::get('menu', function () {
 //     return view('Sisor.menu');
-// });
-
-// Route::get('nilai', function () {
-//     return view('Sisor.nilai');
-// });
-
-// Route::get('kehadiran', function () {
-//     return view('Sisor.kehadiran');
-// });
-
-// Route::get('aspirasi', function () {
-//     return view('Ortu.aspirasi');
-// });
-
-// Route::get('guru menu', function () {
-//     return view('Pages.menu');
-// });
-
-// Route::get('lihat aspirasi', function () {
-//     return view('Pages.lihatAspirasi');
-// });
-
-// Route::get('guru nilai', function () {
-//     return view('Guru.guruNilai');
-// });
-
-// Route::get('detail nilai', function () {
-//     return view('Guru.detailNilai');
-// });
-
-// Route::get('guru kehadiran', function () {
-//     return view('Guru.guruKehadiran');
-// });
-
-// Route::get('detail kehadiran', function () {
-//     return view('Guru.detailKehadiran');
-// });
-
-// Route::get('guru profil', function () {
-//     return view('Guru.guruProfil');
-// });
-
-// Route::get('admin menu', function () {
-//     return view('Pages.menu');
-// });
-
-// Route::get('admin guru', function () {
-//     return view('Admin.adminGuru');
-// });
-
-// Route::get('tambah guru', function () {
-//     return view('Admin.tambahGuru');
-// });
-
-// Route::get('admin mapel', function () {
-//     return view('Admin.adminMapel');
-// });
-
-// Route::get('tambah mapel', function () {
-//     return view('Admin.tambahMapel');
-// });
-
-// Route::get('admin siswa', function () {
-//     return view('Admin.adminSiswa');
-// });
-
-// Route::get('tambah siswa', function () {
-//     return view('Admin.tambahSiswa');
-// });
-
-// Route::get('admin ortu', function () {
-//     return view('Admin.adminOrtu');
-// });
-
-// Route::get('tambah ortu', function () {
-//     return view('Admin.tambahOrtu');
-// });
-
-// Route::get('admin anggota', function () {
-//     return view('Admin.adminAnggotaAdmin');
-// });
-
-// Route::get('tambah admin', function () {
-//     return view('Admin.tambahAnggotaAdmin');
-// });
-
-// Route::get('admin kelas siswa', function () {
-//     return view('Admin.adminKelasSiswa');
-// });
-
-// Route::get('tambah kelas siswa', function () {
-//     return view('Admin.tambahKelasSiswa');
 // });
 
 // Route::view('welcome', 'welcome');

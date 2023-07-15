@@ -31,7 +31,7 @@
             </a>
         </li>       
         <li>
-            <a href="{{ route('kelasSiswaAdmin') }}" class="dropdown-toggle no-arrow">
+            <a href="{{ route('kelasSiswa') }}" class="dropdown-toggle no-arrow">
                 <span class="micon fa fa-university"></span><span class="mtext">Kelas Siswa</span>
             </a>
         </li> 

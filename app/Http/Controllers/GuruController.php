@@ -27,8 +27,8 @@ class GuruController extends Controller
 
     public function index()
     {
-        $data = $this->model->getAllGuru();
-        return view('Guru.indexGuruAdmin', compact('data'));
+        $guru = $this->model->getAllGuru();
+        return view('Guru.indexGuruAdmin', compact('guru'));
     }
 
     public function editGuru($id)
@@ -52,6 +52,7 @@ class GuruController extends Controller
 
     public function guruExport()
     {
+        // return new GuruExport()->download('guru.xlsx');
         return Excel::download(new GuruExport,'guru.xlsx');
     }
 
@@ -78,16 +79,9 @@ class GuruController extends Controller
 		Session::flash('sukses','Data Siswa Berhasil Diimport!');
  
 		// alihkan halaman kembali
-		return redirect('masterGuru');
-
-        // $file = $request->file('file');
-        // $namaFile = $file->getClientOriginalName();
-        // $file->move('dataGuru',$namaFile);
-
-        // Excel::import(new GuruImport, public_path('/dataGuru/',$namaFile));
-        // return redirect('masterGuru');
+		return redirect('masterGuru');  
     }
-
+ 
     public function simpanGuru(Request $request)
     {
         $request->validate([
