@@ -101,7 +101,7 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Jenis Kelamin</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="jenkel" name="jenkel" placeholder="jenkel" disabled
+                                <input class="form-control" id="tampilJenkel" name="tampilJenkel" placeholder="Jenis Kelamin" disabled
                                     type="text" />
                             </div>
                         </div>
@@ -207,8 +207,8 @@
                             <div class="col-sm-12 col-md-12">
                                 <select id="jenkel" name="jenkel" class="custom-select col-12">
                                     <option selected="">Jenis Kelamin</option>
-                                    <option value="1">Laki-Laki</option>
-                                    <option value="2">Perempuan</option>
+                                    <option value="Laki-Laki">Laki-Laki</option>
+                                    <option value="Perempuan">Perempuan</option>
                                 </select>
                             </div>
                         </div>
@@ -292,65 +292,40 @@
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="password">Password</label>
-                                <input id="password" name="password" class="form-control" type="password"
+                                <input id="editpassword" name="editpassword" class="form-control" type="password"
                                     required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="name">Nama Lengkap</label>
-                                <input id="name" name="name" class="form-control" type="text"
-                                    placeholder="Nama Lengkap" required />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-12 ">Jenis Kelamin</label>
-                            <div class="col-sm-12 col-md-12 jenkel">
-                                <select id="jenkel" name="jenkel" class="custom-select col-12">
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12 col-md-12">
-                                <label for="notelp">Nomor Telepon</label>
-                                <input id="notelp" name="notelp" class="form-control" type="text"
-                                    placeholder="Nomor Telepon" required />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12 col-md-12">
-                                <label for="tempatLahir">Tempat Lahir</label>
-                                <input id="tempatLahir" name="tempatLahir" class="form-control" type="text"
-                                    placeholder="Tempat Lahir" required />
+                                <input id="editname" name="editname" class="form-control" type="text" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="tglLahir">Tanggal Lahir</label>
-                                <input id="tglLahir" name="tglLahir" class="form-control" type="date"
-                                    placeholder="Tanggal Lahir" required />
+                                <input id="edittanggalLahir" name="edittanggalLahir" class="form-control" type="date"
+                                    required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="email">Email</label>
-                                <input id="email" name="email" class="form-control" type="email"
-                                    placeholder="Email" required />
+                                <input id="editemail" name="editemail" class="form-control" type="email" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label class="col-sm-12 col-md-12">Status Kepegawaian</label>
-                                <input class="form-control" id="statusKepegawaian" name="statusKepegawaian"
-                                    placeholder="Status Kepegawaian" type="text" />
+                                <input class="form-control" id="editstatusKepegawaian" name="editstatusKepegawaian"
+                                    type="text" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="alamat">Alamat</label>
-                                <textarea id="alamat" name="alamat" class="form-control" type="text" placeholder="Alamat" required></textarea>
+                                <textarea id="editalamat" name="editalamat" class="form-control" type="text" required></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -385,9 +360,9 @@
                     $('#idPegawai').val(data.data.id);
                     $('#username').val(data.data.username);
                     $('#name').val(data.data.name);
-                    $('#jenkel').val(data.data.jenkel);
+                    $('#tampilJenkel').val(data.data.jenkel);
                     $('#tempatLahir').val(data.data.tempatLahir);
-                    $('#tanggalLahir').val(data.data.tanggalLahir);
+                    $('#tanggalLahir').val(data.data.tglLahir);
                     $('#notelp').val(data.data.notelp);
                     $('#email').val(data.data.email);
                     $('#statusKepegawaian').val(data.data.statusKepegawaian);
@@ -412,15 +387,16 @@
                     console.log(data.data)
                     $('#showEditPegawai').modal('show'); //menampilkan modal
                     $('#idPegawai').val(data.data.id);
+                    $('#editpassword').val(data.data.password);
                     $('#editusername').val(data.data.username);
-                    $('#name').val(data.data.name);
-                    $("div.jenkel select").val(data.data.jenkel).change();                
-                    $('#tempatLahir').val(data.data.tempatLahir);
-                    $('#tanggalLahir').val(data.data.tanggalLahir);
-                    $('#notelp').val(data.data.notelp);
-                    $('#email').val(data.data.email);
-                    $('#statusKepegawaian').val(data.data.statusKepegawaian);
-                    $('#alamat').val(data.data.alamat);
+                    $('#editname').val(data.data.name);
+                    $("div.jenkel select").val(data.data.jenkel).change();
+                    $('#edittempatLahir').val(data.data.tempatLahir);
+                    $('#edittanggalLahir').val(data.data.tglLahir);
+                    $('#editnotelp').val(data.data.notelp);
+                    $('#editemail').val(data.data.email);
+                    $('#editstatusKepegawaian').val(data.data.statusKepegawaian);
+                    $('#editalamat').val(data.data.alamat);
                 }
             });
         });

@@ -6,10 +6,16 @@ use App\Models\Kurikulum;
 use Illuminate\Http\Request;
 
 class KurikulumController extends Controller
-{
+{ private $model;
+
+    public function __construct()
+    {
+        $this->model = new Kurikulum();
+    }
+
     public function index()
     {
-        $data = Kurikulum::all();
+        $data = $kehadiran = $this->model->getKurikulum();
         return view('Admin.kurikulum', compact('data'));
     }
 

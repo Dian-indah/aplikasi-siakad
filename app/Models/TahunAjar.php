@@ -14,8 +14,14 @@ class TahunAjar extends Model
         'semester',
     ];
 
-    public function kelas()
+    public function getTahunAjar()
     {
-        return $this->hasMany(kelas::class);
+        $a = TahunAjar::query()            
+            ->select('tahunajar.tahunAjar as tahunAjar','tahunajar.semester as semester')
+            ->orderBy('tahunajar.tahunAjar', 'DESC')
+            ->orderBy('tahunajar.semester', 'ASC')
+            ->get();
+        // dd($a);
+        return $a;
     }
 }

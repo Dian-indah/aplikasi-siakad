@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 use App\Exports\GuruExport;
@@ -10,9 +11,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
 use App\Models\Guru;
-use App\Http\Requests\StoreGuruRequest;
-use App\Http\Requests\UpdateGuruRequest;
-use GuzzleHttp\Promise\Create;
+use App\Models\Kehadiran;
+use App\Models\KelasSiswa;
+use App\Models\SiswaKelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,15 +32,80 @@ class GuruController extends Controller
         return view('Guru.indexGuruAdmin', compact('guru'));
     }
 
+    public function menu()
+    {
+        return view('Guru.menu');
+    }
+
+    public function profil()
+    {
+        return view('Guru.guruProfil');
+    }
+    public function tambahGuru()
+    {
+        return view('guru.tambahGuru');
+    }
+
+    public function nilai($id)
+    {
+        $g = Guru::find($id);
+        $nilai = $this->model->getDataSiswa($id);
+        return view('guru.guruNilai', compact('g', 'nilai'));
+    }
+    public function kehadiran($id)
+    {
+        $g = Guru::find($id);
+        $kehadiran = $this->model->getDataSiswa($id);
+        return view('Guru.guruKehadiran', compact('g', 'kehadiran'));
+    }
+    public function tambahKehadiran($id)
+    {
+        $ks = KelasSiswa::find($id);
+        $kehadiran = $this->model->getKelasSiswa($id);
+        return view('guru.inputKehadiran', compact('ks', 'kehadiran'));
+    }
+    public function simpanKehadiran($id, Request $request)
+    {
+        foreach ($request->input('kehadiran') as $idSiswaKelas => $kehadiran) {
+            $siswa = SiswaKelas::find($idSiswaKelas);
+            $siswa->kehadiran = $kehadiran;
+            $siswa->save();
+        }       
+
+        return back();
+    }    
+    public function viewKehadiran($id, Request $request)
+    {
+        $request->validate([
+            'tgl' => 'required',
+        ]);
+        $ks = KelasSiswa::find($id);
+        $kehadiran = $this->model->viewKehadiran($id, $request->tgl);
+        return view('guru.viewKehadiran', compact('ks', 'kehadiran'));
+    }
+    public function tampilKehadiran($id)
+    {
+        $ks = KelasSiswa::find($id);
+        $kehadiran = $this->model->viewKehadiran(0, 0);
+        return view('guru.viewKehadiran', compact('ks', 'kehadiran'));
+    }
+    public function tambahNts($id)
+    {
+        $ks = KelasSiswa::find($id);
+        $nts = $this->model->getKelasSiswa($id);
+        return view('guru.inputNts', compact('ks', 'nts'));
+    }
+
+    public function tambahNas($id)
+    {
+        $ks = KelasSiswa::find($id);
+        $nas = $this->model->getKelasSiswa($id);
+        return view('guru.inputNas', compact('ks', 'nas'));
+    }
     public function editGuru($id)
     {
         $guru = Guru::find($id);
         return view('guru.editGuru', compact('guru'));
-    }
-
-    public function tambahGuru()
-    {      
-        return view('guru.tambahGuru');
     }
 
     public function showGuruById($id)
@@ -49,39 +115,36 @@ class GuruController extends Controller
         $response['data'] = $guru;
         return response()->json($response);
     }
-
     public function guruExport()
     {
-        // return new GuruExport()->download('guru.xlsx');
-        return Excel::download(new GuruExport,'guru.xlsx');
+        return Excel::download(new GuruExport, 'guru.xlsx');
     }
 
     public function guruImportExcel(Request $request)
     {
-        // validasi
-		$this->validate($request, [
-			'file' => 'required|mimes:csv,xls,xlsx'
-		]);
- 
-		// menangkap file excel
-		$file = $request->file('file');
- 
-		// membuat nama file unik
-		$nama_file = rand().$file->getClientOriginalName();
- 
-		// upload ke folder file_siswa di dalam folder public
-		$file->move('dataGuru',$nama_file);
- 
-		// import data
-		Excel::import(new GuruImport, public_path('/dataGuru/'.$nama_file));
- 
-		// notifikasi dengan session
-		Session::flash('sukses','Data Siswa Berhasil Diimport!');
- 
-		// alihkan halaman kembali
-		return redirect('masterGuru');  
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        // menangkap file excel
+        $file = $request->file('file');
+
+        // membuat nama file unik
+        $nama_file = rand() . $file->getClientOriginalName();
+
+        // upload ke folder file_siswa di dalam folder public
+        $file->move('dataGuru', $nama_file);
+
+        // import data
+        Excel::import(new GuruImport, public_path('/dataGuru/' . $nama_file));
+
+        // notifikasi dengan session
+        Session::flash('sukses', 'Data Siswa Berhasil Diimport!');
+
+        // alihkan halaman kembali
+        return redirect('masterGuru');
     }
- 
+
     public function simpanGuru(Request $request)
     {
         $request->validate([
@@ -167,7 +230,7 @@ class GuruController extends Controller
     public function updateGuru(Request $request)
     {
         $id = $request->idGuru;
-        $data = Guru::where('id',$id)
+        $data = Guru::where('id', $id)
             ->update([
                 'username' => $request->username,
                 'password' => Hash::make($request['password']),
@@ -202,11 +265,11 @@ class GuruController extends Controller
                 'keahlianBahasaIsyarat' => $request->keahlianBahasaIsyarat,
                 'bank' => $request->bank,
                 'norek' => $request->norek,
-                'namaRek' => $request->namaRek,                
-            ]);      
-            // dd($data)   ;
+                'namaRek' => $request->namaRek,
+            ]);
+        // dd($data)   ;
 
-            return redirect()->route('masterGuru');
+        return redirect()->route('masterGuru');
         // ->with('success', 'data Kurikulum telah ditambahkan');
     }
 }

@@ -14,6 +14,7 @@ class Ortu extends Authenticatable
         'name',
         'username',
         'password',  
+        'idSiswa',
     ];
 
     protected $hidden = [

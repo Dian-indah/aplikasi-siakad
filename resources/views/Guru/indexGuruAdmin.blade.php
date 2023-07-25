@@ -30,13 +30,13 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col col-sm-4">No</th>
-                            <th scope="col col-sm-4">NUPTK</th>
-                            <th scope="col col-sm-4">Nama</th>
-                            <th scope="col col-sm-4">Jenis PTK</th>
-                            <th scope="col col-sm-4">No Handphone</th>
-                            <th scope="col col-sm-4">Email</th>
-                            <th scope="col col-sm-4">Action</th>
+                            <th scope="col">No</th>
+                            <th scope="col">NUPTK</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Jenis PTK</th>
+                            <th scope="col">No Handphone</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>

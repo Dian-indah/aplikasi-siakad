@@ -50,7 +50,7 @@
                                 <td>{{ $row->nisn }}</td>
                                 <td>{{ $row->username }}</td>
                                 <td>{{ $row->noHp }}</td>
-                                <td>{{ $row->email }}</td>
+                                <td>{{ $row->jenkel }}</td>
                                 <td class="text-center">
                                     <a href="#" data-id="<?= $row->id ?>" class="btn btn-info" id="tampilSiswa"
                                         type="button"><i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a>

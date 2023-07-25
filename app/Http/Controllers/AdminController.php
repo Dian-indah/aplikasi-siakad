@@ -22,6 +22,11 @@ class AdminController extends Controller
         return view('pegawai.index', compact('pegawai'));
     }
 
+    public function menuAdmin()
+    {
+        return view('admin.menu');
+    }
+
     public function showPegawaiById($id)
     {
         $pegawai = Admin::find($id);
@@ -114,6 +119,6 @@ class AdminController extends Controller
 
     public function ortu()
     {
-        return view('Admin.Ortu');
+        return view('ortu.indexOrtuAdmin');
     }
 }

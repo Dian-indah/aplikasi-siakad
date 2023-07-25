@@ -18,6 +18,7 @@ class CreateOrtusTable extends Migration
             $table->string('name');
             $table->string('username');        
             $table->string('password');
+            $table->foreignId('siswaId')->constrained('siswa')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -17,4 +17,14 @@ class Kurikulum extends Model
     {
         return $this->hasMany(mapel::class);
     }
+
+    public function getKurikulum()
+    {
+        $a = Kurikulum::query()            
+            ->select('kurikulum.namaKurikulum as namaKurikulum')
+            ->orderBy('kurikulum.namaKurikulum', 'DESC')           
+            ->get();
+        // dd($a);
+        return $a;
+    }
 }

@@ -8,9 +8,9 @@
     <title>SIAKAD</title>
 
     <!-- Site favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href={{asset('vendors/images/apple-touch-icon.png')}}  />
-    <link rel="icon" type="image/png" sizes="32x32" href={{asset('vendors/images/favicon-32x32.png')}} />
-    <link rel="icon" type="image/png" sizes="16x16" href={{asset('vendors/images/favicon-16x16.png')}} />
+    <link rel="apple-touch-icon" sizes="180x180" href={{ asset('vendors/images/apple-touch-icon.png') }} />
+    <link rel="icon" type="image/png" sizes="32x32" href={{ asset('vendors/images/favicon-32x32.png') }} />
+    <link rel="icon" type="image/png" sizes="16x16" href={{ asset('vendors/images/favicon-16x16.png') }} />
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -19,13 +19,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href={{asset('vendors/styles/core.css')}} />
-    <link rel="stylesheet" type="text/css" href={{asset('vendors/styles/icon-font.min.css')}} />
-    <link rel="stylesheet" type="text/css" href={{asset('plugins/sweetalert2/sweetalert2.css')}} />
-    <link rel="stylesheet" type="text/css" href={{asset('vendors/styles/style.css')}} />    
-    <link rel="stylesheet" type="text/css" href={{asset('plugins/datatables/css/dataTables.bootstrap4.min.css')}} />    
-    <link rel="stylesheet" type="text/css" href={{asset('plugins/datatables/css/responsive.bootstrap4.min.css')}} />    
-    <link rel="stylesheet" type="text/css" href={{asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}} />        
+    <link rel="stylesheet" type="text/css" href={{ asset('vendors/styles/core.css') }} />
+    <link rel="stylesheet" type="text/css" href={{ asset('vendors/styles/icon-font.min.css') }} />
+    <link rel="stylesheet" type="text/css" href={{ asset('plugins/sweetalert2/sweetalert2.css') }} />
+    <link rel="stylesheet" type="text/css" href={{ asset('vendors/styles/style.css') }} />
+    {{-- Select2 --}}
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    {{-- datatable --}}
+    <link rel="stylesheet" type="text/css" href={{ asset('plugins/datatables/css/dataTables.bootstrap4.min.css') }} />
+    <link rel="stylesheet" type="text/css" href={{ asset('plugins/datatables/css/responsive.bootstrap4.min.css') }} />
+    <link rel="stylesheet" type="text/css"
+        href={{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }} />
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('plugins/datatables/css/dataTables.bootstrap4.min.css') }}" />
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('plugins/datatables/css/responsive.bootstrap4.min.css') }}" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
@@ -63,7 +74,7 @@
 <body>
     <div class="header">
         <div class="header-left">
-            <div class="menu-icon bi bi-list"></div>           
+            <div class="menu-icon bi bi-list"></div>
             <div class="header-search">
                 <form>
                     <div class="form-group mb-0">
@@ -85,7 +96,7 @@
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                         <span class="user-icon">
-                            <img src={{asset('vendors/images/photo1.jpg')}} alt="" />
+                            <img src={{ asset('vendors/images/photo1.jpg') }} alt="" />
                         </span>
                         <span class="user-name">
                             @if (Str::length(Auth::guard('admin')->user()) > 0)
@@ -93,7 +104,7 @@
                             @elseif (Str::length(Auth::guard('siswa')->user()) > 0)
                                 {{ Auth::guard('siswa')->user()->name }}
                             @elseif (Str::length(Auth::guard('guru')->user()) > 0)
-                                {{ Auth::guard('guru')->user()->name }}
+                                {{ Auth::guard('guru')->user()->username }}
                             @elseif (Str::length(Auth::guard('ortu')->user()) > 0)
                                 {{ Auth::guard('ortu')->user()->name }}
                             @endif
@@ -147,12 +158,12 @@
     <div class="left-side-bar">
         <div class="brand-logo">
             <a href="#">
-                <img src={{asset('vendors/images/smk-light.svg')}} class="light-logo" width="50px" height="50px"
+                <img src={{ asset('vendors/images/smk-light.svg') }} class="light-logo" width="50px" height="50px"
                     alt="" />
-                <img src={{asset('vendors/images/smk-light.svg')}} class="dark-logo" width="50px" height="50px"
+                <img src={{ asset('vendors/images/smk-light.svg') }} class="dark-logo" width="50px" height="50px"
                     alt="" />
-                <img src={{asset('vendors/images/siakad-dark.svg')}} alt="" class="dark-logo" />
-                <img src={{asset('vendors/images/siakad-light.svg')}} alt="" class="light-logo" />
+                <img src={{ asset('vendors/images/siakad-dark.svg') }} alt="" class="dark-logo" />
+                <img src={{ asset('vendors/images/siakad-light.svg') }} alt="" class="light-logo" />
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
                 <i class="ion-close-round"></i>
@@ -176,20 +187,18 @@
     {{-- End content --}}
     <!-- js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src={{asset('plugins/sweetalert2/sweet-alert.init.js')}}></script>
-    <script src={{asset('plugins/sweetalert2/sweetalert2.min.js')}}></script>
-    <script src={{asset('plugins/toastr/toastr.min.js')}}></script>
-    <script src={{asset('vendors/scripts/core.js')}}></script>
-    <script src={{asset('vendors/scripts/script.min.js')}}></script>
-    <script src={{asset('vendors/scripts/process.js')}}></script>
-    <script src={{asset('vendors/scripts/layout-settings.js')}}></script>
-    <script src={{asset('plugins/sweetalert2/sweetalert2.all.js')}}></script>
-    <script src={{asset('plugins/apexcharts/apexcharts.min.js')}}></script>
-    <script src={{asset('plugins/datatables/js/jquery.dataTables.min.js')}}></script>
-    <script src={{asset('plugins/datatables/js/dataTables.bootstrap4.min.js')}}></script>
-    <script src={{asset('plugins/datatables/js/dataTables.responsive.min.js')}}></script>
-    <script src={{asset('plugins/datatables/js/responsive.bootstrap4.min.js')}}></script>
-    <script src={{asset('vendors/scripts/dashboard.js')}}></script>
+    <script src={{ asset('plugins/sweetalert2/sweet-alert.init.js') }}></script>
+    <script src={{ asset('plugins/sweetalert2/sweetalert2.min.js') }}></script>
+    <script src={{ asset('plugins/toastr/toastr.min.js') }}></script>
+    <script src={{ asset('vendors/scripts/core.js') }}></script>
+    <script src={{ asset('vendors/scripts/script.min.js') }}></script>
+    <script src={{ asset('vendors/scripts/process.js') }}></script>
+    <script src={{ asset('vendors/scripts/layout-settings.js') }}></script>
+    <script src={{ asset('plugins/sweetalert2/sweetalert2.all.js') }}></script>
+    <script src={{ asset('plugins/apexcharts/apexcharts.min.js') }}></script>
+    
+    <script src={{ asset('vendors/scripts/dashboard.js') }}></script>
+    
 
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"

@@ -13,9 +13,7 @@ class KelasSiswa extends Model
     protected $fillable = [
         'kelasId',
         'mapelId',
-        'guruPengajar',
-        'waliKelas',
-        'jumlahSiswa',
+        'guruPengajar',   
     ];
 
     public function getAllKelasSiswa()
@@ -25,7 +23,7 @@ class KelasSiswa extends Model
             ->leftJoin('mapel as m', 'm.id', 'kelas_siswa.mapelId')
             ->leftJoin('guru as g', 'g.id', 'kelas_siswa.guruPengajar')
             ->leftJoin('guru as w', 'w.id', 'k.guruId')
-            ->select('jumlahSiswa','namaKelas', 'namaMapel', 'g.username as guruPengajar', 'w.username as waliKelas')
+            ->select('kelas_siswa.id','jumlahSiswa','namaKelas', 'namaMapel', 'g.username as guruPengajar', 'w.username as waliKelas')
             ->get();
         // dd($a);
         return $a;
