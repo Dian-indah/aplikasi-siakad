@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class SiswaController extends Controller
@@ -239,8 +240,21 @@ class SiswaController extends Controller
         return view('sisor.nilai');
     }
 
-    public function kehadiran()
+    public function ShowNilai()
+    {
+        $id = Auth::guard('siswa')->user()->id;
+        $s = Siswa::find($id);
+        $nilai = $this->model->getKelasSiswa($id);
+        return view('sisor.nilai', compact('s', 'nilai'));
+    }
+
+     public function kehadiran()
     {
         return view('sisor.kehadiran');
-    }    
+    } 
+    
+    public function menuSiswa()
+    {
+        return view('siswa.menu');
+    } 
 }

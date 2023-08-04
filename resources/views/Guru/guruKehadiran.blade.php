@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-md-12 col-sm-6 m-3">                   
 
-                    <table class=" table hover nowrap" id="example1">
+                    <table id="example" class="table table-bordered">
                         <thead>
 
                             <tr>
@@ -54,23 +54,10 @@
         </div>
     </div>
 @endsection
-@section('js')    
-    <script src={{ asset('plugins/datatables/js/jquery.dataTables.min.js') }}></script>
-    <script src={{ asset('plugins/datatables/js/dataTables.bootstrap4.min.js') }}></script>
-    <script src={{ asset('plugins/datatables/js/dataTables.responsive.min.js') }}></script>
-    <script src={{ asset('plugins/datatables/js/responsive.bootstrap4.min.js') }}></script>
-    <!-- Datatable Setting js -->    
-    <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
-    
-    <script src="{{ asset('plugins/datatables/js/dataTables.bootstrap4.min.j') }}"></script>
-    <script src="{{ asset('plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
-    <!-- buttons for Export datatable -->
-    <script src="{{ asset('plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/js/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/js/vfs_fonts.js') }}"></script>
+@section('js')  
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>     
 @endsection

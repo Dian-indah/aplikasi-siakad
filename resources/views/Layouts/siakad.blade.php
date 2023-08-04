@@ -33,11 +33,8 @@
     <link rel="stylesheet" type="text/css" href={{ asset('plugins/datatables/css/responsive.bootstrap4.min.css') }} />
     <link rel="stylesheet" type="text/css"
         href={{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }} />
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('plugins/datatables/css/dataTables.bootstrap4.min.css') }}" />
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('plugins/datatables/css/responsive.bootstrap4.min.css') }}" />
-
+    <!-- Perpustakaan jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
@@ -75,14 +72,6 @@
     <div class="header">
         <div class="header-left">
             <div class="menu-icon bi bi-list"></div>
-            <div class="header-search">
-                <form>
-                    <div class="form-group mb-0">
-                        <i class="dw dw-search2 search-icon"></i>
-                        <input type="text" class="form-control search-input" placeholder="Search Here" />
-                    </div>
-                </form>
-            </div>
         </div>
         <div class="header-right">
             <div class="dashboard-setting user-notification">
@@ -96,7 +85,15 @@
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                         <span class="user-icon">
-                            <img src={{ asset('vendors/images/photo1.jpg') }} alt="" />
+                            @if (Str::length(Auth::guard('admin')->user()) > 0)
+                                <img src={{ asset('vendors/images/hacker.png') }} alt="" />
+                            @elseif (Str::length(Auth::guard('siswa')->user()) > 0)
+                                <img src={{ asset('vendors/images/siswa1.png') }} alt="" />
+                            @elseif (Str::length(Auth::guard('guru')->user()) > 0)
+                                <img src={{ asset('vendors/images/guru.png') }} alt="" />
+                            @elseif (Str::length(Auth::guard('ortu')->user()) > 0)
+                                <img src={{ asset('vendors/images/ortu.png') }} alt="" />
+                            @endif
                         </span>
                         <span class="user-name">
                             @if (Str::length(Auth::guard('admin')->user()) > 0)
@@ -196,9 +193,26 @@
     <script src={{ asset('vendors/scripts/layout-settings.js') }}></script>
     <script src={{ asset('plugins/sweetalert2/sweetalert2.all.js') }}></script>
     <script src={{ asset('plugins/apexcharts/apexcharts.min.js') }}></script>
-    
+
     <script src={{ asset('vendors/scripts/dashboard.js') }}></script>
-    
+
+    {{-- new --}}
+    <script src={{ asset('plugins/datatables/js/jquery.dataTables.min.js') }}></script>
+    <script src={{ asset('plugins/datatables/js/dataTables.bootstrap4.min.js') }}></script>
+    <script src={{ asset('plugins/datatables/js/dataTables.responsive.min.js') }}></script>
+    <script src={{ asset('plugins/datatables/js/responsive.bootstrap4.min.js') }}></script>
+
+    <!-- buttons for Export datatable -->
+    <script src="{{ asset('plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/js/vfs_fonts.js') }}"></script>
+    <!-- Datatable Setting js -->
+    <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
+    {{-- new --}}
 
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"

@@ -14,10 +14,10 @@ class Admin extends Authenticatable
     protected $fillable = [
         'name',
         'username',
-        'password',  
+        'password',
         'email',
         'notelp',
-        'jenkel' ,
+        'jenkel',
         'tempatLahir',
         'tglLahir',
         'alamat',
@@ -37,8 +37,12 @@ class Admin extends Authenticatable
         return $q;
     }
     public function isAdmin()
-{
-    return $this->role === 'admin';
-}
-    
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->role === 'superadmin';
+    }
 }

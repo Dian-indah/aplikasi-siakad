@@ -96,29 +96,35 @@ class AdminController extends Controller
         return redirect()->route('pegawaiAdmin');
         // ->with('success', 'data Kurikulum telah ditambahkan');
     }
+    // public function destroy(Admin $user)
+    // {
+    //     // Memeriksa apakah pengguna yang sedang login adalah admin
+    //     if (Auth::user()->$this->model->isAdmin()) {
+    //         // Memeriksa apakah pengguna yang sedang login mencoba menghapus akunnya sendiri
+    //         if ($user->id === Auth::user()->id) {
+    //             return redirect()->back()->with('error', 'Tidak dapat menghapus akun admin sendiri.');
+    //         }
+    //         // Proses penghapusan akun
+    //         $user->delete();
+    //         return redirect()->route('pegawaiAdmin')->with('success', 'Akun pengguna telah dihapus.');
+    //     }
+    //     // Jika bukan admin, mungkin ada penanganan lain atau redirect
+    //     return redirect()->back()->with('error', 'Anda tidak memiliki izin untuk menghapus akun pengguna.');
+    // }
+
     public function destroy(Admin $user)
     {
-        // Memeriksa apakah pengguna yang sedang login adalah admin
-        if (Auth::user()->$this->model->isAdmin()) {
-            // Memeriksa apakah pengguna yang sedang login mencoba menghapus akunnya sendiri
-            if ($user->id === Auth::user()->id) {
-                return redirect()->back()->with('error', 'Tidak dapat menghapus akun admin sendiri.');
-            }
-            // Proses penghapusan akun
+        // Cek apakah user yang sedang login adalah admin dan tidak sedang menghapus akunnya sendiri
+        if (auth()->user()->$this->model->isAdmin() && Auth::admin()->id !== $user->id) {
             $user->delete();
-            return redirect()->route('pegawaiAdmin')->with('success', 'Akun pengguna telah dihapus.');
+            return redirect()->route('pegawai.index')->with('success', 'Akun berhasil dihapus.');
         }
-        // Jika bukan admin, mungkin ada penanganan lain atau redirect
-        return redirect()->back()->with('error', 'Anda tidak memiliki izin untuk menghapus akun pengguna.');
+        return redirect()->route('pegawai.index')->with('error', 'Tidak dapat menghapus akun admin yang sedang login atau akun sendiri.');
     }
 
     public function aspirasi()
     {
         return view('Admin.aspirasi');
     }
-
-    public function ortu()
-    {
-        return view('ortu.indexOrtuAdmin');
-    }
+ 
 }

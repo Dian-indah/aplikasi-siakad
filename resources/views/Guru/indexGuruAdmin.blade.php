@@ -27,7 +27,7 @@
                     </a>
 
                 </div>
-                <table class="table table-bordered">
+                <table id="example" class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -409,6 +409,11 @@
     {{-- end tampil modal --}}
 @endsection
 @section('js')
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
     <script>
         // Show Data
         $(document).on('click', '#tampilGuru', function() { //editKelas ada di class     

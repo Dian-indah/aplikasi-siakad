@@ -7,23 +7,24 @@
                 <div class="col-md-9 col-sm-9">
                     <div class="title">
                         <h4>Kehadiran Siswa</h4>
-                        <form action="{{url('/guru/viewKehadiran/'.$ks->id)}}" method="post">
+                        <form action="{{ url('/guru/viewKehadiran/' . $ks->id) }}" method="post">
                             @csrf
                             <div class="modal-body">
-                                <input type="text" value="{{$ks->id}}" id="idKelasSiswa" name="idKelasSiswa" hidden>
+                                <input type="text" value="{{ $ks->id }}" id="idKelasSiswa" name="idKelasSiswa"
+                                    hidden>
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
                                         <label for="">Tanggal</label>
                                         <input id="tgl" name="tgl" class="form-control" type="date" required />
                                     </div>
-                                </div>                            
+                                </div>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="pull-right col-md-2 col-sm-2">
-                    
+
                 </div>
             </div>
         </div>
@@ -41,34 +42,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <form action="#" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @foreach ($kehadiran as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nipd }}</td>
-                                    <td>{{ $item->namaSiswa }}</td>
-                                    <td>{{ $item->status }}</td>
-                                    <td>{{ $item->tglKehadiran }}</td>
-                                </tr>
-                            @endforeach
-                            {{-- <td>
-                                <div class="form-group row">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio1" name="option" value="Hadir"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadio1">Hadir</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio2" name="option" value="Tidak Hadir"
-                                            class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadio2">Tidak Hadir</label>
-                                    </div>
-                                </div>
-                            </td> --}}
+                        @foreach ($kehadiran as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->nipd }}</td>
+                                <td>{{ $item->namaSiswa }}</td>
+                                <td>{{ $item->status }}</td>
+                                <td>{{ $item->tglKehadiran }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
-                </table>              
-                </form>
+                </table>
             </div>
         </div>
         {{-- end content bawah --}}

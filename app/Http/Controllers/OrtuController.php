@@ -3,84 +3,69 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ortu;
-use App\Http\Requests\StoreOrtuRequest;
-use App\Http\Requests\UpdateOrtuRequest;
+use App\Models\Siswa;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class OrtuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new Ortu();
+    }
+
     public function index()
     {
-        return view('Ortu.menu');
+        $data = $this->model->getAllOrtu();
+        return view('ortu.indexOrtuAdmin', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function selectSearchSiswa(Request $request)
     {
-        //
+        $siswa = [];
+
+        if ($request->has('q')) {
+            $search = $request->q;
+            $siswa = Siswa::select("id", "name")
+                ->where('name', 'LIKE', "%$search%")
+                ->get();
+        }
+        return response()->json($siswa);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreOrtuRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreOrtuRequest $request)
+    public function simpanOrtu(Request $request)
     {
-        //
+        $Id = Ortu::create([
+            'name' => $request->namaOrtu,
+            'username' => $request->username,
+            'password' => Hash::make($request['password']),
+            'siswaId' => $request->livesearch,
+        ]);
+
+        return back();
+    }
+    public function getById($id)
+    {
+        $ks = Ortu::find($id);
+        $response['success'] = true;
+        $response['data'] = $ks;
+        // dd($response);
+        return response()->json($response);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Ortu  $ortu
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Ortu $ortu)
+    public function updateOrtu(Request $request)
     {
-        //
-    }
+        $id = $request->idOrtu;
+        $data = Ortu::find($id)
+            ->update([
+                'name' => $request->editNamaOrtu,
+                'username' => $request->editUsername,
+                'password' => Hash::make($request['password']),
+                'siswaId' => $request->livesearch,
+            ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Ortu  $ortu
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ortu $ortu)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateOrtuRequest  $request
-     * @param  \App\Models\Ortu  $ortu
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateOrtuRequest $request, Ortu $ortu)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Ortu  $ortu
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Ortu $ortu)
-    {
-        //
+        return back();
     }
 }

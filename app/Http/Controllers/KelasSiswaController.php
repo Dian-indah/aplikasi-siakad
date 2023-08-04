@@ -51,7 +51,7 @@ class KelasSiswaController extends Controller
         $ks = KelasSiswa::find($id);
         $response['success'] = true;
         $response['data'] = $ks;
-        dd($response);
+        // dd($response);
         return response()->json($response);
     }
 

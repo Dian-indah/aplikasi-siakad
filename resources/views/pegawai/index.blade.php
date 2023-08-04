@@ -27,7 +27,7 @@
                             <th scope="col">Status Kepegawaian</th>
                             <th scope="col">No Handphone</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Action</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -41,18 +41,20 @@
                                 <td>{{ $row->email }}</td>
                                 <td class="text-center">
                                     <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-info" id="tampilPegawai"
-                                        type="button"><i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a>
+                                        type="button"><i class="icon-copy fa fa-eye" aria-hidden="true"></i></a>
                                     <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-warning"
                                         id="editPegawai" type="button"><i class="icon-copy fa fa-edit"
-                                            aria-hidden="true"></i> Edit</a>
-                                    {{-- <a href="{{ route('users.destroy', $row->id) }}" class="btn btn-danger"
-                                        onclick="event.preventDefault(); if(confirm('Apakah Anda yakin ingin menghapus akun ini?')) document.getElementById('delete-form').submit();">Hapus
-                                        Akun</a>
-                                    <form id="delete-form" action="{{ route('users.destroy', $row->id) }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form> --}}
+                                            aria-hidden="true"></i> </a>
+                                {{-- <td>
+                                    @if (Auth::guard('admin') === 'admin' && Auth::guard('admin')->id !== $row->id)
+                                        <!-- Tampilkan tombol untuk menghapus akun jika user adalah admin dan bukan akun yang sedang login -->
+                                        <form action="{{ route('users.destroy', $row->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a class="btn btn-sm btn-danger" type="submit">Hapus Akun</button>
+                                        </form>
+                                    @endif
+                                </td> --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -101,8 +103,8 @@
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Jenis Kelamin</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="tampilJenkel" name="tampilJenkel" placeholder="Jenis Kelamin" disabled
-                                    type="text" />
+                                <input class="form-control" id="tampilJenkel" name="tampilJenkel"
+                                    placeholder="Jenis Kelamin" disabled type="text" />
                             </div>
                         </div>
                     </div>

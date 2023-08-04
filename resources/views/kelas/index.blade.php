@@ -20,7 +20,7 @@
                     <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#small-modal"><i
                             class="icon-copy fa fa-plus" aria-hidden="true"></i> Tambah Data</a>
                 </div> <br><br>
-                <table class="table table-bordered">
+                <table id="example" class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -115,7 +115,8 @@
                                     <select id="tahunAjarId" name="tahunAjarId" class="custom-select col-12" required>
                                         <option disabled selected="">Pilih..</option>
                                         @foreach ($tahunajar as $row)
-                                            <option value="{{ $row->id }}">{{ $row->tahunAjar }} {{ $row->semester }}
+                                            <option value="{{ $row->id }}">{{ $row->tahunAjar }}
+                                                {{ $row->semester }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -201,10 +202,16 @@
 @endsection
 @section('js')
     <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
+    <script>
         // Edit Data
         $(document).on('click', '#editKelas', function() { //editKelas ada di class                      
             var id = $(this).data(
-            'id'); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
+                'id'
+                ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
             $.ajax({
                 // console.log(id);
                 url: "{{ url('/kelas/editKelas') }}" + '/' + id,

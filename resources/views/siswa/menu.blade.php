@@ -3,7 +3,7 @@
 @section('content')		
         <div class="card-box mb-30">
             <h2 class="pd-20 ">Selamat Datang</h2>														
-            <h6 class="pd-20">Bapak Ibu</h6>					
+            <h6 class="pd-20">Siswa</h6>					
             <p class="pd-20">Siakad merupakan aplikasi yang dapat membantu siswa dan 
                 orang tua siswa dalam mengakses nilai siswa di sekolah.
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor dolores

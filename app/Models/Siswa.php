@@ -16,59 +16,59 @@ class Siswa extends Authenticatable
     protected $fillable = [
         'name',
         'username',
-        'email',         
-        'password',         
-        'nisn',         
-        'nipd',         
-        'jenkel',         
-        'tempatLahir',         
-        'tanggalLahir',         
-        'nik',         
-        'noKk',         
-        'noHp',         
-        'agama',         
-        'alamat',         
-        'jenisTinggal',         
-        'trasportasi',         
-        'skhun',         
-        'penerimaKpps',         
-        'noKpps',         
-        'namaAyah',         
-        'tanggalLahirAyah',         
-        'pendidikanAyah',         
-        'pekerjaanAyah',         
-        'penghasilanAyah',         
-        'nikAyah',         
-        'namaIbu',         
-        'tanggalLahirIbu',         
-        'pendidikanIbu',         
-        'pekerjaanIbu',         
-        'penghasilanIbu',         
-        'nikIbu',         
-        'namaWali',         
-        'tanggalLahirWali',         
-        'pendidikanWali',         
-        'pekerjaanWali',         
-        'penghasilanWali',         
-        'nikWali',         
-        'noUn',         
-        'noSeriIjazah',         
-        'penerimaKip',         
-        'noKip',         
-        'namaKip',                     
-        'noReqAkta',                     
-        'bank',                     
-        'noRekening',                                                                           
-        'namaRekening',                                                                           
-        'layakPip',                                                                           
-        'alasanPip', 
+        'email',
+        'password',
+        'nisn',
+        'nipd',
+        'jenkel',
+        'tempatLahir',
+        'tanggalLahir',
+        'nik',
+        'noKk',
+        'noHp',
+        'agama',
+        'alamat',
+        'jenisTinggal',
+        'trasportasi',
+        'skhun',
+        'penerimaKpps',
+        'noKpps',
+        'namaAyah',
+        'tanggalLahirAyah',
+        'pendidikanAyah',
+        'pekerjaanAyah',
+        'penghasilanAyah',
+        'nikAyah',
+        'namaIbu',
+        'tanggalLahirIbu',
+        'pendidikanIbu',
+        'pekerjaanIbu',
+        'penghasilanIbu',
+        'nikIbu',
+        'namaWali',
+        'tanggalLahirWali',
+        'pendidikanWali',
+        'pekerjaanWali',
+        'penghasilanWali',
+        'nikWali',
+        'noUn',
+        'noSeriIjazah',
+        'penerimaKip',
+        'noKip',
+        'namaKip',
+        'noReqAkta',
+        'bank',
+        'noRekening',
+        'namaRekening',
+        'layakPip',
+        'alasanPip',
         'kebutuhanKhusus',
         'sekolahAsal',
         'anak',
         'jmlSaudara',
         'bb',
         'tb',
-        'jarakSekolah',                                                                               
+        'jarakSekolah',
     ];
 
     protected $hidden = [
@@ -89,5 +89,25 @@ class Siswa extends Authenticatable
         SELECT * from tingkatKelas
         ");
         return $q;
+    }
+
+    public function getKelasSiswa($id)
+    {
+        $a = KelasSiswa::query()                                    
+            ->leftJoin('guru as g', 'g.id', 'kelas_siswa.guruPengajar')      
+            ->leftJoin('mapel as m', 'm.id', 'kelas_siswa.mapelId')      
+            ->leftJoin('siswa_kelas as sk', 'sk.kelasSiswaId', 'kelas_siswa.id')      
+            ->leftJoin('siswa as s', 's.id', 'sk.siswaId') 
+            ->select(
+                'm.namaMapel as namaMapel',
+                'g.username as namaGuru',
+                'sk.nts as nts',
+                'sk.nas as nas',
+                'sk.kehadiran as kehadiran',
+                's.id as siswaId'
+            )
+            ->where('s.id', $id)
+            ->get();
+        return $a;
     }
 }

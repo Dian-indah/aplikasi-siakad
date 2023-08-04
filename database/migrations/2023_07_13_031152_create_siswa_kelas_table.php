@@ -20,7 +20,7 @@ class CreateSiswaKelasTable extends Migration
             $table->string('nts');
             $table->string('nas');     
             $table->string('kehadiran');     
-            $table->string('tglKehadiran');     
+            $table->date('tglKehadiran');     
             $table->timestamps();
         });
     }

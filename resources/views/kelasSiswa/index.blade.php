@@ -30,7 +30,7 @@
                     <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#small-modal"><i
                             class="icon-copy fa fa-plus" aria-hidden="true"></i> Tambah Data</a>
                 </div> <br><br>
-                <table class="table table-bordered">
+                <table id="example" class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -187,6 +187,11 @@
     {{-- end modal edit --}}
 @endsection
 @section('js')
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
     <script>
         // Edit Data
         $(document).on('click', '#edit', function() { //editKelas ada di class

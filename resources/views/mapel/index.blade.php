@@ -31,7 +31,7 @@
                     <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#small-modal"><i
                             class="icon-copy fa fa-plus" aria-hidden="true"></i> Tambah Data</a>
                 </div> <br><br>
-                <table class="table table-bordered">
+                <table id="example" class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -78,86 +78,87 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header ">
-                        <h4 class="modal-title" id="myLargeModalLabel">
-                            Tambah Mata Pelajaran
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            ×
-                        </button>
+                    <h4 class="modal-title" id="myLargeModalLabel">
+                        Tambah Mata Pelajaran
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                </div>
+                <form action="{{ route('tambahMapel') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kodeMapel">Kode Mapel</label>
+                                <input id="kodeMapel" name="kodeMapel" class="form-control" type="text"
+                                    placeholder="Kode Mapel" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="namaMapel">Nama Mapel</label>
+                                <input id="namaMapel" name="namaMapel" class="form-control" type="text"
+                                    placeholder="Nama Mapel" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="tingkatKelasId">Tingkat Kelas</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select id="tingkatKelasId" name="tingkatKelasId" class="custom-select col-12" required>
+                                        <option disabled selected="">Pilih..</option>
+                                        @foreach ($tingkatKelas as $row)
+                                            <option value="{{ $row->id }}">{{ $row->tingkatKelas }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kurikulumId">Kurikulum</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select id="kurikulumId" name="kurikulumId" class="custom-select col-12" required>
+                                        <option disabled selected="">Pilih..</option>
+                                        @foreach ($kurikulum as $row)
+                                            <option value="{{ $row->id }}">{{ $row->namaKurikulum }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="statusKurikulum">Status Kurikulum</label>
+                                <input id="statusKurikulum" name="statusKurikulum" class="form-control" type="text"
+                                    placeholder="Status Kurikulum" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="kompetensiKeahlian">Kompetensi Keahlian</label>
+                                <input id="kompetensiKeahlian" name="kompetensiKeahlian" class="form-control"
+                                    type="text" placeholder="Kompetensi Keahlian" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="namaPtk">Nama PTK</label>
+                                <input id="namaPtk" name="namaPtk" class="form-control" type="text"
+                                    placeholder="Nama PTK" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </div>
                     </div>
-                    <form action="{{ route('tambahMapel') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group row">
-                                <div class="col-sm-12 col-md-12">
-                                    <label for="kodeMapel">Kode Mapel</label>
-                                    <input id="kodeMapel" name="kodeMapel" class="form-control" type="text"
-                                        placeholder="Kode Mapel" required />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-12 col-md-12">
-                                    <label for="namaMapel">Nama Mapel</label>
-                                    <input id="namaMapel" name="namaMapel" class="form-control" type="text"
-                                        placeholder="Nama Mapel" required />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-12 col-md-12">
-                                    <label for="tingkatKelasId">Tingkat Kelas</label>
-                                    <div class="col-sm-12 col-md-12">
-                                        <select id="tingkatKelasId" name="tingkatKelasId" class="custom-select col-12" required>
-                                            <option disabled selected="">Pilih..</option>
-                                             @foreach ($tingkatKelas as $row)
-                <option value="{{ $row->id }}">{{ $row->tingkatKelas }} </option>
-                @endforeach
-                </select>
+                </form>
             </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-12 col-md-12">
-            <label for="kurikulumId">Kurikulum</label>
-            <div class="col-sm-12 col-md-12">
-                <select id="kurikulumId" name="kurikulumId" class="custom-select col-12" required>
-                    <option disabled selected="">Pilih..</option>
-                    @foreach ($kurikulum as $row)
-                        <option value="{{ $row->id }}">{{ $row->namaKurikulum }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-12 col-md-12">
-            <label for="statusKurikulum">Status Kurikulum</label>
-            <input id="statusKurikulum" name="statusKurikulum" class="form-control" type="text"
-                placeholder="Status Kurikulum" required />
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-12 col-md-12">
-            <label for="kompetensiKeahlian">Kompetensi Keahlian</label>
-            <input id="kompetensiKeahlian" name="kompetensiKeahlian" class="form-control" type="text"
-                placeholder="Kompetensi Keahlian" required />
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-12 col-md-12">
-            <label for="namaPtk">Nama PTK</label>
-            <input id="namaPtk" name="namaPtk" class="form-control" type="text" placeholder="Nama PTK" required />
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-    </div>
-    </div>
-    </form>
-    </div>
-    </div>
     </div>
     {{-- end modal tambah --}}
 
@@ -256,10 +257,16 @@
 @endsection
 @section('js')
     <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
+    <script>
         // Edit Data
         $(document).on('click', '#editMapel', function() { //editKelas ada di class                      
             var id = $(this).data(
-            'id'); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
+                'id'
+                ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
             $.ajax({
                 // console.log(id);
                 url: "{{ url('/mapel/editMapel') }}" + '/' + id,

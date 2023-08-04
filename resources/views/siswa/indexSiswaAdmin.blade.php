@@ -30,7 +30,7 @@
                     <a href="{{ route('tambahSiswa') }}" class="btn btn-success btn-sm"><i class="icon-copy fa fa-plus"
                             aria-hidden="true"></i> Tambah Data</a>
                 </div> <br><br>
-                <table class="table table-bordered">
+                <table id="example" class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -544,6 +544,11 @@
     {{-- end tampil modal --}}
 @endsection
 @section('js')
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    });
+</script>
     <script>
         // Show Data
         $(document).on('click', '#tampilSiswa', function() { //editKelas ada di class     
