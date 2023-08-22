@@ -15,52 +15,51 @@ class Kelas extends Model
         'tahunAjarId',
         'tingkatKelasId',  
         'guruId',  
-    ];
+    ]; 
 
     public function getKelas()
     {
-        $q = DB::select("
-        SELECT kelas.id as id, kelas.namaKelas as namaKelas, tahunAjar.tahunAjar as tahunAjar,
-        tahunAjar.semester as semester, tingkatKelas.tingkatKelas as tingkatKelas,
-        guru.username as username FROM kelas 
-        JOIN tahunAjar on tahunAjar.id = kelas.tahunAjarId
-        JOIN tingkatKelas on tingkatKelas.id = kelas.tingkatKelasId
-        JOIN guru on guru.id = kelas.guruId
-        ORDER BY tahunAjar.tahunAjar desc , kelas.namaKelas asc
-        ");
-        return $q;
+        $a = Kelas::query()
+            ->join('guru as g', 'g.id', 'kelas.guruId')
+            ->join('tingkatKelas as tk', 'tk.id', 'kelas.tingkatKelasId')
+            ->join('tahunajar as ta', 'ta.id', 'kelas.tahunAjarId')                     
+            ->select('kelas.namaKelas as namaKelas',
+            'g.nama as waliKelas',
+            'tk.tingkatKelas as tingkatKelas',
+            'ta.tahunAjar as tahunAjar',
+            'ta.semester as semester',
+            'kelas.id as id')
+            ->orderBy('ta.tahunAjar', 'DESC')  
+            ->orderBy('kelas.namaKelas', 'ASC')  
+            ->get();
+        // dd($a);
+        return $a;
+
     }
 
     public function getAllTahunAjar()
-    {
-        $a = DB::select("
-        select * from tahunAjar;
-        ");
-        return $a;
+    {     
+        $a = TahunAjar::query()
+        ->select('tahunAjar', 'semester','id')
+        ->get();
+        // dd($a);
+        return $a;       
     }
 
     public function getAllTingkatKelas()
-    {
-        $a = DB::select("
-        select * from tingkatKelas;
-        ");
+    {        
+        $a = TingkatKelas::query()
+        ->select('tingkatKelas','id')
+        ->get();
         return $a;
     }
 
     public function getAllGuru()
     {
-        $a = DB::select("
-        select * from guru;
-        ");
-        return $a;
-    }
-
-    public function tingkatKelas()
-    {
-        return $this->belongsTo(tingkatKelas::class);
-    }
-    public function tahunAjar()
-    {
-        return $this->belongsTo(tahunAjar::class);
-    }
+        $a = Guru::query()
+        ->select('username', 'nama','id')
+        ->get();
+        // dd($a);
+        return $a;       
+    }   
 }

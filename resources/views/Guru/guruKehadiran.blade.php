@@ -35,12 +35,12 @@
                                     <td>{{ $row->namaKelas }}</td>                              
                                     <td>
                                         <label for="userImage">
-                                            <a href="{{ url('/guru/tampilKehadiran/' . $row->kelasSiswaId) }}"
+                                            <a href="{{ url('/guru/viewKehadiran/' . $row->kelasMapelId) }}"
                                                 class="btn btn-outline-success" rel="nofollow">
                                                 <i class="icon-copy fa fa-address-card" aria-hidden="true"></i></a>
                                         </label>
                                         <label for="userImage">
-                                            <a href="{{url('/guru/tambahKehadiran/'.$row->kelasSiswaId)}}"
+                                            <a href="{{url('/guru/tambahKehadiran/'.$row->kelasMapelId)}}"
                                                 class="btn btn-outline-success" rel="nofollow">
                                                 <i class="icon-copy fa fa-plus" aria-hidden="true"></i></a>
                                         </label>

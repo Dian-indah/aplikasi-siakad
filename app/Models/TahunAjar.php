@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TahunAjar extends Model
 {
     public $timestamps = false;
-    public $table = "tahunAjar";
+    public $table = "tahunajar";
     protected $fillable = [     
         'tahunAjar', 
         'semester',
@@ -17,7 +17,7 @@ class TahunAjar extends Model
     public function getTahunAjar()
     {
         $a = TahunAjar::query()            
-            ->select('tahunajar.tahunAjar as tahunAjar','tahunajar.semester as semester')
+            ->select('tahunajar.tahunAjar as tahunAjar','tahunajar.semester as semester','id')
             ->orderBy('tahunajar.tahunAjar', 'DESC')
             ->orderBy('tahunajar.semester', 'ASC')
             ->get();

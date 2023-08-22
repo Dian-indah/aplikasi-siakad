@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapelController;
@@ -9,9 +10,10 @@ use App\Http\Controllers\OrtuController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TahunAjarController;
 use App\Http\Controllers\KelasController;
-use App\Http\Controllers\KelasSiswaController;
+use App\Http\Controllers\KelasMapelController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\SiswaKelasController;
-use App\Models\KelasSiswa;
+use App\Models\KelasMapel;
 use App\Models\TahunAjar;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +28,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth:siswa')->group(function () {
 
     Route::get('/menuSiswa', [SiswaController::class, 'menuSiswa'])->name('menuSiswa');
-    Route::get('/nilaiSiswa', [SiswaController::class, 'ShowNilai'])->name('nilaiSiswa');
+    Route::get('/nilaiSiswa', [NilaiController::class, 'ShowNilaiSiswa'])->name('nilaiSiswa');
     Route::get('/kehadiranSiswa', [SiswaController::class, 'kehadiran'])->name('kehadiranSiswa');
 });
 Route::middleware('auth:admin')->group(function () {
@@ -42,16 +44,17 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/pegawai/updatePegawai', [AdminController::class, 'updatePegawai'])->name('updatePegawai');
     Route::delete('/pegawai/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
 
-    //KelasSiswa
-    Route::get('/kelasSiswa', [KelasSiswaController::class, 'index'])->name('kelasSiswa');
-    Route::post('/kelasSiswa/tambahKelas', [KelasSiswaController::class, 'simpan'])->name('tambahKelasSiswa');
-    Route::get('/kelasSiswa/editKelasSiswa/{id}', [KelasSiswaController::class, 'getById'])->name('editKelasSiswa');
-    Route::post('/kelasSiswa/updateKelasSiswa', [KelasSiswaController::class, 'updateKelasSiswa'])->name('updateKelasSiswa');
-    Route::get('/searchSiswa', [KelasSiswaController::class, 'selectSearch'])->name('searchSiswa'); 
-    Route::get('/kelasSiswa/tambahSiswaKelas/{id}', [SiswaKelasController::class, 'tambahSiswaKelas'])->name('tambahSiswaKelas');  
+    //KelasMapel
+    Route::get('/kelasMapel', [KelasMapelController::class, 'index'])->name('kelasMapel');
+    Route::post('/kelasMapel/tambahKelas', [KelasMapelController::class, 'simpan'])->name('tambahKelasMapel');
+    Route::get('/kelasMapel/editKelasMapel/{id}', [KelasMapelController::class, 'getById'])->name('editKelasMapel');
+    Route::post('/kelasMapel/updateKelasMapel', [KelasMapelController::class, 'updateKelasMapel'])->name('updateKelasMapel');
+    Route::get('/searchSiswa', [SiswaController::class, 'selectSearch'])->name('searchSiswa');       
 
     //Siswa Kelas
     Route::post('/kelasSiswa/simpanTambahSisKel', [SiswaKelasController::class, 'simpanSisKel'])->name('simpanTambahSisKel');  
+    Route::get('/kelas/tambahSiswaKelas/{id}', [SiswaKelasController::class, 'tambahSiswaKelas'])->name('tambahSiswaKelas');
+    Route::post('/kelas/hapusSiswaKelas/{id}', [SiswaKelasController::class, 'hapusSiswaKelas'])->name('hapusSiswaKelas');
     // Route::get('/kelasSiswa/tampilDataSisKel', [SiswaKelasController::class, 'index'])->name('tampilDataSisKel');  
 
     //Mapel
@@ -71,7 +74,7 @@ Route::middleware('auth:admin')->group(function () {
     //Tahun Ajar
     Route::get('/tahunAjar', [TahunAjarController::class, 'index'])->name('tahunAjar');
     Route::post('/tahunAjar/tambahTahunAjar', [TahunAjarController::class, 'simpanTahunAjar'])->name('tambahTahunAjar');
-    Route::get('/tahunAjar/editTahunAjar/{id}', [TahunAjarController::class, 'getById'])->name('editTahunAjar');
+    Route::get('/tahunAjar/editTahunAjar/{id}', [TahunAjarController::class, 'tahunAjarById'])->name('editTahunAjar');
     Route::post('/tahunAjar/updateTahunAjar', [TahunAjarController::class, 'updateTahunAjar'])->name('updateTahunAjar');
     Route::post('/tahunAjar/delete/{id}', [TahunAjarController::class, 'destroy'])->name('deleteTahunAjar');
 
@@ -111,25 +114,33 @@ Route::middleware('auth:admin')->group(function () {
 
 Route::middleware('auth:guru')->group(function () {
     Route::get('/menuGuru', [GuruController::class, 'menu'])->name('menuGuru');
-    Route::get('/guru/nilai/{id}', [GuruController::class, 'nilai'])->name('nilaiGuru');
-    Route::get('/guru/kehadiran/{id}', [GuruController::class, 'kehadiran'])->name('kehadiranGuru');
+    Route::get('/guru/nilai/{id}', [NilaiController::class, 'nilai'])->name('nilaiGuru');
+    Route::get('/guru/kehadiran/{id}', [KehadiranController::class, 'kehadiran'])->name('kehadiranGuru');
     Route::get('/guru/profil', [GuruController::class, 'profil'])->name('profilGuru');
-    Route::get('/guru/tambahNts/{id}', [GuruController::class, 'tambahNts'])->name('tambahNts');
-    Route::get('/guru/tambahNas/{id}', [GuruController::class, 'tambahNas'])->name('tambahNas');
+    Route::get('/guru/tambahNts/{id}', [NilaiController::class, 'tambahNts'])->name('tambahNts');
+    Route::get('/guru/tambahNas/{id}', [NilaiController::class, 'tambahNas'])->name('tambahNas');
     Route::get('/guru/tampilKehadiran/{id}', [GuruController::class, 'tampilKehadiran'])->name('tampilKehadiran');
-    Route::post('/guru/viewKehadiran/{id}', [GuruController::class, 'viewKehadiran'])->name('viewKehadiran');
-    Route::get('/guru/tambahKehadiran/{id}', [GuruController::class, 'tambahKehadiran'])->name('tambahKehadiran');
-    Route::get('/guru/simpanKehadiran', [GuruController::class, 'simpanKehadiran'])->name('simpanKehadiran');
-    Route::post('/guru/saveKehadiran', [GuruController::class, 'processInputKehadiran'])->name('saveKehadiran');
+    Route::get('/guru/viewKehadiran/{id}', [KehadiranController::class, 'viewKehadiran'])->name('viewKehadiran');    
+    Route::get('/guru/tambahKehadiran/{id}', [KehadiranController::class, 'tambahKehadiran'])->name('tambahKehadiran');
+    Route::post('/guru/simpanKehadiran', [KehadiranController::class, 'simpanKehadiran'])->name('simpanKehadiran');
+    Route::put('/guru/updateKehadiran/{id}', [KehadiranController::class, 'simpanKehadiran'])->name('updateKehadiran');
+    // Route::post('/guru/updateKehadiran ', [KehadiranController::class, 'updateKehadiran'])->name('updateKehadiran');
+    Route::get('/guru/editKehadiran/{id}', [KehadiranController::class, 'editKehadiran'])->name('editKehadiran');
+    // Route::post('/guru/saveKehadiran', [GuruController::class, 'processInputKehadiran'])->name('saveKehadiran');
 
-    Route::post('/guru/editNts', [SiswaKelasController::class, 'editNts'])->name('editNts');
-    Route::post('/guru/editNas', [SiswaKelasController::class, 'editNas'])->name('editNas');
+    Route::post('/guru/inputNts', [NilaiController::class, 'inputNts'])->name('inputNts');
+    Route::get('/guru/editNts/{id}', [NilaiController::class, 'getById'])->name('editNts');
+    Route::post('/guru/updateNts', [NilaiController::class, 'updateNts'])->name('updateNts');
+    Route::get('/guru/editNas/{id}', [NilaiController::class, 'nasGetById'])->name('editNas');
+    Route::post('/guru/updateNas', [NilaiController::class, 'updateNas'])->name('updateNas');
     Route::get('/guru/showSiskelById/{id}', [SiswaKelasController::class, 'showSiskelById'])->name('showSiskelById');
 });
 
 Route::middleware('auth:ortu')->group(function () {
     Route::get('/menuOrtu', [OrtuController::class, 'index'])->name('menuOrtu');
+    Route::get('/nilaiSiswaOrtu', [NilaiController::class, 'ShowNilaiOrtu'])->name('nilaiSiswaOrtu');
 });
+
 
 
 // Route::get('/', LandingPageController::class)->name('login');

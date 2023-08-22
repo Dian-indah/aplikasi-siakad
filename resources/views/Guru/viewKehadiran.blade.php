@@ -7,20 +7,6 @@
                 <div class="col-md-9 col-sm-9">
                     <div class="title">
                         <h4>Kehadiran Siswa</h4>
-                        <form action="{{ url('/guru/viewKehadiran/' . $ks->id) }}" method="post">
-                            @csrf
-                            <div class="modal-body">
-                                <input type="text" value="{{ $ks->id }}" id="idKelasSiswa" name="idKelasSiswa"
-                                    hidden>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <label for="">Tanggal</label>
-                                        <input id="tgl" name="tgl" class="form-control" type="date" required />
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <div class="pull-right col-md-2 col-sm-2">
@@ -35,20 +21,20 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">NIPD</th>
+                            <th scope="col">NISN</th>
                             <th scope="col">Nama Siswa</th>
                             <th scope="col">Keterangan</th>
                             <th scope="col">Tanggal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($kehadiran as $item)
+                        @foreach ($kh as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->nipd }}</td>
-                                <td>{{ $item->namaSiswa }}</td>
-                                <td>{{ $item->status }}</td>
-                                <td>{{ $item->tglKehadiran }}</td>
+                                <td scope="col">{{ $loop->iteration }}</td>
+                                <td scope="col">{{ $item->nisn }}</td>
+                                <td scope="col">{{ $item->namaSiswa }}</td>                               
+                                <td scope="col">{{ $item->status }}</td>
+                                <td scope="col">{{ $item->tglKehadiran }}</td>
                             </tr>
                         @endforeach
                     </tbody>

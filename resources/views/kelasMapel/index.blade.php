@@ -6,11 +6,11 @@
             <div class="row">
                 <div class="col-md-9 col-sm-9">
                     <div class="title">
-                        <h4>Daftar Kelas Siswa</h4>
+                        <h4>Daftar Kelas Mapel</h4>
                     </div>
                 </div>
                 <div class="text-right col-md-2 col-sm-2 dropdown">
-                    <div class="dropdown">
+                    {{-- <div class="dropdown">
                         <a class="btn btn-primary dropdown-toggle" href="#" role="button"
                             data-toggle="dropdown">Kelas</a>
 
@@ -19,7 +19,7 @@
                                 <a class="dropdown-item" href="#"> {{ $kelas->tingkatKelas }} </a>
                             @endforeach
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -36,22 +36,19 @@
                             <th scope="col">No</th>
                             <th scope="col">Nama Kelas</th>
                             <th scope="col">Mata Pelajaran</th>
-                            <th scope="col">Guru Pengajar</th>
-                            <th scope="col">Wali Kelas</th>
+                            <th scope="col">Guru Pengajar</th>                       
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($kelasSiswa as $row)
+                        @foreach ($kelasMapel as $row)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $row->namaKelas }}</td>
                                 <td>{{ $row->namaMapel }}</td>
-                                <td>{{ $row->guruPengajar }}</td>
-                                <td>{{ $row->waliKelas }}</td>
+                                <td>{{ $row->guruPengajar }}</td>                                
                                 <td class="text-center">
-                                    <a href="{{ url('/kelasSiswa/tambahSiswaKelas/' . $row->id) }}" class="btn btn-info" type="button"><i
-                                            class="icon-copy fa fa-users"></i> </a>
+                                
                                     <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-warning " id="edit"
                                         type="button"><i class="icon-copy fa fa-edit " aria-hidden="true"></i> </a>                                      
                                 </td>
@@ -71,13 +68,13 @@
             <div class="modal-content">
                 <div class="modal-header ">
                     <h4 class="modal-title" id="myLargeModalLabel">
-                        Tambah Kelas Siswa
+                        Tambah Kelas Mapel
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         ×
                     </button>
                 </div>
-                <form action="{{ route('tambahKelasSiswa') }}" method="POST">
+                <form action="{{ route('tambahKelasMapel') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group row">
@@ -131,15 +128,15 @@
             <div class="modal-content">
                 <div class="modal-header ">
                     <h4 class="modal-title" id="myLargeModalLabel">
-                        Tambah Kelas Siswa
+                        Edit Kelas Mapel
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         ×
                     </button>
                 </div>
-                <form action="{{ route('updateKelasSiswa') }}" method="POST">
+                <form action="{{ route('updateKelasMapel') }}" method="POST">
                     @csrf
-                    <input type="text" id="idKelasSiswa" name="idKelasSiswa" hidden>
+                    <input type="text" id="idKelasMapel" name="idKelasMapel" hidden>
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
@@ -201,7 +198,7 @@
             ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
             $.ajax({
                 // console.log(id);
-                url: "{{ url('/kelasSiswa/editKelasSiswa') }}" + '/' + id,
+                url: "{{ url('/kelasMapel/editKelasMapel') }}" + '/' + id,
                 type: 'get',
                 dataType: 'json',
                 data: {},
@@ -212,7 +209,7 @@
                     $('#editkelasId select').val(data.data.kelasId).change();
                     $('#editmapelId').val(data.data.mapelId).change();
                     $('#editguruPengajar').val(data.data.guruPengajar).change();
-                    $('#idKelasSiswa').val(data.data.id);
+                    $('#idKelasMapel').val(data.data.id);
                 }
             });
         });

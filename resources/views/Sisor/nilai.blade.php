@@ -1,35 +1,22 @@
 @extends('Layouts.siakad')
 
 @section('content')
-    <div class="min-height-200px">
-        <div class="page-header">
-            <div class="row">
-                <div class="col-md-6 col-sm-12 title">
-                    <h4>Nilai Siswa</h4>
+<div class="min-height-200px">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-9 col-sm-9">
+                <div class="title">
+                    <h4>Nilai</h4>
                 </div>
-                <div class="col-md-4 col-sm-6 text-right m-3">
-                    <div class="dropdown">
-                        <a class="btn btn-primary dropdown-toggle" href="#" role="button"
-                            data-toggle="dropdown">Kelas</a>
+            </div>
+            <div class="text-right col-md-2 col-sm-2 dropdown">
+            </div>
+        </div>
+    </div>
 
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Kelas 10</a>
-                            <a class="dropdown-item" href="#">Kelas 11</a>
-                            <a class="dropdown-item" href="#">Kelas 12</a>
-                        </div>
-                    </div>
-                </div>
-                <div class=" text-right">
-                    <div class="dropdown">
-                        <a class="btn btn-primary dropdown-toggle" href="#" role="button"
-                            data-toggle="dropdown">Semester</a>
-
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Semester 1 Ganjil</a>
-                            <a class="dropdown-item" href="#">Semester 2 Genap</a>
-                        </div>
-                    </div>
-                </div>
+        {{-- Content bawah --}}
+        <div class="pd-20 card-box mb-30">
+            <div class="clearfix">           
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -55,5 +42,6 @@
                 </table>
             </div>
         </div>
+        {{-- end content bawah --}}
     </div>
 @endsection

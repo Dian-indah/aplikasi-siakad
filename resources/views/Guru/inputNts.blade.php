@@ -17,11 +17,12 @@
         {{-- Content bawah --}}
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
+
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">NIPD</th>
+                            <th scope="col">NISN</th>
                             <th scope="col">Nama Siswa</th>
                             <th scope="col">Nilai</th>
                             <th scope="col">Action</th>
@@ -31,12 +32,22 @@
                         @foreach ($nts as $item)
                             <tr>
                                 <td scope="col">{{ $loop->iteration }}</td>
-                                <td scope="col">{{ $item->nipd }}</td>
+                                <td scope="col">{{ $item->nisn }}</td>
                                 <td scope="col">{{ $item->namaSiswa }}</td>
                                 <td scope="col">{{ $item->nts }}</td>
+                                {{-- <td scope="col">{{ $item->nilaiId }}</td> --}}
                                 <td scope="col">
-                                    <a href="javascript:;" data-id="<?= $item->idSiswaKelas ?>" class="btn btn-info " id="edit"
-                                        type="button"> <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Nilai</a>
+                                    @if ($item->nts)
+                                        <a href="javascript:;" data-id="<?= $item->nilaiId ?>" class="btn btn-info"
+                                            type="button" id="editNts">
+                                            <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Nilai</a>
+                                    @else
+                                        <a href="javascript:;" data-id="<?= $item->siswaKelasId ?>"
+                                            data-mapel="<?= $item->kelasMapelId ?>" data-nts="<?= $item->nts ?>"
+                                            class="btn btn-info " id="tambahNts" type="button"> <i
+                                                class="icon-copy fa fa-edit" aria-hidden="true"></i> Nilai</a>
+                                    @endif
+                                    {{--  --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -46,8 +57,8 @@
         </div>
         {{-- end content bawah --}}
     </div>
-    <!-- Start edit modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <!-- Start Tambah modal -->
+    <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -59,18 +70,18 @@
                         ×
                     </button>
                 </div>
-                <form action="{{route ('editNts')}}" method="POST">
+                <form action="{{ route('inputNts') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <input type="text" id="idSiswaKelas" name="idSiswaKelas" hidden>
+                        <input type="text" class="form-control" id="siswaKelasId" name="siswaKelasId" hidden>
+                        <input type="text" class="form-control" id="kelasMapelId" name="kelasMapelId" hidden>
                         <div class="form-group row">
-                            <div class="col-sm-12 col-md-12">                               
-                                <input id="editNilai" name="editNilai" class="form-control" type="text"
-                                    required />
+                            <div class="col-sm-12 col-md-12">
+                                <input id="nilaiNts" name="nilaiNts" class="form-control" type="text" required />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12 col-md-12 d-flex justify-content-center">                               
+                            <div class="col-sm-12 col-md-12 d-flex justify-content-center">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </div>
@@ -79,27 +90,73 @@
             </div>
         </div>
     </div>
+    {{-- end Tambah Modal --}}
+
+    <!-- Start edit modal -->
+    <div class="modal fade" id="modalEdit" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h4 class="modal-title" id="myLargeModalLabel">
+                        Nilai
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                </div>
+                <form action="{{ route('updateNts') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="nilaiId" name="nilaiId" hidden>                       
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <input type="text" class="form-control" id="editnilaiNts" name="editnilaiNts" >  
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- end Tambah Nilai --}}
 @endsection
 @section('js')
     <script>
-        // Edit Data
-        $(document).on('click', '#edit', function() { //editKelas ada di class                      
+        // Tambah Data
+        $(document).on('click', '#tambahNts', function() { //editKelas ada di class                      
             // alert('test');
+            var siswa = $(this).attr("data-id")
+            var mapel = $(this).attr("data-mapel")
+            var nilaiNts = $(this).attr("data-nts")
+
+            $('#tambahModal').modal('show');
+            $('#nilaiNts').val(nilaiNts);
+            $('#siswaKelasId').val(siswa);
+            $('#kelasMapelId').val(mapel);
+        });
+
+        // Edit Data
+        $('body').on('click', '#editNts', function() { 
             var id = $(this).data(
                 'id'
-                ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
+            ); 
             $.ajax({
-                // console.log(id);
-                url: "{{ url('/guru/showSiskelById') }}" + '/' + id,
+                url: "{{ url('/guru/editNts') }}" + '/' + id,
                 type: 'get',
                 dataType: 'json',
                 data: {},
                 beforeSend: function() {},
                 success: function(data) {
-                    // console.log(data.data)
-                    $('#editModal').modal('show'); //menampilkan modal
-                    $('#editNilai').val(data.data.nts);
-                    $('#idSiswaKelas').val(data.data.id);
+                    console.log(data.data)
+                    $('#modalEdit').modal('show'); //menampilkan modal
+                    $('#nilaiId').val(data.data.id);
+                    $('#editnilaiNts').val(data.data.nts);                                            
                 }
             });
         });

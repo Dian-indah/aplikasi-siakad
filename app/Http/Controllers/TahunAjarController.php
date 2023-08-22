@@ -16,7 +16,7 @@ class TahunAjarController extends Controller
 
     public function index()
     {
-        $data = $kehadiran = $this->model->getTahunAjar();
+        $data = $this->model->getTahunAjar();
         return view('Admin.tahunAjar', compact('data'));
     }
 
@@ -37,7 +37,7 @@ class TahunAjarController extends Controller
             // ->with('success', 'data Kurikulum telah ditambahkan');
     }
 
-    public function getById($id)
+    public function tahunAjarById($id)
     {
         $ta = TahunAjar::find($id);
         $response['success'] = true;

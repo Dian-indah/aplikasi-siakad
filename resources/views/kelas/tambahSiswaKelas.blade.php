@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-9 col-sm-9">
                     <div class="title">
-                        <h4>Daftar Nama Siswa</h4>
+                        <h4>Daftar Nama Siswa Kelas </h4>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <input type="text" value="{{ $ks->id }}" id="idKelasSiswa" name="idKelasSiswa" hidden>
+                        <input type="text" value="{{ $k->id }}" id="kelasId" name="kelasId" hidden>
                     </div>
                     <div class="form-group row ">
                         <div class="col-sm-12 col-md-10">                          
@@ -41,7 +41,7 @@
                     <thead>
                         <tr>
                             <th class="table-plus datatable-nosort">No</th>
-                            <th scope="col">NIPD</th>
+                            <th scope="col">NISN</th>
                             <th scope="col">Nama Siswa</th>
                             <th class="table-plus datatable-nosort">Action</th>
                         </tr>
@@ -50,13 +50,11 @@
                         @foreach ($siskel as $row)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $row->nipd }}</td>
+                                <td>{{ $row->nisn }}</td>
                                 <td>{{ $row->namaSiswa }}</td>
-                                <td class="text-center">
-                                    <a href="#" id="editMapel" class="btn btn-warning" type="button"><i
-                                            class="icon-copy fa fa-edit" aria-hidden="true"></i></a>
-                                    <a href="#" id="btn-hapus" class="btn btn-danger"><i class="fa fa-trash"></i>
-                                    </a>
+                                <td class="text-center">                                    
+                                    <a href="javascript:;" id="btn-hapus" data-id="<?= $row->id ?>"
+                                        class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -87,6 +85,42 @@
                 },
                 cache: true
             }
+        });
+    </script>
+    <script>
+        
+        // Hapus Data
+        $(document).on('click', '#btn-hapus', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            swal({
+                    title: "Apakah Yakin Dihapus?",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Ya!",
+                    showCancelButton: true,
+                }, )
+                .then(function(e) {
+                    if (e.value == true) {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ url('/kelas/hapusSiswaKelas') }}" + '/' + id,
+                            data: {
+                                id: id
+                            },
+                            success: function(data) {
+                                if (data.success == true) {
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    }
+                })
         });
     </script>
 @endsection

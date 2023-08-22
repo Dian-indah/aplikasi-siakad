@@ -36,19 +36,19 @@
                         @foreach ($data as $row)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $row->username }}</td>
+                                <td>{{ $row->waliKelas }}</td>
                                 <td>{{ $row->namaKelas }}</td>
                                 <td>{{ $row->tingkatKelas }}</td>
                                 <td>{{ $row->tahunAjar }}</td>
                                 <td>{{ $row->semester }}</td>
                                 <td class="text-center">
-                                    {{-- <a href="/detail nilai" class="btn btn-info" type="button">
-                                        <i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a> --}}
+                                    <a href="{{ url('/kelas/tambahSiswaKelas/' . $row->id) }}" class="btn btn-info" type="button"><i
+                                        class="icon-copy fa fa-users"></i> </a>
                                     <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-warning " id="editKelas"
-                                        type="button"> <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                        type="button"> <i class="icon-copy fa fa-edit" aria-hidden="true"></i> </a>
                                     <a href="javascript:;" data-id="<?= $row->id ?>" id="btn-hapus"
                                         class="btn btn-danger"><i class="fa fa-trash"></i>
-                                        Hapus</a>
+                                        </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -89,7 +89,7 @@
                                     <select id="guruId" name="guruId" class="custom-select col-12" required>
                                         <option disabled selected="">Pilih..</option>
                                         @foreach ($guru as $row)
-                                            <option value="{{ $row->id }}">{{ $row->username }}</option>
+                                            <option value="{{ $row->id }}">{{ $row->nama }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -142,7 +142,7 @@
             <div class="modal-content">
                 <div class="modal-header ">
                     <h4 class="modal-title" id="myLargeModalLabel">
-                        Nama Kelas
+                        Edit Nama Kelas
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         ×
@@ -154,9 +154,23 @@
                         <input type="text" id="idKelas" name="idKelas" hidden>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="namaKelas">Tingkat Kelas</label>
+                                <label for="namaKelas">Nama Kelas</label>
                                 <input id="editNamaKelas" name="editNamaKelas" class="form-control" type="text"
                                     placeholder="Nama Kelas" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="editWaliKelas">Wali Kelas</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select id="editWaliKelas" name="editWaliKelas" class="custom-select col-12"
+                                        required>
+                                        <option disabled selected="">Pilih..</option>
+                                        @foreach ($guru as $row)
+                                            <option value="{{ $row->id }}">{{ $row->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -223,6 +237,7 @@
                     // console.log(data.data)
                     $('#editmodal').modal('show'); //menampilkan modal
                     $('#editNamaKelas').val(data.data.namaKelas);
+                    $('#editWaliKelas').val(data.data.guruId);
                     $('#editTahunAjar').val(data.data.tahunAjarId);
                     $('#editTingkatKelas').val(data.data.tingkatKelasId);
                     $('#idKelas').val(data.data.id);

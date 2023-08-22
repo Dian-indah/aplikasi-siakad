@@ -21,7 +21,7 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">NIPD</th>
+                            <th scope="col">NISN</th>
                             <th scope="col">Nama Siswa</th>
                             <th scope="col">Nilai</th>
                             <th scope="col">Action</th>
@@ -31,12 +31,20 @@
                         @foreach ($nas as $item)
                             <tr>
                                 <td scope="col">{{ $loop->iteration }}</td>
-                                <td scope="col">{{ $item->nipd }}</td>
+                                <td scope="col">{{ $item->nisn }}</td>
                                 <td scope="col">{{ $item->namaSiswa }}</td>
                                 <td scope="col">{{ $item->nas }}</td>
                                 <td scope="col">
-                                    <a href="javascript:;" data-id="<?= $item->idSiswaKelas ?>" class="btn btn-info " id="edit"
-                                        type="button"> <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Nilai</a>
+                                    @if ($item->nts)
+                                        <a href="javascript:;" data-id="<?= $item->nilaiId ?>" class="btn btn-info"
+                                            type="button" id="editNas">
+                                            <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Nilai</a>
+                                    @else
+                                    <a href="javascript:;" data-id="<?= $item->nilaiId ?>" class="btn btn-info"
+                                        type="button" id="tambahNas">
+                                        <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Nilai</a>
+                                    @endif
+                                    {{--  --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -48,8 +56,7 @@
     </div>
 
     <!-- Start edit modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalEdit" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header ">
@@ -60,18 +67,17 @@
                         ×
                     </button>
                 </div>
-                <form action="{{route ('editNas')}}" method="POST">
+                <form action="{{ route('updateNas') }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <input type="text" id="idSiswaKelas" name="idSiswaKelas" hidden>
+                        <input type="text" class="form-control" id="nilaiId" name="nilaiId" hidden>
                         <div class="form-group row">
-                            <div class="col-sm-12 col-md-12">                               
-                                <input id="editNilai" name="editNilai" class="form-control" type="text"
-                                    required />
+                            <div class="col-sm-12 col-md-12">
+                                <input type="text" class="form-control" id="editnilaiNas" name="editnilaiNas">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-12 col-md-12 d-flex justify-content-center">                               
+                            <div class="col-sm-12 col-md-12 d-flex justify-content-center">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </div>
@@ -80,29 +86,38 @@
             </div>
         </div>
     </div>
+    {{-- end Tambah Nilai --}}
 @endsection
 @section('js')
     <script>
         // Edit Data
-        $(document).on('click', '#edit', function() { //editKelas ada di class                      
-            // alert('test');
+        $('body').on('click', '#editNas', function() {
             var id = $(this).data(
                 'id'
-                ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
+            );
+            // alert(id) ;
             $.ajax({
-                // console.log(id);
-                url: "{{ url('/guru/showSiskelById') }}" + '/' + id,
+                url: "{{ url('/guru/editNas') }}" + '/' + id,
                 type: 'get',
                 dataType: 'json',
                 data: {},
                 beforeSend: function() {},
                 success: function(data) {
                     // console.log(data.data)
-                    $('#editModal').modal('show'); //menampilkan modal
-                    $('#editNilai').val(data.data.nas);
-                    $('#idSiswaKelas').val(data.data.id);
+                    $('#modalEdit').modal('show'); //menampilkan modal
+                    $('#nilaiId').val(data.data.id);
+                    $('#editnilaiNas').val(data.data.nas);
                 }
             });
+        });
+
+        // Hapus Data
+        $(document).on('click', '#tambahNas', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            swal({
+                title: "Nilai NTS Belum Diinputkan",               
+            }, )
         });
     </script>
 @endsection

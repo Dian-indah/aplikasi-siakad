@@ -14,40 +14,34 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Username</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="username" name="username" class="form-control" type="text" placeholder="siswa" />
+                    <input id="username" name="username" class="form-control" type="text" placeholder="siswa" required />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Nama Lengkap</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="name" name="name" class="form-control" type="text" placeholder="Nama Lengkap" />
+                    <input id="name" name="name" class="form-control" type="text" placeholder="Nama Lengkap" required />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Email</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="email" name="email" class="form-control" type="email" placeholder="dian@gmail.com" />
+                    <input id="email" name="email" class="form-control" type="email" placeholder="dian@gmail.com" required />
                 </div>
             </div>
             {{-- 3 --}}
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Password</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="password" name="password" class="form-control" type="password" placeholder="Password" />
+                    <input id="password" name="password" class="form-control" type="password" placeholder="Password" required/>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">NISN</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="nisn" name="nisn" class="form-control" type="nisn" placeholder="nisn" />
+                    <input id="nisn" name="nisn" class="form-control" type="nisn" placeholder="nisn" required />
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">NIPD</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="nipd" name="nipd" class="form-control" type="nipd" placeholder="nipd" />
-                </div>
-            </div>
+            </div>            
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Jenis Kelamin</label>
                 <div class="col-sm-12 col-md-10">
@@ -75,7 +69,7 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">NIK</label>
                 <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="nik" name="nik" placeholder="NIK" type="text" />
+                    <input class="form-control" id="nik" name="nik" placeholder="NIK" type="text" required/>
                 </div>
             </div>
             <div class="form-group row">
@@ -121,36 +115,14 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Transportasi</label>
                 <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="trasportasi" name="trasportasi" placeholder=" trasportasi"
+                    <input class="form-control" id="transportasi" name="transportasi" placeholder=" transportasi"
                         type="text" />
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">SKHUN</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="skhun" name="skhun" placeholder="skhun" type="text" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Penerima KPPS</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="penerimaKpps" name="penerimaKpps" class="custom-select col-12">
-                        <option selected="" disabled>Pilih...</option>
-                        <option value="Ya">Ya</option>
-                        <option value="Tidak">Tidak</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">No KPPS</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="noKpps" name="noKpps" placeholder="noKpps" type="text" />
-                </div>
-            </div>
+            </div>            
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Nama Ayah</label>
                 <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="namaAyah" name="namaAyah" placeholder="namaAyah" type="text" />
+                    <input class="form-control" id="namaAyah" name="namaAyah" placeholder="namaAyah" type="text" required/>
                 </div>
             </div>
             <div class="form-group row">
@@ -206,7 +178,7 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Nama Ibu</label>
                 <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="namaIbu" name="namaIbu" placeholder="namaIbu" type="text" />
+                    <input class="form-control" id="namaIbu" name="namaIbu" placeholder="namaIbu" type="text" required/>
                 </div>
             </div>
             <div class="form-group row">
@@ -258,198 +230,27 @@
                 <div class="col-sm-12 col-md-10">
                     <input class="form-control" id="nikIbu" name="nikIbu" placeholder="nikIbu" type="text" />
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nama Wali</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="namaWali" name="namaWali" placeholder="namaWali" type="text" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Tanggal Lahir Wali</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control date-picker" id="tanggalLahirWali" name="tanggalLahirWali"
-                        placeholder="Tanggal Lahir Wali" type="date" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Jenjang Pendidikan Wali</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="pendidikanWali" name="pendidikanWali" class="custom-select col-12">
-                        <option selected="" disabled>Pilih...</option>
-                        <option value="Tidak Sekolah">Tidak Sekolah</option>
-                        <option value="Putus SD">Putus SD</option>
-                        <option value="SD/Sederajat">SD/Sederajat</option>
-                        <option value="SMP/Sederajat">SMP/Sederajat</option>
-                        <option value="SMA/Sederajat">SMA/Sederajat</option>
-                        <option value="S1">S1</option>
-                        <option value="S2">S2</option>
-                        <option value="Diatas S2">Diatas S2</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Pekerjaan Wali</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="pekerjaanWali" name="pekerjaanWali" placeholder="pekerjaanWali"
-                        type="text" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Penghasilan</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="penghasilanWali" name="penghasilanWali" class="custom-select col-12">
-                        <option selected="" disabled>Pilih Penghasilan...</option>
-                        <option value="Tidak Berpenghasilan">Tidak Berpenghasilan</option>
-                        <option value="Kurang Dari Rp.500.000,00">Kurang Dari Rp.500.000,00</option>
-                        <option value="Rp.500.000,00 - Rp.999.999,00">Rp.500.000,00 - Rp.999.999,00</option>
-                        <option value="Rp.1.000.000,00 - Rp.1.999.999,00">Rp.1.000.000,00 - Rp.1.999.999,00</option>
-                        <option value="Rp.2.000.000,00 - Rp.4.999.999,00">Rp.2.000.000,00 - Rp.4.999.999,00</option>
-                        <option value="Diatas Rp.5.000.000,00">Diatas Rp.5.000.000,00</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">NIK Wali</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="nikWali" name="nikWali" placeholder="nikWali" type="text" />
-                </div>
-            </div>            
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor Peserta Ujian Nasional</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="noUn" name="noUn" class="form-control" type="text"
-                        placeholder="Nomor Peserta Ujian Nasional"  />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor Seri Ijazah</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="noSeriIjazah" name="noSeriIjazah" class="form-control" type="text"
-                        placeholder="Nomor Seri Ijazah"  />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Penerima KIP</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="penerimaKip" name="penerimaKip" class="custom-select col-12">
-                        <option selected="" disabled>Pilih...</option>
-                        <option value="Ya">Ya</option>
-                        <option value="Tidak">Tidak</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor KIP</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="noKip" name="noKip" class="form-control" type="text" placeholder="Nomor KIP"  />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nama Di KIP</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="namaKip" name="namaKip" class="form-control" type="text"
-                        placeholder="Nama Di KIP"  />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor Registrasi Akta Lahir</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="noReqAkta" name="noReqAkta" class="form-control" type="text"
-                        placeholder="Nomor Registrasi Akta Lahir"  />
-                </div>
-            </div>    
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Bank</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="bank" name="bank" class="form-control" type="text" placeholder="Bank"  />
-                </div>
-            </div>     
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor Rekening Bank</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="noRekening" name="noRekening" class="form-control" type="text"
-                        placeholder="Nomor Rekening Bank"  />
-                </div>
-            </div>  
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Rekening Atas Nama</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="namaRekening" name="namaRekening" class="form-control" type="text"
-                        placeholder="Rekening Atas Nama"  />
-                </div>
-            </div>     
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Layak PIP (Usulan Dari Sekolah)</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="layakPip" name="layakPip" class="custom-select col-12">
-                        <option selected="" disabled>Pilih...</option>
-                        <option value="Ya">Ya</option>
-                        <option value="Tidak">Tidak</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Alasan Layak PIP</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="alasanPip" name="alasanPip" class="form-control" type="text"
-                        placeholder="Alasan Layak PIP"  />
-                </div>
-            </div>      
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Kebutuhan Khusus</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="kebutuhanKhusus" name="kebutuhanKhusus" class="form-control" type="text"
-                        placeholder="Kebutuhan Khusus"  />
-                </div>
-            </div>
-            {{-- 49 --}}
+            </div>           
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Sekolah Asal</label>
                 <div class="col-sm-12 col-md-10">
                     <input id="sekolahAsal" name="sekolahAsal" class="form-control" type="text"
                         placeholder="Sekolah Asal"  />
                 </div>
-            </div>
-            {{-- 50 --}}
+            </div>           
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Anak Ke-</label>
                 <div class="col-sm-12 col-md-10">
                     <input id="anak" name="anak" class="form-control" type="number" placeholder="Anak Ke-"  />
                 </div>
-            </div>
-            {{-- 51 --}}
+            </div>        
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Jumlah Saudara Kandung</label>
                 <div class="col-sm-12 col-md-10">
                     <input id="jmlSaudara" name="jmlSaudara" class="form-control" type="number"
                         placeholder="Jumlah Saudara Kandung"  />
                 </div>
-            </div>
-            {{-- 52 --}}
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Berat Badan</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="bb" name="bb" class="form-control" type="number"
-                        placeholder="Berat Badan"  />
-                </div>
-            </div>
-            {{-- 53 --}}
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Tinggi Badan</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="tb" name="tb" class="form-control" type="number"
-                        placeholder="Tinggi Badan"  />
-                </div>
-            </div>
-            {{-- 54 --}}
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Jarak Rumah Ke Sekolah (KM)</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="jarakSekolah" name="jarakSekolah" class="form-control" type="number"
-                        placeholder="Jarak Rumah Ke Sekolah (KM)"  />
-                </div>
-            </div>                      
+            </div>                                
             <div class="form-group row">
                 <div class="col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Simpan</button>

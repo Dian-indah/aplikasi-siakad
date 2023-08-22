@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ortu;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class OrtuController extends Controller
@@ -17,9 +18,8 @@ class OrtuController extends Controller
     }
 
     public function index()
-    {
-        $data = $this->model->getAllOrtu();
-        return view('ortu.indexOrtuAdmin', compact('data'));
+    {        
+        return view('ortu.menu');
     }
 
     public function selectSearchSiswa(Request $request)

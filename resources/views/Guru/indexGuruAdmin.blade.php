@@ -32,8 +32,7 @@
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">NUPTK</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Jenis PTK</th>
+                            <th scope="col">Nama</th>                          
                             <th scope="col">No Handphone</th>
                             <th scope="col">Email</th>
                             <th scope="col">Action</th>
@@ -44,16 +43,15 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $row->nuptk }}</td>
-                                <td>{{ $row->username }}</td>
-                                <td>{{ $row->jenisPtk }}</td>
+                                <td>{{ $row->username }}</td>                          
                                 <td>{{ $row->notelp }}</td>
                                 <td>{{ $row->email }}</td>
                                 <td class="text-center">
                                     <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-info" id="tampilGuru"
-                                        type="button"><i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a>
+                                        type="button"><i class="icon-copy dw dw-email-2 fa-sm"></i> </a>
                                     <a href="{{ url('/guru/editGuru/' . $row->id) }}" class="btn btn-warning "
                                         id="editGuru" type="button"> <i class="icon-copy fa fa-edit"
-                                            aria-hidden="true"></i> Edit</a>
+                                            aria-hidden="true"></i> </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -106,13 +104,22 @@
                     </button>
                 </div>
                 <form>
-                    <input id="idGuru" name="idGuru" hidden />
+                    <input id="idGuru" name="idGuru" hidden />                     
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Nama</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Username</label>
                             <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="username" name="username" type="text" disabled
-                                    placeholder="Nama" />
+                                <input class="form-control" id="username" name="username" placeholder="username" disabled
+                                    type="text" />
+                            </div>
+                        </div>
+                    </div>                
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-12">
+                            <label class="col-sm-12 col-md-2 col-form-label">Nama</label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control" id="nama" name="nama" placeholder="nama" disabled
+                                    type="text" />
                             </div>
                         </div>
                     </div>
@@ -169,16 +176,7 @@
                                     placeholder="Tanggal Lahir" type="text" />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">NIP</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="nip" name="nip" placeholder="NIP" disabled
-                                    type="text" />
-                            </div>
-                        </div>
-                    </div>
+                    </div>                   
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">No Telepon</label>
@@ -196,79 +194,7 @@
                                     type="email" />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Status Kepegawaian</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="statusKepegawaian" name="statusKepegawaian" disabled
-                                    placeholder="Status Kepegawaian" type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">SK Pengangkatan</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="skPengangkatan" name="skPengangkatan" disabled
-                                    placeholder="SK Pengangkatan" type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">TMT Pengangkatan</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="tmpPengangkatan" name="tmpPengangkatan" disabled
-                                    placeholder="TMT Pengangkatan" type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Lembaga Pengangkatan</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="lembagaPengangkatan" name="lembagaPengangkatan" disabled
-                                    placeholder="Lembaga Pengangkatan" type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Sumber Gaji</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="sumberGaji" name="sumberGaji" placeholder="Sumber Gaji"
-                                    disabled type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Jenis PTK</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="jenisPtk" name="jenisPtk" placeholder="Jenis PTK"
-                                    disabled type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">NPWP</label>
-                            <div class="col-sm-12 col-md-10">
-                                <input class="form-control" id="npwp" name="npwp" placeholder="NPWP" disabled
-                                    type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Nama Wajib Pajak</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="namaNpwp" name="namaNpwp" disabled
-                                    placeholder="Nama Wajib Pajak" type="text" />
-                            </div>
-                        </div>
-                    </div>
+                    </div>                                                                                              
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Agama</label>
@@ -293,115 +219,7 @@
                                     placeholder="Kewarganegaraan" type="text" />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Nama Ibu Kandung</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="ibuKandung" disabled name="ibuKandung"
-                                    placeholder="Nama Ibu Kandung" type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Status Perkawinan</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="statusPerkawinan" disabled name="statusPerkawinan"
-                                    disabled type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Nama Suami/Istri</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="namaPasangan" name="namaPasangan" disabled
-                                    placeholder="Nama Suami/Istri" type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">NIP Suami/Istri</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="nipPasangan" name="nipPasangan" disabled
-                                    placeholder="NIP Suami/Istri" type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Pekerjaan Suami/Istri</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="pekerjaanPasangan" name="pekerjaanPasangan" disabled
-                                    placeholder="Pekerjaan Suami/Istri" type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Sudah Lisensi Kepala Sekolah</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="lisensiKepsek" name="lisensiKepsek" disabled
-                                    type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Pernah Diklat Kepegawaian</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="diklatKepegawaian" name="diklatKepegawaian" disabled
-                                    type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Keahlian Braille</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="keahlianBraile" name="keahlianBraile" disabled
-                                    type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Keahlian Bahasa Isyarat</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="keahlianBahasaIsyarat" name="keahlianBahasaIsyarat"
-                                    disabled type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">Bank</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="bank" name="bank" placeholder="Bank" disabled
-                                    type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">No Rekening</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="norek" name="norek" placeholder="No Rekening"
-                                    disabled type="text" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Rekening Atas Nama</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input class="form-control" id="namaRek" name="namaRek" disabled
-                                    placeholder="Rekening Atas Nama" type="text" />
-                            </div>
-                        </div>
-                    </div>
+                    </div>                                                                                                  
                 </form>
             </div>
         </div>
@@ -432,38 +250,18 @@
                     $('#showDataGuru').modal('show'); //menampilkan modal
                     $('#idGuru').val(data.data.id);
                     $('#username').val(data.data.username);
+                    $('#nama').val(data.data.nama);
                     $('#nik').val(data.data.nik);
                     $('#noKk').val(data.data.noKk);
                     $('#nuptk').val(data.data.nuptk);
                     $('#jenkel').val(data.data.jenkel);
                     $('#tempatLahir').val(data.data.tempatLahir);
-                    $('#tanggalLahir').val(data.data.tanggalLahir);
-                    $('#nip').val(data.data.nip);
+                    $('#tanggalLahir').val(data.data.tanggalLahir);                  
                     $('#notelp').val(data.data.notelp);
-                    $('#email').val(data.data.email);
-                    $('#statusKepegawaian').val(data.data.statusKepegawaian);
-                    $('#skPengangkatan').val(data.data.skPengangkatan);
-                    $('#tmpPengangkatan').val(data.data.tmpPengangkatan);
-                    $('#lembagaPengangkatan').val(data.data.lembagaPengangkatan);
-                    $('#sumberGaji').val(data.data.sumberGaji);
-                    $('#jenisPtk').val(data.data.jenisPtk);
-                    $('#npwp').val(data.data.npwp);
-                    $('#namaNpwp').val(data.data.namaNpwp);
+                    $('#email').val(data.data.email);                                        
                     $('#agama').val(data.data.agama);
                     $('#alamat').val(data.data.alamat);
-                    $('#kewarganegaraan').val(data.data.kewarganegaraan);
-                    $('#ibuKandung').val(data.data.ibuKandung);
-                    $('#statusPerkawinan').val(data.data.statusPerkawinan);
-                    $('#namaPasangan').val(data.data.namaPasangan);
-                    $('#nipPasangan').val(data.data.nipPasangan);
-                    $('#pekerjaanPasangan').val(data.data.pekerjaanPasangan);
-                    $('#lisensiKepsek').val(data.data.lisensiKepsek);
-                    $('#diklatKepegawaian').val(data.data.diklatKepegawaian);
-                    $('#keahlianBraile').val(data.data.keahlianBraile);
-                    $('#keahlianBahasaIsyarat').val(data.data.keahlianBahasaIsyarat);
-                    $('#bank').val(data.data.bank);
-                    $('#noRek').val(data.data.noRek);
-                    $('#namaRek').val(data.data.namaRek);
+                    $('#kewarganegaraan').val(data.data.kewarganegaraan);                   
                 }
             });
         });

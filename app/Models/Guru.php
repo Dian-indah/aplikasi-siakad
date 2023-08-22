@@ -14,39 +14,19 @@ class Guru extends Authenticatable
     protected $primaryKey = 'id';
     protected $fillable = [
         'username',
-        'nik',
-        'noKk',
-        'nuptk',
-        'jenkel',
-        'tempatLahir',
-        'tanggalLahir',
-        'nip',
-        'notelp',
-        'email',
-        'statusKepegawaian',
-        'skPengangkatan',
-        'tmpPengangkatan',
-        'lembagaPengangkatan',
-        'sumberGaji',
-        'jenisPtk',
-        'npwp',
-        'namaNpwp',
-        'agama',
-        'alamat',
-        'kewarganegaraan',
-        'ibuKandung',
-        'statusPerkawinan',
-        'namaPasangan',
-        'nipPasangan',
-        'pekerjaanPasangan',
-        'lisensiKepsek',
-        'diklatKepegawaian',
-        'keahlianBraile',
-        'keahlianBahasaIsyarat',
-        'bank',
-        'norek',
-        'namaRek',
-        'password',
+            'nama',
+            'password',
+            'nik',
+            'noKk',
+            'nuptk',
+            'jenkel',
+            'tempatLahir',
+            'tanggalLahir',           
+            'notelp',
+            'email',            
+            'agama',
+            'alamat',
+            'kewarganegaraan',   
     ];
 
     protected $hidden = [
@@ -60,39 +40,19 @@ class Guru extends Authenticatable
         ->select(
             'id'         ,
             'username',
+            'nama',
             'password',
             'nik',
             'noKk',
             'nuptk',
             'jenkel',
             'tempatLahir',
-            'tanggalLahir',
-            'nip',
+            'tanggalLahir',           
             'notelp',
-            'email',
-            'statusKepegawaian',
-            'skPengangkatan',
-            'tmpPengangkatan',
-            'lembagaPengangkatan',
-            'sumberGaji',
-            'jenisPtk',
-            'npwp',
-            'namaNpwp',
+            'email',            
             'agama',
             'alamat',
-            'kewarganegaraan',
-            'ibuKandung',
-            'statusPerkawinan',
-            'namaPasangan',
-            'nipPasangan',
-            'pekerjaanPasangan',
-            'lisensiKepsek',
-            'diklatKepegawaian',
-            'keahlianBraile',
-            'keahlianBahasaIsyarat',
-            'bank',
-            'norek',
-            'namaRek',            
+            'kewarganegaraan',                 
         )
         ->get();
         return $g;
@@ -110,6 +70,7 @@ class Guru extends Authenticatable
                 'm.kodeMapel as kodeMapel',
                 'guru.username as guruPengajar',
                 'ks.id as kelasSiswaId'
+                
             )
             ->where('guru.id', $id)
             ->get();
@@ -120,74 +81,49 @@ class Guru extends Authenticatable
     public function getKelasSiswa($id)
     {
         $a = Guru::query()
-            ->leftJoin('kelas_siswa as ks', 'ks.guruPengajar', 'guru.id')
-            ->leftJoin('siswa_kelas as sk', 'sk.kelasSiswaId', 'ks.id')
+            ->leftJoin('kelas_mapel as km', 'km.guruPengajar', 'guru.id')
+            ->leftJoin('siswa_kelas as sk', 'sk.kelasSiswaId', 'km.id')
             ->leftJoin('siswa as s', 's.id', 'sk.siswaId')
-            ->leftJoin('kehadiran as kh', 'kh.siswaKelasId', 'sk.id')
+            // ->leftJoin('kehadiran as kh', 'kh.siswaId', 's.id')
             ->select(
-                's.nipd as nipd',
+                's.nisn as nisn',
                 's.name as namaSiswa',
                 's.id as siswaId',
                 'sk.nts as nts',
                 'sk.nas as nas',
                 'sk.id as siswaKelasId',
                 'guru.username',
-                'ks.id',
-                'sk.id as idSiswaKelas',
-                'sk.kehadiran as kehadiran',
-                'sk.tglKehadiran as tglKehadiran',
-                'ks.id as idKelasSiswa'
+                'km.id',
+                'sk.id as idSiswaKelas',              
+                'km.id as idKelasSiswa'
             )
-            ->where('ks.id', $id)
+            ->where('km.id', $id)
             ->get();
         return $a;
     }
+    
 
-    public function viewKehadiran($id, $tgl)
-    {
-        $a = Guru::query()
-            ->leftJoin('kelas_siswa as ks', 'ks.guruPengajar', 'guru.id')
-            ->leftJoin('siswa_kelas as sk', 'sk.kelasSiswaId', 'ks.id')
-            ->leftJoin('siswa as s', 's.id', 'sk.siswaId')
-            ->leftJoin('kehadiran as kh', 'kh.siswaKelasId', 'sk.id')
-            ->select(
-                's.nipd as nipd',
-                's.name as namaSiswa',
-                'sk.nts as nts',
-                'sk.nas as nas',
-                'guru.username',
-                'ks.id',
-                'sk.id as idSiswaKelas',
-                'sk.kehadiran as kehadiran',
-                'sk.tglKehadiran as tglKehadiran'
-            )
-            ->where('ks.id', $id)
-            ->where('sk.tglKehadiran', $tgl)
-            ->get();
-        return $a;
-    }
-
-    public function Kehadiran($id, $tgl)
-    {
-        $a = Guru::query()
-            ->leftJoin('kelas_siswa as ks', 'ks.guruPengajar', 'guru.id')
-            ->leftJoin('siswa_kelas as sk', 'sk.kelasSiswaId', 'ks.id')
-            ->leftJoin('siswa as s', 's.id', 'sk.siswaId')
-            ->leftJoin('kehadiran as kh', 'kh.siswaKelasId', 'sk.id')
-            ->select(
-                's.nipd as nipd',
-                's.name as namaSiswa',
-                'sk.nts as nts',
-                'sk.nas as nas',
-                'guru.username',
-                'ks.id',
-                'sk.id as idSiswaKelas',
-                'kh.status as status',
-                'kh.tglKehadiran as tglKehadiran'
-            )
-            ->where('ks.id', $id)
-            ->where('kh.tglKehadiran', $tgl)
-            ->get();
-        return $a;
-    }
+    // public function Kehadiran($id, $tgl)
+    // {
+    //     $a = Guru::query()
+    //         ->leftJoin('kelas_siswa as ks', 'ks.guruPengajar', 'guru.id')
+    //         ->leftJoin('siswa_kelas as sk', 'sk.kelasSiswaId', 'ks.id')
+    //         ->leftJoin('siswa as s', 's.id', 'sk.siswaId')
+    //         ->leftJoin('kehadiran as kh', 'kh.siswaKelasId', 'sk.id')
+    //         ->select(
+    //             's.nipd as nipd',
+    //             's.name as namaSiswa',
+    //             'sk.nts as nts',
+    //             'sk.nas as nas',
+    //             'guru.username',
+    //             'ks.id',
+    //             'sk.id as idSiswaKelas',
+    //             'kh.status as status',
+    //             'kh.tglKehadiran as tglKehadiran'
+    //         )
+    //         ->where('ks.id', $id)
+    //         ->where('kh.tglKehadiran', $tgl)
+    //         ->get();
+    //     return $a;
+    // }
 }

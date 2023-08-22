@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KelasSiswa;
+use App\Models\KelasMapel;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
-class KelasSiswaController extends Controller
+class KelasMapelController extends Controller
 {
     private $model;
 
     public function __construct()
     {       
-        $this->model = new KelasSiswa();
+        $this->model = new KelasMapel();
 
     }
     public function index()
     {         
-        $kelasSiswa = $this->model->getAllKelasSiswa();      
+        $kelasMapel = $this->model->getAllKelasMapel();      
         $kls = $this->model->getAllKelas();
         $mapel = $this->model->getAllMapel();   
         $guru = $this->model->getAllGuru();
         $tingkatKelas = $this->model->getAllTingkatKelas(); 
         // dd($kelas)  ;
-        return view('kelasSiswa.index', compact('kelasSiswa','kls','mapel','guru','tingkatKelas'));                 
+        return view('kelasMapel.index', compact('kelasMapel','kls','mapel','guru','tingkatKelas'));                 
     }  
 
     public function simpan(Request $request)
@@ -34,7 +34,7 @@ class KelasSiswaController extends Controller
             'guruPengajar' => 'required',
         ]);           
 
-        $Id = KelasSiswa::create([
+        $Id = KelasMapel::create([
             'kelasId' => $request->kelasId,                               
             'mapelId' => $request->mapelId,                     
             'guruPengajar' => $request->guruPengajar,                                              
@@ -42,23 +42,23 @@ class KelasSiswaController extends Controller
         // dd($Id);
 
         return redirect()
-            ->route('kelasSiswa');
+            ->route('kelasMapel');
             // ->with('success', 'data Kurikulum telah ditambahkan');
     }    
 
     public function getById($id)
     {
-        $ks = KelasSiswa::find($id);
+        $ks = KelasMapel::find($id);
         $response['success'] = true;
         $response['data'] = $ks;
         // dd($response);
         return response()->json($response);
     }
 
-    public function updateKelasSiswa(Request $request)
+    public function updateKelasMapel(Request $request)
     {
-        $id = $request->idKelasSiswa;
-          $data = KelasSiswa::find($id)     
+        $id = $request->idKelasMapel;
+          $data = KelasMapel::find($id)     
           ->update([
             //'kode' => $request->kode,
             'kelasId' => $request->kelasId,                               
@@ -67,20 +67,7 @@ class KelasSiswaController extends Controller
           ]); 
 
           return redirect()
-            ->route('kelasSiswa');
+            ->route('kelasMapel');
             // ->with('success', 'data Kurikulum telah ditambahkan');
-    }
-
-    public function selectSearch(Request $request)
-    {
-    	$siswa = [];
-
-        if($request->has('q')){
-            $search = $request->q;
-            $siswa =Siswa::select("id", "name")
-            		->where('name', 'LIKE', "%$search%")
-            		->get();
-        }
-        return response()->json($siswa);
     }
 }

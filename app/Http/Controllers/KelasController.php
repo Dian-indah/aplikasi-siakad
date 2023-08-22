@@ -34,10 +34,10 @@ class KelasController extends Controller
         ]);           
 
         $Id = Kelas::create([
-            'namaKelas' => $request->post('namaKelas'),
-            'tahunAjarId' => $request->post('tahunAjarId'),
-            'tingkatKelasId' => $request->post('tingkatKelasId'),                     
-            'guruId' => $request->post('guruId'),                     
+            'namaKelas' => $request->namaKelas,
+            'tahunAjarId' => $request->tahunAjarId,
+            'tingkatKelasId' => $request->tingkatKelasId,                     
+            'guruId' => $request->guruId,                     
         ]);
 
         return redirect()
@@ -62,7 +62,7 @@ class KelasController extends Controller
             'namaKelas' => $request->editNamaKelas,
             'tahunAjarId' => $request->editTahunAjar,
             'tingkatKelasId' => $request->editTingkatKelas,
-            'guruId' => $request->editGuru,
+            'guruId' => $request->editWaliKelas,
           ]); 
 
           return redirect()

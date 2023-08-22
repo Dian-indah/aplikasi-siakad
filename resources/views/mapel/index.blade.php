@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="pull-right col-md-2 col-sm-2">
-                    <div class="dropdown">
+                    {{-- <div class="dropdown">
                         <a class="btn btn-primary dropdown-toggle" href="#" role="button"
                             data-toggle="dropdown">Kelas</a>
 
@@ -20,7 +20,7 @@
                                 <a class="dropdown-item" href="#"> {{ $kelas->tingkatKelas }} </a>
                             @endforeach
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -38,10 +38,7 @@
                             <th scope="col">Kode Mapel</th>
                             <th scope="col">Nama Matpel</th>
                             <th scope="col">Tingkat Kelas</th>
-                            <th scope="col">Kurikulum</th>
-                            <th scope="col">Status di Kurikulum</th>
-                            <th scope="col">Kompetensi Keahlian</th>
-                            <th scope="col">Nama PTK</th>
+                            <th scope="col">Kurikulum</th>                                                  
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -52,10 +49,7 @@
                                 <td>{{ $row->kodeMapel }}</td>
                                 <td>{{ $row->namaMapel }}</td>
                                 <td>{{ $row->tingkatKelas }}</td>
-                                <td>{{ $row->namaKurikulum }}</td>
-                                <td>{{ $row->statusKurikulum }}</td>
-                                <td>{{ $row->kompetensiKeahlian }}</td>
-                                <td>{{ $row->namaPtk }}</td>
+                                <td>{{ $row->namaKurikulum }}</td>                                                       
                                 <td class="text-center">
                                     <a href="javascript:;" data-id="<?= $row->id ?>" id="editMapel" class="btn btn-warning"
                                         type="button"><i class="icon-copy fa fa-edit" aria-hidden="true"></i></a>
@@ -142,14 +136,7 @@
                                 <input id="kompetensiKeahlian" name="kompetensiKeahlian" class="form-control"
                                     type="text" placeholder="Kompetensi Keahlian" required />
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12 col-md-12">
-                                <label for="namaPtk">Nama PTK</label>
-                                <input id="namaPtk" name="namaPtk" class="form-control" type="text"
-                                    placeholder="Nama PTK" required />
-                            </div>
-                        </div>
+                        </div>                       
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -235,14 +222,7 @@
                                 <input id="editKompetensiKeahlian" name="editKompetensiKeahlian" class="form-control"
                                     type="text" placeholder="Kompetensi Keahlian" required />
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12 col-md-12">
-                                <label for="editNamaPtk">Nama PTK</label>
-                                <input id="editNamaPtk" name="editNamaPtk" class="form-control" type="text"
-                                    placeholder="Nama PTK" required />
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -282,8 +262,7 @@
                     $('#editTingkatKelasId').val(data.data.tingkatKelasId);
                     $('#editKurikulumId').val(data.data.kurikulumId);
                     $('#editStatusKurikulum').val(data.data.statusKurikulum);
-                    $('#editKompetensiKeahlian').val(data.data.kompetensiKeahlian);
-                    $('#editNamaPtk').val(data.data.namaPtk);
+                    $('#editKompetensiKeahlian').val(data.data.kompetensiKeahlian);                  
                     $('#idMapel').val(data.data.id);
                 }
             });

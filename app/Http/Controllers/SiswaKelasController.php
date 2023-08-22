@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KelasSiswa;
+use App\Models\Kehadiran;
+use App\Models\Kelas;
 use App\Models\SiswaKelas;
 use Illuminate\Http\Request;
 
@@ -16,17 +17,21 @@ class SiswaKelasController extends Controller
     }
     public function tambahSiswaKelas($id)
     {
-        $ks = KelasSiswa::find($id);
+        $k = Kelas::find($id);        
         $siskel = $this->model->getAllSiswaKelas($id);
-        return view('kelasSiswa.tambahSiswaKelas', compact('ks', 'siskel'));
+        return view('kelas.tambahSiswaKelas', compact('k', 'siskel'));
     }
     public function simpanSisKel(Request $request)
     {
 
         $Id = SiswaKelas::create([
             'siswaId' => $request->livesearch,
-            'kelasSiswaId' => $request->idKelasSiswa,
+            'kelasId' => $request->kelasId,
         ]);
+        // $Id = Kehadiran::create([
+        //     'siswaId' => $request->livesearch,
+        //     'kelasId' => $request->kelasId,
+        // ]);
 
         return back();
     }
@@ -38,16 +43,6 @@ class SiswaKelasController extends Controller
         return response()->json($response);
     }
 
-    public function editNts(Request $request)
-    {
-        $id = $request->idSiswaKelas;
-        $data = SiswaKelas::where('id', $id)
-            ->update([
-                'nts' => $request->editNilai,
-            ]);          
-        return back();
-    }
-
     public function editNas(Request $request)
     {
         $id = $request->idSiswaKelas;
@@ -56,5 +51,15 @@ class SiswaKelasController extends Controller
                 'nas' => $request->editNilai,
             ]);          
         return back();
+    }
+
+    public function hapusSiswaKelas($id)
+    {
+       
+        $sk = SiswaKelas::findOrFail($id);        
+        $sk->delete();
+
+        return response()->json(['success' => true]);
+        // return back()->with('berhasil', 'Berhasil Dihapus');
     }
 }

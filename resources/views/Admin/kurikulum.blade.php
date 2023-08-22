@@ -33,11 +33,9 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $row->namaKurikulum }}</td>
-                                <td class="text-center">
-                                    {{-- <a href="/detail nilai" class="btn btn-info" type="button">
-                                        <i class="icon-copy dw dw-email-2 fa-sm"></i> Detail</a> --}}
+                                <td class="text-center">                               
                                     <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-warning editKurikulum"
-                                        type="button">
+                                        type="button" id="">
                                         <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
                                     <a href="javascript:;" id="btn-hapus" data-id="<?= $row->id ?>"
                                         class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>

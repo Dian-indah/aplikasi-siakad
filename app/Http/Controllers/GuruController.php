@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 use App\Exports\GuruExport;
 use App\Imports\GuruImport;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Guru;
 use App\Models\Kehadiran;
+use App\Models\KelasMapel;
 use App\Models\KelasSiswa;
 use App\Models\SiswaKelas;
 use Illuminate\Http\Request;
@@ -53,76 +55,36 @@ class GuruController extends Controller
     {
         $request->validate([
             'username' => 'required',
+            'nama' => '',
             'password' => 'required',
             'nik' => '',
             'noKk' => '',
             'nuptk' => 'required',
             'jenkel' => '',
             'tempatLahir' => '',
-            'tanggalLahir' => '',
-            'nip' => 'required',
+            'tanggalLahir' => '',           
             'notelp' => '',
-            'email' => '',
-            'statusKepegawaian' => '',
-            'skPengangkatan' => '',
-            'tmpPengangkatan' => '',
-            'lembagaPengangkatan' => '',
-            'sumberGaji' => '',
-            'jenisPtk' => '',
-            'npwp' => '',
-            'namaNpwp' => '',
+            'email' => '',            
             'agama' => '',
             'alamat' => '',
-            'kewarganegaraan' => '',
-            'ibuKandung' => '',
-            'statusPerkawinan' => '',
-            'namaPasangan' => '',
-            'nipPasangan' => '',
-            'pekerjaanPasangan' => '',
-            'lisensiKepsek' => '',
-            'diklatKepegawaian' => '',
-            'keahlianBraile' => '',
-            'keahlianBahasaIsyarat' => '',
-            'bank' => '',
-            'norek' => '',
-            'namaRek' => '',
+            'kewarganegaraan' => '',            
         ]);
 
         $Id = Guru::create([
             'username' => $request->username,
+            'nama' => $request->nama,
             'password' => Hash::make($request['password']),
             'nik' => $request->nik,
             'noKk' => $request->noKk,
             'nuptk' => $request->nuptk,
             'jenkel' => $request->jenkel,
             'tempatLahir' => $request->tempatLahir,
-            'tanggalLahir' => $request->tanggalLahir,
-            'nip' => $request->nip,
+            'tanggalLahir' => $request->tanggalLahir,          
             'notelp' => $request->notelp,
-            'email' => $request->email,
-            'statusKepegawaian' => $request->statusKepegawaian,
-            'skPengangkatan' => $request->skPengangkatan,
-            'tmpPengangkatan' => $request->tmpPengangkatan,
-            'lembagaPengangkatan' => $request->lembagaPengangkatan,
-            'sumberGaji' => $request->sumberGaji,
-            'jenisPtk' => $request->jenisPtk,
-            'npwp' => $request->npwp,
-            'namaNpwp' => $request->namaNpwp,
+            'email' => $request->email,            
             'agama' => $request->agama,
             'alamat' => $request->alamat,
-            'kewarganegaraan' => $request->kewarganegaraan,
-            'ibuKandung' => $request->ibuKandung,
-            'statusPerkawinan' => $request->statusPerkawinan,
-            'namaPasangan' => $request->namaPasangan,
-            'nipPasangan' => $request->nipPasangan,
-            'pekerjaanPasangan' => $request->pekerjaanPasangan,
-            'lisensiKepsek' => $request->lisensiKepsek,
-            'diklatKepegawaian' => $request->diklatKepegawaian,
-            'keahlianBraile' => $request->keahlianBraile,
-            'keahlianBahasaIsyarat' => $request->keahlianBahasaIsyarat,
-            'bank' => $request->bank,
-            'norek' => $request->norek,
-            'namaRek' => $request->namaRek,
+            'kewarganegaraan' => $request->kewarganegaraan,            
         ]);
         // dd($Id);
         // $data = Guru::Create($request->post());
@@ -136,41 +98,21 @@ class GuruController extends Controller
         $data = Guru::where('id', $id)
             ->update([
                 'username' => $request->username,
+                'nama' => $request->nama,
                 'password' => Hash::make($request['password']),
                 'nik' => $request->nik,
                 'noKk' => $request->noKk,
                 'nuptk' => $request->nuptk,
                 'jenkel' => $request->jenkel,
                 'tempatLahir' => $request->tempatLahir,
-                'tanggalLahir' => $request->tanggalLahir,
-                'nip' => $request->nip,
+                'tanggalLahir' => $request->tanggalLahir,          
                 'notelp' => $request->notelp,
-                'email' => $request->email,
-                'statusKepegawaian' => $request->statusKepegawaian,
-                'skPengangkatan' => $request->skPengangkatan,
-                'tmpPengangkatan' => $request->tmpPengangkatan,
-                'lembagaPengangkatan' => $request->lembagaPengangkatan,
-                'sumberGaji' => $request->sumberGaji,
-                'jenisPtk' => $request->jenisPtk,
-                'npwp' => $request->npwp,
-                'namaNpwp' => $request->namaNpwp,
+                'email' => $request->email,            
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'kewarganegaraan' => $request->kewarganegaraan,
-                'ibuKandung' => $request->ibuKandung,
-                'statusPerkawinan' => $request->statusPerkawinan,
-                'namaPasangan' => $request->namaPasangan,
-                'nipPasangan' => $request->nipPasangan,
-                'pekerjaanPasangan' => $request->pekerjaanPasangan,
-                'lisensiKepsek' => $request->lisensiKepsek,
-                'diklatKepegawaian' => $request->diklatKepegawaian,
-                'keahlianBraile' => $request->keahlianBraile,
-                'keahlianBahasaIsyarat' => $request->keahlianBahasaIsyarat,
-                'bank' => $request->bank,
-                'norek' => $request->norek,
-                'namaRek' => $request->namaRek,
-            ]);    
-        return redirect()->route('masterGuru');        
+            ]);
+        return redirect()->route('masterGuru');
     }
     public function guruExport()
     {
@@ -219,79 +161,33 @@ class GuruController extends Controller
         $nilai = $this->model->getDataSiswa($id);
         return view('guru.guruNilai', compact('g', 'nilai'));
     }
-    public function tambahNts($id)
-    {
-        $ks = KelasSiswa::find($id);
-        $nts = $this->model->getKelasSiswa($id);
-        return view('guru.inputNts', compact('ks', 'nts'));
-    }
-    public function tambahNas($id)
-    {
-        $ks = KelasSiswa::find($id);
-        $nas = $this->model->getKelasSiswa($id);
-        return view('guru.inputNas', compact('ks', 'nas'));
-    }
-    //GURU KEHADIRAN
-    public function kehadiran($id)
-    {
-        $g = Guru::find($id);
-        $kehadiran = $this->model->getDataSiswa($id);
-        return view('Guru.guruKehadiran', compact('g', 'kehadiran'));
-    }
+
+    //GURU KEHADIRAN    
     public function tambahKehadiran($id)
     {
-        $ks = KelasSiswa::find($id);
-        $kh = $this->model->getKelasSiswa($id);
-        $today = date('Y-m-d');
-        $attendanceData = SiswaKelas::where('tglKehadiran', $today)->get();
-        return view('guru.inputKehadiran', compact('ks', 'kh', 'attendanceData'));
+        $ks = KelasMapel::find($id);
+        $kh = $this->model->viewKehadiran($id);
+        $now = Carbon::now();
+        $tglKehadiran = $now->toDateString();
+        // $today = date('Y-m-d');
+        // $attendanceData = Kehadiran::where('tglKehadiran', $today)->get();
+        return view('guru.inputKehadiran', compact('ks', 'kh','tglKehadiran'));
     }
     public function processInputKehadiran(Request $request)
-    {
-        $attendanceDate = $request->input('attendance_date');
-        $statusData = $request->input('kehadiran');
-        $idKelasSiswa = $request->input('idKelasSiswa');      
-        $idSiswa = $request->input('siswaId');
-
-        foreach ($statusData as $i) {
-            // $id = $request->idSiswa;    
-            $data = SiswaKelas::where('kelasSiswaId', $idKelasSiswa)
-            ->where('siswaId', $idSiswa)
+    {        
+        $id = $request->idKehadiran;
+        $data = Kehadiran::where('id', $id)
             ->update([
-            // $Id = SiswaKelas::create([                    
-                'tglKehadiran' => $attendanceDate,
-                'kehadiran' => $statusData,
-            ]);
-        }
-
-        dd($statusData);
-            
+                'status' => $request->status,
+                'tglKehadiran' => $request->tglKehadiran,
+            ]);          
         return back();
     }
 
-    public function simpanKehadiran($id, Request $request)
-    {
-        foreach ($request->input('kehadiran') as $idSiswaKelas => $kehadiran) {
-            $siswa = SiswaKelas::find($idSiswaKelas);
-            $siswa->kehadiran = $kehadiran;
-            $siswa->save();
-        }
-
-        return back();
-    }
-    public function viewKehadiran($id, Request $request)
-    {
-        $request->validate([
-            'tgl' => 'required',
-        ]);
-        $ks = KelasSiswa::find($id);
-        $kehadiran = $this->model->viewKehadiran($id, $request->tgl);
-        return view('guru.viewKehadiran', compact('ks', 'kehadiran'));
-    }
     public function tampilKehadiran($id)
     {
-        $ks = KelasSiswa::find($id);
-        $kehadiran = $this->model->viewKehadiran(0, 0);
+        $ks = KelasMapel::find($id);
+        $kehadiran = $this->model->viewKehadiran($id);
         return view('guru.viewKehadiran', compact('ks', 'kehadiran'));
     }
 }

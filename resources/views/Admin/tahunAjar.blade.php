@@ -1,3 +1,4 @@
+
 @extends('Layouts.siakad')
 
 @section('content')
@@ -35,12 +36,13 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $row->tahunAjar }}</td>
                                 <td>{{ $row->semester }}</td>
-                                <td class="text-center">                                    
+                                <td class="text-center">
                                     <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-warning editTahunAjar"
                                         type="button">
                                         <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
-                                        <a href="javascript:;" id="btn-hapus" data-id="<?= $row->id ?>"
-                                            class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                        <a href="javascript:;" data-id="<?= $row->id ?>" id="btn-hapus"
+                                            class="btn btn-danger"><i class="fa fa-trash"></i>
+                                    
                                 </td>
                             </tr>
                         @endforeach
@@ -135,7 +137,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12 text-center">
-                                <button type="submit"  class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </div>
 
@@ -163,7 +165,7 @@
                     $('#editmodal').modal('show'); //menampilkan modal
                     $('#editTahunAjar').val(data.data.tahunAjar);
                     $('#editSemester').val(data.data.semester);
-                    $('#idTahunAjar').val(data.data.id);                                   
+                    $('#idTahunAjar').val(data.data.id);
                 }
             });
         });

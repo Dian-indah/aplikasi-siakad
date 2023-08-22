@@ -34,8 +34,8 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Username</th>
                             <th scope="col">Nama Ortu</th>
+                            <th scope="col">Username</th>
                             <th scope="col">Nama Siswa</th>
                             <th class="table-plus datatable-nosort">Action</th>
                         </tr>

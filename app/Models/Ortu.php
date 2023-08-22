@@ -23,7 +23,7 @@ class Ortu extends Authenticatable
     ];
     public function getAllOrtu()
     {
-        $a = Ortu::query()           
+        $a = Ortu::query()
             ->leftJoin('siswa as s', 's.id', 'ortu.siswaId')
             ->select(
                 's.name as namaSiswa',
@@ -32,7 +32,8 @@ class Ortu extends Authenticatable
                 'ortu.password as password',
                 'ortu.id as id'
             )
-            ->get();          
+            ->get();
         return $a;
     }
+    
 }

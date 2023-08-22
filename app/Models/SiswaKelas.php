@@ -11,18 +11,20 @@ class SiswaKelas extends Model
     public $table = "siswa_kelas";
     protected $fillable = [
         'siswaId',
-        'kelasSiswaId',
-        'nts',
-        'nas',   
+        'kelasId',
     ];
 
     public function getAllSiswaKelas($id)
     {
         $a = SiswaKelas::query()
-            ->leftJoin('siswa as s', 's.id', 'siswa_kelas.siswaId')          
-            ->leftJoin('kelas_siswa as ks', 'ks.id', 'siswa_kelas.KelasSiswaId')          
-            ->select('s.nipd as nipd','s.name as namaSiswa', 'ks.id')          
-            ->where('ks.id',$id)
+            ->leftJoin('siswa as s', 's.id', 'siswa_kelas.siswaId')
+            ->leftJoin('kelas as k', 'k.id', 'siswa_kelas.kelasId')
+            ->select(
+                's.nisn as nisn',
+                's.name as namaSiswa',
+                'k.id'
+            )
+            ->where('k.id', $id)
             ->get();
         // dd($a);
         return $a;

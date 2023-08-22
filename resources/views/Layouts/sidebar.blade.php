@@ -12,12 +12,12 @@
                 <span class="micon fa fa-calendar-check-o"></span><span class="mtext">Tahun Ajar</span>
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('kurikulum') }}"
                 class="{{ request()->is('kurikulum') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon fa fa-sticky-note-o"></span><span class="mtext">Kurikulum</span>
             </a>
-        </li>
+        </li> --}}
         <li>
             <a href="{{ route('kelas') }}"
                 class="{{ request()->is('kelas') ? 'active' : '' }} dropdown-toggle no-arrow">
@@ -37,17 +37,17 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('kelasSiswa') }}"
-                class="{{ request()->is('kelasSiswa') ? 'active' : '' }} dropdown-toggle no-arrow">
-                <span class="micon fa fa-university"></span><span class="mtext">Kelas Siswa</span>
-            </a>
-        </li>
-        <li>
             <a href="{{ route('masterSiswa') }}"
                 class="{{ request()->is('masterSiswa') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon fa fa-graduation-cap"></span><span class="mtext">Siswa</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('kelasMapel') }}"
+                class="{{ request()->is('kelasMapel') ? 'active' : '' }} dropdown-toggle no-arrow">
+                <span class="micon fa fa-university"></span><span class="mtext">Kelas Mapel</span>
+            </a>
+        </li>        
         <li>
             <a href="{{ route('ortuAdmin') }}"
                 class="{{ request()->is('ortuAdmin') ? 'active' : '' }} dropdown-toggle no-arrow">
@@ -74,7 +74,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('nilaiSiswa') }}"
+            <a href="{{ route('nilaiSiswa')}}"
                 class="{{ request()->is('nilaiSiswa') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-notebook"></span><span class="mtext">Nilai</span>
             </a>
@@ -87,12 +87,12 @@
         </li>
     @elseif (Auth::guard('ortu')->check())
         <li>
-            <a href="/menu" class="dropdown-toggle no-arrow">
+            <a href="{{route('menuOrtu')}}" class="dropdown-toggle no-arrow">
                 <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
             </a>
         </li>
         <li>
-            <a href="/nilai" class="dropdown-toggle no-arrow">
+            <a href="{{route('nilaiSiswaOrtu')}}" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-notebook"></span><span class="mtext">Nilai</span>
             </a>
         </li>

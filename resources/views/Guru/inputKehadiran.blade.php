@@ -6,29 +6,6 @@
                 <div class="col-md-9 col-sm-9">
                     <div class="title">
                         <h4>Kehadiran Siswa</h4>
-                        <form id="tgl" name="tgl">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="form-group row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <label class="col-sm-12 col-md-2 col-form-label">Select</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <select class="custom-select col-12">
-                                                <option selected="">Choose...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <div class="pull-right col-md-2 col-sm-2">
@@ -39,50 +16,76 @@
         {{-- Content bawah --}}
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
-                <form id="kehadiran" name="kehadiran" action="{{ route('saveKehadiran') }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <table class="table table-bordered">
-                        <thead>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">NIPD</th>
+                            <th scope="col">Nama Siswa</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($kh as $item)
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">NIPD</th>
-                                <th scope="col">Nama Siswa</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($kh as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nipd }}</td>
+                                <form action="{{ isset($test->status) ? route('updateKehadiran', $item->kehadiranId) : route('simpanKehadiran') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @if (isset($test->status))
+                                        @method('PUT')
+                                        <input type="hidden" name="kehadiranId[]" value="{{ $item->kehadiranId }}">
+                                    @endif
+                                    <td>{{ $loop->iteration }}</td>                                   
+                                    <td>{{ $item->nisn }}</td>
                                     <td>{{ $item->namaSiswa }}</td>
-                                    <td hidden><input value="{{ $item->siswaId }}" name="siswaId" id="siswaId"></td>
-                                    {{-- <td><input type="text" name="attendance_date" id="attendance_date"></td> --}}
-                                    <td hidden><input value="{{ $item->idKelasSiswa }}" name="idKelasSiswa"
-                                            id="idKelasSiswa"></td>
-                                    <td>
-                                        <select name="kehadiran[{{ $item->siswaKelasId }}]" required>
-                                            <option value="Hadir">Hadir</option>
-                                            <option value="Izin">Izin</option>
-                                            <option value="Sakit">Sakit</option>
-                                            <option value="Alpa">Alpa</option>
-                                        </select>
-                                        {{-- <input type="radio" name="kehadiran[{{ $item->siswaKelasId }}]" value="Hadir">
-                                        Hadir
-                                        <input type="radio" name="kehadiran[{{ $item->siswaKelasId }}]"
-                                            value="Tidak Hadir">
-                                        Tidak Hadir --}}
+                                    <td hidden>
+                                        <input value="{{ $item->kehadiranId }}" name="kehadiranId[]"
+                                                id="kehadiranId">
                                     </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
+                                    <td hidden>
+                                        @if ($item->tglKehadiran)
+                                            <input value="{{ $item->tglKehadiran }}" name="tglKehadiran[]"
+                                                id="tglKehadiran">
+                                        @else
+                                            <input value="{{ $tglKehadiran }}" name="tglKehadiran[]" id="tglKehadiran">
+                                        @endif
+                                    </td>
+                                    <td hidden><input value="{{ $item->siswaKelasId }}" name="siswaKelasId[]"
+                                            id="siswaKelasId"></td>
+                                    <td hidden><input value="{{ $item->kelasMapelId }}" name="kelasMapelId[]"
+                                            id="kelasMapelId"></td>
+                                    <td>
+                                        @if ($item->status)
+                                            <select id="status[]" name="status[]" class="custom-select col-12">
+                                                <option <?php if ($item->status == 'Hadir') {
+                                                    echo ' selected';
+                                                } ?> value="Hadir">Hadir</option>
+                                                <option <?php if ($item->status == 'Tidak Hadir') {
+                                                    echo ' selected';
+                                                } ?> value="Tidak Hadir">Tidak Hadir</option>
+                                            </select>
+                                        @else
+                                            <select name="status[]" class="custom-select col-12">
+                                                <option disabled selected>status</option>
+                                                <option value="Tidak Hadir">Tidak Hadir</option>
+                                                <option value="Hadir">Hadir</option>
+                                            </select>
+                                        @endif
+                                    </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-12">
+                        @if ($test)
+                            <button type="submit" name="action" value="Update"
+                                class="btn btn-sm btn-success">Update</button>
+                        @else
+                            <button type="submit" name="action" value="Simpan"
+                                class="btn btn-sm btn-primary">Simpan</button>
+                        @endif
                     </div>
+                </div>
                 </form>
             </div>
         </div>
@@ -91,26 +94,27 @@
 @endsection
 @section('js')
     <script>
-        document.getElementById("tgl").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form submission to the server for now
-
-            // Get data from form orang tua
-            var tglKehadiran = document.getElementById("tanggal").value.trim();
-
-            // Fill the data into form wali siswa
-            document.getElementById("attendance_date").value = tglKehadiran;
-        });
-    </script>
-    <script>
-        const radioOptions = document.querySelectorAll('.radio-option');
-
-        radioOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                radioOptions.forEach(otherOption => {
-                    if (otherOption !== option) {
-                        otherOption.checked = false;
-                    }
-                });
+        // Edit Data
+        $(document).on('click', '#editKelas', function() { //editKelas ada di class                      
+            var id = $(this).data(
+                'id'
+            ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
+            $.ajax({
+                // console.log(id);
+                url: "{{ url('/kelas/editKelas') }}" + '/' + id,
+                type: 'get',
+                dataType: 'json',
+                data: {},
+                beforeSend: function() {},
+                success: function(data) {
+                    // console.log(data.data)
+                    $('#editmodal').modal('show'); //menampilkan modal
+                    $('#editNamaKelas').val(data.data.namaKelas);
+                    $('#editWaliKelas').val(data.data.guruId);
+                    $('#editTahunAjar').val(data.data.tahunAjarId);
+                    $('#editTingkatKelas').val(data.data.tingkatKelasId);
+                    $('#idKelas').val(data.data.id);
+                }
             });
         });
     </script>

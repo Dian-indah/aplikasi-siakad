@@ -6,24 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class KelasSiswa extends Model
+class KelasMapel extends Model
 {
     public $timestamps = false;
-    public $table = "kelas_siswa";
+    public $table = "kelas_mapel";
     protected $fillable = [
         'kelasId',
         'mapelId',
         'guruPengajar',   
     ];
 
-    public function getAllKelasSiswa()
+    public function getAllKelasMapel()
     {
-        $a = KelasSiswa::query()
-            ->leftJoin('kelas as k', 'k.id', 'kelas_siswa.kelasId')
-            ->leftJoin('mapel as m', 'm.id', 'kelas_siswa.mapelId')
-            ->leftJoin('guru as g', 'g.id', 'kelas_siswa.guruPengajar')
-            ->leftJoin('guru as w', 'w.id', 'k.guruId')
-            ->select('kelas_siswa.id','jumlahSiswa','namaKelas', 'namaMapel', 'g.username as guruPengajar', 'w.username as waliKelas')
+        $a = KelasMapel::query()
+            ->leftJoin('kelas as k', 'k.id', 'kelas_mapel.kelasId')
+            ->leftJoin('mapel as m', 'm.id', 'kelas_mapel.mapelId')
+            ->leftJoin('guru as g', 'g.id', 'kelas_mapel.guruPengajar')           
+            ->select('kelas_mapel.id','namaKelas', 'namaMapel', 'g.username as guruPengajar')
             ->get();
         // dd($a);
         return $a;

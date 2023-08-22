@@ -40,10 +40,10 @@ class Mapel extends Model
 
     public function getTingkatKelas()
     {
-        $q = DB::select("
-        SELECT * FROM tingkatKelas
-        ");
-        return $q;
+        $a = TingkatKelas::query()
+        ->select('tingkatKelas','id')
+        ->get();
+        return $a;
     }
 
     public function getKurikulum()

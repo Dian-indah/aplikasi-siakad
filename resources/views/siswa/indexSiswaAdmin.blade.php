@@ -9,17 +9,7 @@
                         <h4>Daftar Siswa</h4>
                     </div>
                 </div>
-                <div class="text-right col-md-2 col-sm-2 dropdown">
-                    <div class="dropdown">
-                        <a class="btn btn-primary dropdown-toggle" href="#" role="button"
-                            data-toggle="dropdown">Kelas</a>
-
-                        <div id="dropdown" class="dropdown-menu dropdown-menu-right">
-                            @foreach ($tingkatKelas as $kelas)
-                                <a class="dropdown-item" href="#"> {{ $kelas->tingkatKelas }} </a>
-                            @endforeach
-                        </div>
-                    </div>
+                <div class="text-right col-md-2 col-sm-2 dropdown">                    
                 </div>
             </div>
         </div>
@@ -34,8 +24,7 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">NIPD</th>
-                            <th scope="col">NISN</th>
+                            <th scope="col">NISN</th>                            
                             <th scope="col">Nama</th>
                             <th scope="col">No Handphone</th>
                             <th scope="col">Jenis Kelamin</th>
@@ -46,8 +35,7 @@
                         @foreach ($data as $row)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $row->nipd }}</td>
-                                <td>{{ $row->nisn }}</td>
+                                <td>{{ $row->nisn }}</td>                                
                                 <td>{{ $row->username }}</td>
                                 <td>{{ $row->noHp }}</td>
                                 <td>{{ $row->jenkel }}</td>
@@ -82,15 +70,7 @@
                 </div>
                 {{-- form --}}
                 <form>
-                    <input id="idSiswa" name="idSiswa" hidden />
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">NIPD</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="nipd" name="nipd" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
+                    <input id="idSiswa" name="idSiswa" hidden />                    
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Nama Lengkap</label>
@@ -197,32 +177,7 @@
                                     disabled />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">SKHUN</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="skhun" name="skhun" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Penerima KPPS</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="penerimaKpps" name="penerimaKpps" class="form-control" type="text"
-                                    disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">No KPPS</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="noKpps" name="noKpps" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
+                    </div>                                      
                     {{-- Input Data Ayah --}}
                     <div class="col-sm-12 col-md-12 pd-20 text-center h4 text-blue">Data Ayah</div>
                     <div class="form-group row">
@@ -330,163 +285,7 @@
                                 <input id="nikIbu" name="nikIbu" class="form-control" type="text" disabled />
                             </div>
                         </div>
-                    </div>
-                    {{-- Input Data Wali --}}
-                    <div class="col-sm-12 col-md-12 pd-20 text-center h4 text-blue">Data Wali</div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Nama Lengkap</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="namaWali" name="namaWali" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">Tanggal Lahir</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="tanggalLahirWali" name="tanggalLahirWali" class="form-control month-picker"
-                                    type="date" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Jenjang Pendidikan</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="pendidikanWali" name="pendidikanWali" class="form-control month-picker"
-                                    type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">Pekerjaan</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="pekerjaanWali" name="pekerjaanWali" class="form-control" type="text"
-                                    disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">Penghasilan</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="penghasilanWali" name="penghasilanWali" class="form-control" type="text"
-                                    disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">NIK</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="nikWali" name="nikWali" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Kelengkapan Data Siswaa --}}
-                    <div class="col-sm-12 col-md-12 pd-20 text-center h4 text-blue">Kelengkapan Data Siswa</div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Nomor Peserta Ujian Nasional</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="noUn" name="noUn" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Nomor Seri Ijazah</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="noSeriIjazah" name="noSeriIjazah" class="form-control" type="text"
-                                    disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">Penerima KIP</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="penerimaKip" name="penerimaKip" class="form-control" type="text"
-                                    disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">Nomor KIP</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="noKip" name="noKip" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">Nama Di KIP</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="namaKip" name="namaKip" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Nomor Registrasi Akta Lahir</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="noReqAkta" name="noRegAkta" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">Bank</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="bank" name="bank" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Nomor Rekening Bank</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="noRekening" name="noRekening" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Rekening Atas Nama</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="namaRekening" id="namaRekening" class="form-control" type="text"
-                                    disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Layak PIP (Usulan Dari Sekolah)</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="layakPip" id="layakPip" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Alasan Layak PIP</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="alasanPip" name="alasanPip" class="form-control" type="text" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Kebutuhan Khusus</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="kebutuhanKhusus" name="kebutuhanKhusus" class="form-control" type="text"
-                                    disabled />
-                            </div>
-                        </div>
-                    </div>
+                    </div>                                                                                                                                                                                           
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Sekolah Asal</label>
@@ -511,32 +310,7 @@
                                 <input id="jmlSaudara" name="jmlSaudara" class="form-control" type="number" disabled />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">Berat Badan</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="bb" name="bb" class="form-control" type="number" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-2 col-form-label">Tinggi Badan</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="tb" name="tb" class="form-control" type="number" disabled />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12 col-md-12">
-                            <label class="col-sm-12 col-md-12 col-form-label">Jarak Rumah Ke Sekolah (KM)</label>
-                            <div class="col-sm-12 col-md-12">
-                                <input id="jarakSekolah" name="jarakSekolah" class="form-control" type="number"
-                                    disabled />
-                            </div>
-                        </div>
-                    </div>
+                    </div>                
                 </form>
             </div>
         </div>

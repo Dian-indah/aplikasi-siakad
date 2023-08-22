@@ -37,7 +37,7 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Password</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="password" name="password" value="{{ $siswa->password }}" class="form-control"
+                    <input id="password" name="password" value="" class="form-control"
                         type="password" placeholder="Password" />
                 </div>
             </div>
@@ -47,14 +47,7 @@
                     <input id="nisn" name="nisn" value="{{ $siswa->nisn }}" class="form-control" type="nisn"
                         placeholder="nisn" />
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">NIPD</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="nipd" name="nipd" value="{{ $siswa->nipd }}" class="form-control" type="nipd"
-                        placeholder="nipd" />
-                </div>
-            </div>
+            </div>            
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Jenis Kelamin</label>
                 <div class="col-sm-12 col-md-10">
@@ -144,37 +137,10 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Transportasi</label>
                 <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="trasportasi" name="trasportasi" value="{{ $siswa->trasportasi }}"
-                        placeholder=" trasportasi" type="text" />
+                    <input class="form-control" id="transportasi" name="transportasi" value="{{ $siswa->transportasi }}"
+                        placeholder=" transportasi" type="text" />
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">SKHUN</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="skhun" name="skhun" value="{{ $siswa->skhun }}"
-                        placeholder="skhun" type="text" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Penerima KPPS</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="penerimaKpps" name="penerimaKpps" class="custom-select col-12">
-                        <option <?php if ($siswa->penerimaKpps == 'Ya') {
-                            echo ' selected';
-                        } ?> value="Ya">Ya</option>
-                        <option <?php if ($siswa->penerimaKpps == 'Tidak') {
-                            echo ' selected';
-                        } ?> value="Tidak">Tidak</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">No KPPS</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="noKpps" name="noKpps" value="{{ $siswa->noKpps }}"
-                        placeholder="noKpps" type="text" />
-                </div>
-            </div>
+            </div>                       
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Nama Ayah</label>
                 <div class="col-sm-12 col-md-10">
@@ -333,180 +299,7 @@
                 <div class="col-sm-12 col-md-10">
                     <input class="form-control" id="nikIbu" name="nikIbu" value="{{ $siswa->nikIbu }}" placeholder="nikIbu" type="text" />
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nama Wali</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="namaWali" name="namaWali" value="{{ $siswa->namaWali }}" placeholder="namaWali" type="text" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Tanggal Lahir Wali</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control date-picker" id="tanggalLahirWali" name="tanggalLahirWali" value="{{ $siswa->tanggalLahirWali }}"
-                        placeholder="Tanggal Lahir Wali" type="date" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Jenjang Pendidikan Wali</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="pendidikanWali" name="pendidikanWali" class="custom-select col-12">
-                        <option <?php if ($siswa->pendidikanWali == 'Tidak Sekolah') {
-                            echo ' selected';
-                        } ?> value="Tidak Sekolah">Tidak Sekolah</option>
-                        <option <?php if ($siswa->pendidikanWali == 'Putus SD') {
-                            echo ' selected';
-                        } ?> value="Putus SD">Putus SD</option>
-                        <option <?php if ($siswa->pendidikanWali == 'SD/Sederajat') {
-                            echo ' selected';
-                        } ?> value="SD/Sederajat">SD/Sederajat</option>
-                        <option <?php if ($siswa->pendidikanWali == 'SMP/Sederajat') {
-                            echo ' selected';
-                        } ?> value="SMP/Sederajat">SMP/Sederajat</option>
-                        <option <?php if ($siswa->pendidikanWali == 'SMA/Sederajat') {
-                            echo ' selected';
-                        } ?> value="SMA/Sederajat">SMA/Sederajat</option>
-                        <option <?php if ($siswa->pendidikanWali == 'S1') {
-                            echo ' selected';
-                        } ?> value="S1">S1</option>
-                        <option <?php if ($siswa->pendidikanWali == 'Diatas S1') {
-                            echo ' selected';
-                        } ?> value="Diatas S1">Diatas S1</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Pekerjaan Wali</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="pekerjaanWali" name="pekerjaanWali" value="{{ $siswa->pekerjaanWali }}" placeholder="pekerjaanWali"
-                        type="text" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Penghasilan</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="penghasilanWali" name="penghasilanWali" class="custom-select col-12">
-                        <option <?php if ($siswa->penghasilanWali == 'Tidak Berpenghasilan') {
-                            echo ' selected';
-                        } ?> value="Tidak Berpenghasilan">Tidak Berpenghasilan</option>
-                        <option <?php if ($siswa->penghasilanWali == 'Kurang Dari Rp.500.000,00') {
-                            echo ' selected';
-                        } ?> value="Kurang Dari Rp.500.000,00">Kurang Dari Rp.500.000,00</option>
-                        <option <?php if ($siswa->penghasilanWali == 'Rp.500.000,00 - Rp.999.999,00') {
-                            echo ' selected';
-                        } ?> value="Rp.500.000,00 - Rp.999.999,00">Rp.500.000,00 - Rp.999.999,00</option>
-                        <option <?php if ($siswa->penghasilanWali == 'Rp.1.000.000,00 - Rp.1.999.999,00') {
-                            echo ' selected';
-                        } ?> value="Rp.1.000.000,00 - Rp.1.999.999,00">Rp.1.000.000,00 - Rp.1.999.999,00</option>
-                        <option <?php if ($siswa->penghasilanWali == 'Rp.2.000.000,00 - Rp.4.999.999,00') {
-                            echo ' selected';
-                        } ?> value="Rp.2.000.000,00 - Rp.4.999.999,00">Rp.2.000.000,00 - Rp.4.999.999,00</option>
-                        <option <?php if ($siswa->penghasilanWali == 'Diatas Rp.5.000.000,00') {
-                            echo ' selected';
-                        } ?> value="Diatas Rp.5.000.000,00">Diatas Rp.5.000.000,00</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">NIK Wali</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="nikWali" name="nikWali" value="{{ $siswa->nikWali }}" placeholder="nikWali" type="text" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor Peserta Ujian Nasional</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="noUn" name="noUn" value="{{ $siswa->noUn }}" class="form-control" type="text"
-                        placeholder="Nomor Peserta Ujian Nasional" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor Seri Ijazah</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="noSeriIjazah" name="noSeriIjazah" value="{{ $siswa->noSeriIjazah }}" class="form-control" type="text"
-                        placeholder="Nomor Seri Ijazah" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Penerima KIP</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="penerimaKip" name="penerimaKip" class="custom-select col-12">
-                        <option <?php if ($siswa->penerimaKip == 'Ya') {
-                            echo ' selected';
-                        } ?> value="Ya">Ya</option>
-                        <option <?php if ($siswa->penerimaKip == 'Tidak') {
-                            echo ' selected';
-                        } ?> value="Tidak">Tidak</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor KIP</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="noKip" name="noKip" value="{{ $siswa->noKip }}" class="form-control" type="text" placeholder="Nomor KIP" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nama Di KIP</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="namaKip" name="namaKip" value="{{ $siswa->namaKip }}" class="form-control" type="text"
-                        placeholder="Nama Di KIP" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor Registrasi Akta Lahir</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="noReqAkta" name="noReqAkta" value="{{ $siswa->noReqAkta }}" class="form-control" type="text"
-                        placeholder="Nomor Registrasi Akta Lahir" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Bank</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="bank" name="bank" value="{{ $siswa->bank }}" class="form-control" type="text" placeholder="Bank" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor Rekening Bank</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="noRekening" name="noRekening" value="{{ $siswa->noRekening }}" class="form-control" type="text"
-                        placeholder="Nomor Rekening Bank" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Rekening Atas Nama</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="namaRekening" name="namaRekening" value="{{ $siswa->namaRekening }}" class="form-control" type="text"
-                        placeholder="Rekening Atas Nama" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Layak PIP (Usulan Dari Sekolah)</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="layakPip" name="layakPip" class="custom-select col-12">
-                        <option <?php if ($siswa->layakPip == 'Ya') {
-                            echo ' selected';
-                        } ?> value="Ya">Ya</option>
-                        <option <?php if ($siswa->layakPip == 'Tidak') {
-                            echo ' selected';
-                        } ?> value="Tidak">Tidak</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Alasan Layak PIP</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="alasanPip" name="alasanPip" value="{{ $siswa->alasanPip }}" class="form-control" type="text"
-                        placeholder="Alasan Layak PIP" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Kebutuhan Khusus</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="kebutuhanKhusus" name="kebutuhanKhusus" value="{{ $siswa->kebutuhanKhusus }}" class="form-control" type="text"
-                        placeholder="Kebutuhan Khusus" />
-                </div>
-            </div>
+            </div>           
             {{-- 49 --}}
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Sekolah Asal</label>
@@ -514,46 +307,20 @@
                     <input id="sekolahAsal" name="sekolahAsal" value="{{ $siswa->sekolahAsal }}" class="form-control" type="text"
                         placeholder="Sekolah Asal" />
                 </div>
-            </div>
-            {{-- 50 --}}
+            </div>        
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Anak Ke-</label>
                 <div class="col-sm-12 col-md-10">
                     <input id="anak" name="anak" value="{{ $siswa->anak }}" class="form-control" type="number" placeholder="Anak Ke-" />
                 </div>
-            </div>
-            {{-- 51 --}}
+            </div>         
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Jumlah Saudara Kandung</label>
                 <div class="col-sm-12 col-md-10">
                     <input id="jmlSaudara" name="jmlSaudara" value="{{ $siswa->jmlSaudara }}" class="form-control" type="number"
                         placeholder="Jumlah Saudara Kandung" />
                 </div>
-            </div>
-            {{-- 52 --}}
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Berat Badan</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="bb" name="bb" value="{{ $siswa->bb }}" class="form-control" type="number"
-                        placeholder="Berat Badan" />
-                </div>
-            </div>
-            {{-- 53 --}}
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Tinggi Badan</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="tb" name="tb" value="{{ $siswa->tb }}" class="form-control" type="number"
-                        placeholder="Tinggi Badan" />
-                </div>
-            </div>
-            {{-- 54 --}}
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Jarak Rumah Ke Sekolah (KM)</label>
-                <div class="col-sm-12 col-md-10">
-                    <input id="jarakSekolah" name="jarakSekolah" value="{{ $siswa->jarakSekolah }}" class="form-control" type="number"
-                        placeholder="Jarak Rumah Ke Sekolah (KM)" />
-                </div>
-            </div>
+            </div>           
             <div class="form-group row">
                 <div class="col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Simpan</button>
