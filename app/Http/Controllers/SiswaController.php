@@ -160,11 +160,6 @@ class SiswaController extends Controller
         // ->with('success', 'data Kurikulum telah ditambahkan');
     }
 
-    public function kehadiran()
-    {
-        return view('sisor.kehadiran');
-    }
-
     public function menuSiswa()
     {
         return view('siswa.menu');

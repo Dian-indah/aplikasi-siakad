@@ -25,7 +25,10 @@ class TahunAjarController extends Controller
         $request->validate([
             'tahunAjar' => 'required',
             'semester' => 'required',
-        ]);
+        ],[
+            'tahunAjar.required' => 'Tahun Ajar Harus Diisi',  
+            'semester.required' => 'Semester Harus Diisi',  
+        ]);       
 
         $Id = TahunAjar::create([
             'tahunAjar' => $request->post('tahunAjar'),

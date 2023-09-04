@@ -22,6 +22,13 @@ class OrtuController extends Controller
         return view('ortu.menu');
     }
 
+    //Admin
+    public function getAllOrtu()
+    {        
+        $data = $this->model->getAllOrtu();           
+        return view('ortu.indexOrtuAdmin', compact('data'));
+    }
+
     public function selectSearchSiswa(Request $request)
     {
         $siswa = [];

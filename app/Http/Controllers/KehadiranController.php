@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Guru;
 use App\Models\Kehadiran;
 use App\Models\KelasMapel;
+use App\Models\Ortu;
+use App\Models\SiswaKelas;
 use Carbon\Carbon;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
+use App\Models\Siswa;
 
 class KehadiranController extends Controller
 {
@@ -17,30 +22,70 @@ class KehadiranController extends Controller
         $this->model = new Kehadiran();
     }
 
-    public function kehadiran($id)
+    public function kehadiran($id) // TAMPILAN AWAL
     {
         $g = Guru::find($id);
         $kehadiran = $this->model->getKehadiranByIdGuru($id);
-        return view('guru.guruKehadiran', compact('g', 'kehadiran'));
+        $st = $this->model->statusKehadiran($id);
+        return view('guru.guruKehadiran', compact('g', 'kehadiran', 'st'));
     }
-    public function viewKehadiran($id)
+
+    public function viewKehadiranOrtu()
     {
-        $km = KelasMapel::find($id);
-        $kh = $this->model->viewKehadiran($id);
-        // dd($kh);
-        return view('guru.viewKehadiran', compact('km', 'kh'));
+        $id = Auth::guard('ortu')->user()->id;
+        $km = Ortu::find($id);
+        $kh = $this->model->viewKehadiranBySisor($id);
+        return view('sisor.kehadiran', compact('km', 'kh'));
+    }
+    public function viewKehadiranSiswa()
+    {
+        $id = Auth::guard('siswa')->user()->id;
+        $km = Siswa::find($id);
+        $kh = $this->model->viewKehadiranBySisor($id);
+        // $h = $this->model->tampilKehadiran($id); 
+        // dd($h);
+        return view('sisor.kehadiran', compact('km', 'kh'));
+    }
+    public function viewKehadiran(Request $request) //Admin
+    {
+        // $idKelasMapel = $request->get('kelasMapelId');
+        // $tgl = $request->get('tgl');
+        // $idKelas = $request->get('kelasId');
+        // // ([
+        // //     'tgl' => 'required',
+        // // ]);
+        // // $ks = KelasMapel::find($id);
+        // // $test = Kehadiran::find($id);
+        // $kehadiran = $this->model->viewKehadiranLama($idKelasMapel, $tgl,$idKelas);
+        // return view('guru.viewKehadiran', compact('kehadiran','idKelasMapel','idKelas' ));
+    }
+    public function tampilKehadiran(Request $request) //Admin
+    {
+        // dd($request);
+        $status = $request->get('status');
+        $idKelasMapel = $request->get('kelasMapelId');
+        $tgl = $request->get('tgl');
+        // $tgl = Carbon::createFromFormat('d/M/Y', $request->get('tgl'))->format('d-m-Y');
+        // dd($tgl);
+        $idKelas = $request->get('kelasId');
+        $now = Carbon::now();
+        $tglKehadiran = $tgl != "" ? $tgl : $now->toDateString();
+
+        $kehadiran = $this->model->viewKehadiranLama($idKelasMapel, $tglKehadiran, $idKelas);
+        // dd($kehadiran);
+        return view('guru.viewKehadiran', compact('kehadiran', 'idKelasMapel', 'idKelas', 'tglKehadiran', 'status'));
     }
     public function tambahKehadiran($id)
     {
-        $ks = KelasMapel::find($id);
-        $test = Kehadiran::find($id);
-        $kh = $this->model->viewKehadiran($id);
-        $now = Carbon::now();
-        $tglKehadiran = $now->toDateString();
-        return view('guru.inputKehadiran', compact('ks', 'kh', 'tglKehadiran', 'test'));
+        // $ks = KelasMapel::find($id);
+        // $test = Kehadiran::find($id);
+        // $kh = $this->model->lihatKehadiran($id);      
+        // $now = Carbon::now();
+        // $tglKehadiran = $now->toDateString();
+        // return view('guru.inputKehadiran', compact('ks', 'kh', 'tglKehadiran', 'test'));
     }
-    public function simpanKehadiran(Request $request, $id)
-    {        
+    public function simpanKehadiran(Request $request)
+    {
         if ($request->input('action') === 'Simpan') {
             $dataToInsert = [];
             foreach ($request->input('status') as $key => $status) {
@@ -54,27 +99,14 @@ class KehadiranController extends Controller
 
             Kehadiran::insert($dataToInsert);
             return back();
-        } else{
-            $dataToEdit = [];
-
-        foreach ($request->input('data') as $key => $data) {
-            $dataToEdit[] = [
-                'id' => $data['id'],
-                'status' => $data['status'],
-                'tglKehadiran' => $data['tglKehadiran'],
-                'siswaKelasId' => $data['siswaKelasId'],
-                'kelasMapelId' => $data['kelasMapelId'],
-            ];
-        }
-
-        foreach ($dataToEdit as $data) {
-            Kehadiran::where('id', $data['id'])->update([
-                'status' => $data['status'],
-                'tglKehadiran' => $data['tglKehadiran'],
-                'siswaKelasId' => $data['siswaKelasId'],
-                'kelasMapelId' => $data['kelasMapelId'],
-            ]);
-        }
+        } elseif ($request->input('action') === 'Update') {
+            foreach ($request->input('kehadiranId') as $key => $idKehadiran) {
+                $data = Kehadiran::find($idKehadiran)
+                    ->update([
+                        'status' => $request->input('status')[$key],
+                    ]);
+            }
+            return back()->with('success', 'Data mahasiswa berhasil diperbarui.');
         }
     }
 
@@ -85,15 +117,12 @@ class KehadiranController extends Controller
     }
     public function updateKehadiran(Request $request, $id)
     {
-        $student = Kehadiran::find($id);
+        $id = $request->kehadiranId;
+        $data = Kehadiran::find($id)
+            ->update([
+                'status' => $request->status,
+            ]);
 
-        $student->nama = $request->input('nama');
-        $student->nim = $request->input('nim');
-        $student->email = $request->input('email');
-        // tambahkan field lain yang diperlukan
-
-        $student->save();
-
-        return redirect('/edit-mahasiswa/' . $id)->with('success', 'Data mahasiswa berhasil diperbarui.');
+        return back()->with('success', 'Data mahasiswa berhasil diperbarui.');
     }
 }

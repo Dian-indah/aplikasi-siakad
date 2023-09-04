@@ -114,5 +114,12 @@ class NilaiController extends Controller
         $nilai = $this->model->getNilaiByOrtu($id);
         return view('sisor.nilai', compact('s', 'nilai'));
     }
+
+    public function showNilaiByWaliKelas($id,Request $request)
+    {        
+        $ks = KelasMapel::find($id);        
+        $siswa = $this->model->getSiswaKelas($id);     
+        return view('guru.viewWaliKelas', compact('ks', 'siswa'));
+    }
     
 }

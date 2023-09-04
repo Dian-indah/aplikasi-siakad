@@ -87,22 +87,22 @@
         </li>
     @elseif (Auth::guard('ortu')->check())
         <li>
-            <a href="{{route('menuOrtu')}}" class="dropdown-toggle no-arrow">
+            <a href="{{route('menuOrtu')}}" class="{{ request()->is('menuOrtu') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
             </a>
         </li>
         <li>
-            <a href="{{route('nilaiSiswaOrtu')}}" class="dropdown-toggle no-arrow">
+            <a href="{{route('nilaiSiswaOrtu')}}" class="{{ request()->is('nilaiSiswaOrtu') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-notebook"></span><span class="mtext">Nilai</span>
             </a>
         </li>
         <li>
-            <a href="/kehadiran" class="dropdown-toggle no-arrow">
+            <a href="{{ route('kehadiranOrtu') }}" class="{{ request()->is('kehadiranOrtu') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-calendar-4"></span><span class="mtext">Kehadiran</span>
             </a>
         </li>
         <li>
-            <a href="/aspirasi" class="dropdown-toggle no-arrow">
+            <a href="/aspirasiOrtu" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Aspirasi</span>
             </a>
         </li>
@@ -124,7 +124,7 @@
                 class="{{ request()->is('kehadiranGuru') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-calendar-4"></span><span class="mtext">Kehadiran</span>
             </a>
-        </li>
+        </li>        
         <li>
             <a href="#" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Aspirasi</span>
@@ -133,6 +133,12 @@
         <li>
             <a href="{{ route('profilGuru') }}" class="dropdown-toggle no-arrow">
                 <span class="micon dw dw-user-12"></span><span class="mtext">Profil</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('waliKelas', Auth::guard('guru')->user()->id) }}"
+                class=" dropdown-toggle no-arrow">
+                <span class="micon dw dw-calendar-4"></span><span class="mtext">Wali Kelas</span>
             </a>
         </li>
     @endif

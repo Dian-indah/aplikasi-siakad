@@ -7,9 +7,9 @@
     <title>SIAKAD</title>
 
     <!-- Site favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('vendors/images/apple-touch-icon.png')}}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('vendors/images/favicon-32x32.png')}}" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('vendors/images/favicon-16x16.png')}}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('vendors/images/apple-touch-icon.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('vendors/images/favicon-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('vendors/images/favicon-16x16.png') }}" />
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -18,11 +18,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="{{asset('vendors/styles/core.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('vendors/styles/icon-font.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('plugins/sweetalert2/sweetalert2.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('vendors/styles/style.css')}}" />
-	<link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/sweetalert2/sweetalert2.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
@@ -62,7 +62,7 @@
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="brand-logo">
                 <a href="{{ route('login') }}">
-                    <img src="{{asset('vendors/images/siakad.png')}}" alt="" />
+                    <img src="{{ asset('vendors/images/siakad.png') }}" alt="" />
                 </a><br>
                 <h5>Sistem Informasi Akademik SMKI Al-Futuhiyyah</h5>
             </div>
@@ -73,7 +73,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 col-lg-7">
-                    <img src="{{asset ('vendors/images/login.png')}}" alt="" />
+                    <img src="{{ asset('vendors/images/login.png') }}" alt="" />
                 </div>
                 <div class="col-md-6 col-lg-5">
                     <div class="login-box bg-white box-shadow border-radius-10">
@@ -127,10 +127,6 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="input-group mb-0">
-                                        <!--
-           use code for form submit
-           <input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
-          -->
                                         <input class="btn btn-primary btn-lg btn-block" type="submit" value="Login">
                                     </div>
                                 </div>
@@ -142,15 +138,15 @@
         </div>
     </div>
     <!-- js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>  
-	<script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script> 
-    <script src="{{asset ('vendors/scripts/core.js')}}"></script>
-    <script src="{{asset ('vendors/scripts/script.min.js')}}"></script>
-    <script src="{{asset ('vendors/scripts/process.js')}}"></script>
-    <script src="{{asset ('vendors/scripts/layout-settings.js')}}"></script>
-    <script src="{{asset ('plugins/sweetalert2/sweetalert2.all.js')}}"></script>
-    <script src="{{asset ('plugins/sweetalert2/sweet-alert.init.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/core.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/process.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.js') }}"></script>
+    <script src="{{ asset('plugins/sweetalert2/sweet-alert.init.js') }}"></script>
     @if (session()->has('loginError'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {

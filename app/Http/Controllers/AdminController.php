@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function index()
     {
         $pegawai = $this->model->getAllPegawai();       
-        return view('pegawai.index', compact('pegawai'));
+        return view('administrator.index', compact('pegawai'));
     }
 
     public function menuAdmin()
@@ -66,7 +66,40 @@ class AdminController extends Controller
             ->route('pegawaiAdmin');
         // ->with('success', 'data Kurikulum telah ditambahkan');
     }
+    // public function updatePegawaiAdmin(Request $request)
+    // {
+    //     $id = $request->idPegawai;
+    //     $request->validate([                     
+    //         'name' => 'required',
+    //         'username' => 'required',
+    //         'password' => 'required',
+    //         'email' => 'required',
+    //         'notelp' => 'required',
+    //         'jenkel' => 'required',
+    //         'tempatLahir' => '',
+    //         'tglLahir' => '',
+    //         'alamat' => '',
+    //         'statusKepegawaian' => '',  
+    //     ], [
+    //         'username.required' => 'Username Harus Diisi',          
+    //         'password.required' => 'Password Harus Diisi',                    
+    //     ]);
 
+    //     $data = Admin::where('id', $id)
+    //         ->update([
+    //             'name' => $request->editname,
+    //             'username' => $request->editusername,
+    //             'password' => Hash::make($request['password']),
+    //             'email' => $request->editemail,
+    //             'notelp' => $request->editnotelp,
+    //             'jenkel' => $request->editjenkel,
+    //             'tempatLahir' => $request->edittempatLahir,
+    //             'tglLahir' => $request->edittanggalLahir,
+    //             'alamat' => $request->editalamat,
+    //             'statusKepegawaian' => $request->editstatusKepegawaian,          
+    //         ]);
+    //     return redirect()->route('pegawaiAdmin');
+    // }
     public function editPegawai($id)
     {
         $admin = Admin::find($id);
@@ -119,7 +152,7 @@ class AdminController extends Controller
             $user->delete();
             return redirect()->route('pegawai.index')->with('success', 'Akun berhasil dihapus.');
         }
-        return redirect()->route('pegawai.index')->with('error', 'Tidak dapat menghapus akun admin yang sedang login atau akun sendiri.');
+        return redirect()->route('administrator.index')->with('error', 'Tidak dapat menghapus akun admin yang sedang login atau akun sendiri.');
     }
 
     public function aspirasi()

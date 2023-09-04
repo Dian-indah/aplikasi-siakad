@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href={{ asset('vendors/styles/icon-font.min.css') }} />
     <link rel="stylesheet" type="text/css" href={{ asset('plugins/sweetalert2/sweetalert2.css') }} />
     <link rel="stylesheet" type="text/css" href={{ asset('vendors/styles/style.css') }} />
+    <link rel="stylesheet" type="text/css" href={{ asset('vendors/styles/errorStyle.css') }} />
     {{-- Select2 --}}
     {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -33,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href={{ asset('plugins/datatables/css/responsive.bootstrap4.min.css') }} />
     <link rel="stylesheet" type="text/css"
         href={{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }} />
+         {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
     <!-- Perpustakaan jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->

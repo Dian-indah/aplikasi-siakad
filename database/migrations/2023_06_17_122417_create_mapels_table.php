@@ -15,11 +15,10 @@ class CreateMapelsTable extends Migration
     {
         Schema::create('mapel', function (Blueprint $table) {
             $table->id();
-            $table->string('kodeMapel');
+            $table->string('kodeMapel')->unique();
             $table->string('namaMapel');      
             $table->string('statusKurikulum');
-            $table->string('kompetensiKeahlian');
-            $table->string('namaPtk');
+            $table->string('kompetensiKeahlian');    
             $table->foreignId('tingkatKelasId')->constrained('tingkatKelas')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('kurikulumId')->constrained('kurikulum')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

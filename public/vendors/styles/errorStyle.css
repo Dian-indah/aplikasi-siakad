@@ -1,0 +1,5 @@
+.required-indicator {
+    color: red;
+    font-weight: bold;
+    margin-left: 4px; /* Atur margin sesuai kebutuhan Anda */
+}

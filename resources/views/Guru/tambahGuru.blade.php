@@ -8,110 +8,132 @@
         </div>
         <form action="{{ route('simpanGuru') }}" method="POST">
             @csrf
+            {{-- @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif --}}
             <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Username</label>
+                <label class="col-sm-12 col-md-2 col-form-label ">Username</label>
                 <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="username" name="username" type="text" placeholder="Userame" />
+                    <input
+                        class="form-control @error('username') is-invalid @enderror" id="username" name="username" type="text" placeholder="Userame" />
+                    @error('username')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nama</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="nama" name="nama" type="text" placeholder="Nama" />
+            <div class="form-group
+                        row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Nama</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" id="nama" name="nama" type="text" placeholder="Nama" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Password</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="password" name="password" type="password" placeholder="Password" />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Password</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control @error('password') is-invalid @enderror" id="password" name="password" type="password" placeholder="Password" />
+                        @error('password')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">NIK</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="nik" name="nik" placeholder="NIK" type="text" />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">NIK</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" id="nik" name="nik" placeholder="NIK" type="text" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Nomor KK</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="noKk" name="noKk" placeholder="Nomor KK" type="text" />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Nomor KK</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" id="noKk" name="noKk" placeholder="Nomor KK" type="text" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">NUPTK</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="nuptk" name="nuptk" placeholder="NUPTK" type="text" />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">NUPTK</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control @error('nuptk') is-invalid @enderror" id="nuptk" name="nuptk"
+                            placeholder="Nomor Unik Pendidik dan Tenaga Kependidikan" type="text" />
+                            @error('nuptk')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Jenis Kelamin</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="jenkel" name="jenkel" class="custom-select col-12">
-                        <option selected="">Jenis Kelamin</option>
-                        <option value="1">Laki-Laki</option>
-                        <option value="2">Perempuan</option>
-                    </select>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Jenis Kelamin</label>
+                    <div class="col-sm-12 col-md-10">
+                        <select id="jenkel" name="jenkel" class="custom-select col-12">
+                            <option selected="">Jenis Kelamin</option>
+                            <option value="1">Laki-Laki</option>
+                            <option value="2">Perempuan</option>
+                        </select>
+                    </div>
+                    
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Tempat Lahir</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="tempatLahir" name="tempatLahir" placeholder="Tempat Lahir"
-                        type="text" />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Tempat Lahir</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" id="tempatLahir" name="tempatLahir" placeholder="Tempat Lahir"
+                            type="text" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Tanggal Lahir</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control date-picker" id="tanggalLahir" name="tanggalLahir"
-                        placeholder="Tanggal Lahir" type="date" />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Tanggal Lahir</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control date-picker" id="tanggalLahir" name="tanggalLahir"
+                            placeholder="Tanggal Lahir" type="date" />
+                    </div>
                 </div>
-            </div>            
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">No Telepon</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="notelp" name="notelp" placeholder="No Telepon" type="text" />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">No Telepon</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" id="notelp" name="notelp" placeholder="No Telepon" type="text" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Email</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Email</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" />
+                    </div>
                 </div>
-            </div>           
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Agama</label>
-                <div class="col-sm-12 col-md-10">
-                    <select id="agama" name="agama" class="custom-select col-12">
-                        <option selected="" disabled>Pilih Agama</option>
-                        <option value="Islam">Islam</option>
-                        <option value="Kristen Protestan">Kristen Protestan</option>
-                        <option value="Katolik">Katolik</option>
-                        <option value="Budha">Budha</option>
-                        <option value="Hindu">Hindu</option>
-                        <option value="Konghucu">Konghucu</option>
-                    </select>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Agama</label>
+                    <div class="col-sm-12 col-md-10">
+                        <select id="agama" name="agama" class="custom-select col-12">
+                            <option selected="" disabled>Pilih Agama</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen Protestan">Kristen Protestan</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Budha">Budha</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Konghucu">Konghucu</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Alamat</label>
-                <div class="col-sm-12 col-md-10">
-                    <textarea class="form-control" id="alamat" name="alamat" placeholder="Ketik disini"></textarea>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Alamat</label>
+                    <div class="col-sm-12 col-md-10">
+                        <textarea class="form-control" id="alamat" name="alamat" placeholder="Ketik disini"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label">Kewarganegaraan</label>
-                <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="kewarganegaraan" name="kewarganegaraan"
-                        placeholder="Kewarganegaraan" type="text" />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Kewarganegaraan</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" id="kewarganegaraan" name="kewarganegaraan"
+                            placeholder="Kewarganegaraan" type="text" />
+                    </div>
                 </div>
-            </div>           
-            <div class="form-group row">
-                <div class="col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                <div class="form-group row">
+                    <div class="col-sm-12 col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </div>
-            </div>
         </form>
     </div>
 @endsection

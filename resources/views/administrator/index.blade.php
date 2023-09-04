@@ -280,7 +280,7 @@
                         ×
                     </button>
                 </div>
-                <form action="#" method="POST">
+                <form action="{{route('updatePegawai')}}" method="POST">
                     @csrf
                     <input type="text" id="idPegawai" name="idPegawai" hidden>
                     <div class="modal-body">

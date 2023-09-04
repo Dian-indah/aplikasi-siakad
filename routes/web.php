@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AspirasiController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\KurikulumController;
@@ -29,12 +30,13 @@ Route::middleware('auth:siswa')->group(function () {
 
     Route::get('/menuSiswa', [SiswaController::class, 'menuSiswa'])->name('menuSiswa');
     Route::get('/nilaiSiswa', [NilaiController::class, 'ShowNilaiSiswa'])->name('nilaiSiswa');
-    Route::get('/kehadiranSiswa', [SiswaController::class, 'kehadiran'])->name('kehadiranSiswa');
+    Route::get('/kehadiranSiswa', [KehadiranController::class, 'viewKehadiranSiswa'])->name('kehadiranSiswa');
+    // Route::get('/kehadiranSiswaKelas', [KehadiranController::class, 'getWaliKelasKehadiran'])->name('kehadiranSiswaKelas');
 });
 Route::middleware('auth:admin')->group(function () {
 
     Route::get('/menuAdmin', [AdminController::class, 'menuAdmin'])->name('menuAdmin');
-    Route::get('/aspirasiAdmin', [AdminController::class, 'aspirasi'])->name('aspirasiAdmin');    
+    Route::get('/aspirasiAdmin', [AspirasiController::class, 'index'])->name('aspirasiAdmin');    
 
     //Pegawai
     Route::get('/pegawaiAdmin', [AdminController::class, 'index'])->name('pegawaiAdmin');
@@ -54,8 +56,7 @@ Route::middleware('auth:admin')->group(function () {
     //Siswa Kelas
     Route::post('/kelasSiswa/simpanTambahSisKel', [SiswaKelasController::class, 'simpanSisKel'])->name('simpanTambahSisKel');  
     Route::get('/kelas/tambahSiswaKelas/{id}', [SiswaKelasController::class, 'tambahSiswaKelas'])->name('tambahSiswaKelas');
-    Route::post('/kelas/hapusSiswaKelas/{id}', [SiswaKelasController::class, 'hapusSiswaKelas'])->name('hapusSiswaKelas');
-    // Route::get('/kelasSiswa/tampilDataSisKel', [SiswaKelasController::class, 'index'])->name('tampilDataSisKel');  
+    Route::post('/kelas/hapusSiswaKelas/{id}', [SiswaKelasController::class, 'hapusSiswaKelas'])->name('hapusSiswaKelas');    
 
     //Mapel
     Route::get('/mapel', [MapelController::class, 'index'])->name('mapel');
@@ -104,7 +105,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/siswa/updateSiswa', [SiswaController::class, 'updateSiswa'])->name('updateSiswa');
 
     //Ortu
-    Route::get('/ortuAdmin', [OrtuController::class, 'index'])->name('ortuAdmin');
+    Route::get('/ortuAdmin', [OrtuController::class, 'getAllOrtu'])->name('ortuAdmin');
     Route::get('/ortu/tambahOrtu', [OrtuController::class, 'tambahOrtu'])->name('tambahOrtu');
     Route::get('/cariSiswa', [OrtuController::class, 'selectSearchSiswa'])->name('cariSiswa'); 
     Route::post('/ortu/simpanOrtu', [OrtuController::class, 'simpanOrtu'])->name('simpanOrtu');
@@ -114,19 +115,23 @@ Route::middleware('auth:admin')->group(function () {
 
 Route::middleware('auth:guru')->group(function () {
     Route::get('/menuGuru', [GuruController::class, 'menu'])->name('menuGuru');
+    Route::get('/waliKelas/{id}', [GuruController::class, 'indexWaliKelas'])->name('waliKelas');
     Route::get('/guru/nilai/{id}', [NilaiController::class, 'nilai'])->name('nilaiGuru');
     Route::get('/guru/kehadiran/{id}', [KehadiranController::class, 'kehadiran'])->name('kehadiranGuru');
     Route::get('/guru/profil', [GuruController::class, 'profil'])->name('profilGuru');
     Route::get('/guru/tambahNts/{id}', [NilaiController::class, 'tambahNts'])->name('tambahNts');
     Route::get('/guru/tambahNas/{id}', [NilaiController::class, 'tambahNas'])->name('tambahNas');
-    Route::get('/guru/tampilKehadiran/{id}', [GuruController::class, 'tampilKehadiran'])->name('tampilKehadiran');
-    Route::get('/guru/viewKehadiran/{id}', [KehadiranController::class, 'viewKehadiran'])->name('viewKehadiran');    
-    Route::get('/guru/tambahKehadiran/{id}', [KehadiranController::class, 'tambahKehadiran'])->name('tambahKehadiran');
+    Route::get('/guru/tampilKehadiran', [KehadiranController::class, 'tampilKehadiran'])->name('tampilKehadiran');
+    Route::get('/guru/viewKehadiran/{id}', [KehadiranController::class, 'viewKehadiran'])->name('viewKehadiran');            
+    Route::get('/guru/tambahKehadiran/{id}', [KehadiranController::class, 'tambahKehadiran'])->name('tambahKehadiran');    
     Route::post('/guru/simpanKehadiran', [KehadiranController::class, 'simpanKehadiran'])->name('simpanKehadiran');
-    Route::put('/guru/updateKehadiran/{id}', [KehadiranController::class, 'simpanKehadiran'])->name('updateKehadiran');
+    Route::post('/guru/updateKehadiran/{id}', [KehadiranController::class, 'simpanKehadiran'])->name('updateKehadiran');
     // Route::post('/guru/updateKehadiran ', [KehadiranController::class, 'updateKehadiran'])->name('updateKehadiran');
     Route::get('/guru/editKehadiran/{id}', [KehadiranController::class, 'editKehadiran'])->name('editKehadiran');
     // Route::post('/guru/saveKehadiran', [GuruController::class, 'processInputKehadiran'])->name('saveKehadiran');
+
+    //WaliKelas
+    Route::get('/guru/waliKelas/showNilaiByWaliKelas/{id}', [NilaiController::class, 'showNilaiByWaliKelas'])->name('showNilaiByWaliKelas');    
 
     Route::post('/guru/inputNts', [NilaiController::class, 'inputNts'])->name('inputNts');
     Route::get('/guru/editNts/{id}', [NilaiController::class, 'getById'])->name('editNts');
@@ -134,11 +139,14 @@ Route::middleware('auth:guru')->group(function () {
     Route::get('/guru/editNas/{id}', [NilaiController::class, 'nasGetById'])->name('editNas');
     Route::post('/guru/updateNas', [NilaiController::class, 'updateNas'])->name('updateNas');
     Route::get('/guru/showSiskelById/{id}', [SiswaKelasController::class, 'showSiskelById'])->name('showSiskelById');
+    
 });
 
 Route::middleware('auth:ortu')->group(function () {
     Route::get('/menuOrtu', [OrtuController::class, 'index'])->name('menuOrtu');
     Route::get('/nilaiSiswaOrtu', [NilaiController::class, 'ShowNilaiOrtu'])->name('nilaiSiswaOrtu');
+    Route::get('/kehadiranOrtu', [KehadiranController::class, 'viewKehadiranOrtu'])->name('kehadiranOrtu');
+    Route::get('/aspirasiOrtu', [KehadiranController::class, 'aspirasiOrtu'])->name('aspirasiOrtu');
 });
 
 

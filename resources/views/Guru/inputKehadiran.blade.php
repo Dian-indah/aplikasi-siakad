@@ -6,6 +6,20 @@
                 <div class="col-md-9 col-sm-9">
                     <div class="title">
                         <h4>Kehadiran Siswa</h4>
+                        {{-- <form action="{{ url('/guru/viewKehadiran/' . $kh->id) }}" method="post">
+                            @csrf
+                            <div class="modal-body">
+                                <input type="text" value="{{ $ks->id }}" id="siswaKelasId" name="siswaKelasId"
+                                    hidden>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="">Tanggal</label>
+                                        <input id="tgl" name="tgl" class="form-control" type="date" required />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form> --}}
                     </div>
                 </div>
                 <div class="pull-right col-md-2 col-sm-2">
@@ -28,18 +42,18 @@
                     <tbody>
                         @foreach ($kh as $item)
                             <tr>
-                                <form action="{{ isset($test->status) ? route('updateKehadiran', $item->kehadiranId) : route('simpanKehadiran') }}" method="POST" enctype="multipart/form-data">
+                                {{-- <form action="{{ isset($test->status) ? route('updateKehadiran', $item->kehadiranId) : route('simpanKehadiran') }}" method="POST" enctype="multipart/form-data"> --}}
+                                <form action="{{ route('simpanKehadiran') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    @if (isset($test->status))
-                                        @method('PUT')
+                                    {{-- @if (isset($test->status))
+                                        @method('POST')
                                         <input type="hidden" name="kehadiranId[]" value="{{ $item->kehadiranId }}">
-                                    @endif
-                                    <td>{{ $loop->iteration }}</td>                                   
+                                    @endif --}}
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->nisn }}</td>
                                     <td>{{ $item->namaSiswa }}</td>
                                     <td hidden>
-                                        <input value="{{ $item->kehadiranId }}" name="kehadiranId[]"
-                                                id="kehadiranId">
+                                        <input value="{{ $item->kehadiranId }}" name="kehadiranId[]" id="kehadiranId">
                                     </td>
                                     <td hidden>
                                         @if ($item->tglKehadiran)
@@ -65,7 +79,6 @@
                                             </select>
                                         @else
                                             <select name="status[]" class="custom-select col-12">
-                                                <option disabled selected>status</option>
                                                 <option value="Tidak Hadir">Tidak Hadir</option>
                                                 <option value="Hadir">Hadir</option>
                                             </select>
@@ -77,12 +90,13 @@
                 </table>
                 <div class="form-group row">
                     <div class="col-sm-12 col-md-12">
-                        @if ($test)
-                            <button type="submit" name="action" value="Update"
-                                class="btn btn-sm btn-success">Update</button>
-                        @else
+                        @if ($test == null)
                             <button type="submit" name="action" value="Simpan"
                                 class="btn btn-sm btn-primary">Simpan</button>
+                        @else
+                            <button type="submit" name="action" value="Update"
+                                class="btn btn-sm btn-success">Update</button>
+                            </td>
                         @endif
                     </div>
                 </div>

@@ -45,7 +45,7 @@ class Nilai extends Model
             ->join('kelas as k', 'k.id', 'kelas_mapel.kelasId')
             ->join('siswa_kelas as sk', 'sk.kelasId', 'k.id')
             ->join('siswa as s', 's.id', 'sk.siswaId')
-            ->leftJoin('nilai as n', 'n.siswaKelasId', 'sk.id')
+            ->leftJoin('nilai as n', 'n.siswaKelasId', 'sk.id')           
             ->select(
                 's.nisn as nisn',
                 's.name as namaSiswa',              
@@ -55,10 +55,9 @@ class Nilai extends Model
                 'g.nama as guruPengajar',
                 'k.namaKelas as namaKelas',            
                 'kelas_mapel.id as kelasMapelId',
-                'n.id as nilaiId'
+                'n.id as nilaiId',              
             )
-            ->where('kelas_mapel.id', $id)
-            // ->whereNotNull('n.nts')
+            ->where('kelas_mapel.id', $id)           
             ->get();
         // dd($a);
         return $a;

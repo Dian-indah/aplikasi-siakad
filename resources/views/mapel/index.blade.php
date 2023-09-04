@@ -38,7 +38,7 @@
                             <th scope="col">Kode Mapel</th>
                             <th scope="col">Nama Matpel</th>
                             <th scope="col">Tingkat Kelas</th>
-                            <th scope="col">Kurikulum</th>                                                  
+                            <th scope="col">Kurikulum</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -49,7 +49,7 @@
                                 <td>{{ $row->kodeMapel }}</td>
                                 <td>{{ $row->namaMapel }}</td>
                                 <td>{{ $row->tingkatKelas }}</td>
-                                <td>{{ $row->namaKurikulum }}</td>                                                       
+                                <td>{{ $row->namaKurikulum }}</td>
                                 <td class="text-center">
                                     <a href="javascript:;" data-id="<?= $row->id ?>" id="editMapel" class="btn btn-warning"
                                         type="button"><i class="icon-copy fa fa-edit" aria-hidden="true"></i></a>
@@ -84,21 +84,21 @@
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="kodeMapel">Kode Mapel</label>
+                                <label for="kodeMapel">Kode Mapel <span class="required-indicator">*</span></label>
                                 <input id="kodeMapel" name="kodeMapel" class="form-control" type="text"
                                     placeholder="Kode Mapel" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="namaMapel">Nama Mapel</label>
+                                <label for="namaMapel">Nama Mapel <span class="required-indicator">*</span></label>
                                 <input id="namaMapel" name="namaMapel" class="form-control" type="text"
                                     placeholder="Nama Mapel" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="tingkatKelasId">Tingkat Kelas</label>
+                                <label for="tingkatKelasId">Tingkat Kelas <span class="required-indicator">*</span></label>
                                 <div class="col-sm-12 col-md-12">
                                     <select id="tingkatKelasId" name="tingkatKelasId" class="custom-select col-12" required>
                                         <option disabled selected="">Pilih..</option>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="kurikulumId">Kurikulum</label>
+                                <label for="kurikulumId">Kurikulum <span class="required-indicator">*</span></label>
                                 <div class="col-sm-12 col-md-12">
                                     <select id="kurikulumId" name="kurikulumId" class="custom-select col-12" required>
                                         <option disabled selected="">Pilih..</option>
@@ -125,21 +125,21 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="statusKurikulum">Status Kurikulum</label>
+                                <label for="statusKurikulum">Status Kurikulum </label>
                                 <input id="statusKurikulum" name="statusKurikulum" class="form-control" type="text"
                                     placeholder="Status Kurikulum" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
-                                <label for="kompetensiKeahlian">Kompetensi Keahlian</label>
+                                <label for="kompetensiKeahlian">Kompetensi Keahlian </label>
                                 <input id="kompetensiKeahlian" name="kompetensiKeahlian" class="form-control"
                                     type="text" placeholder="Kompetensi Keahlian" required />
                             </div>
-                        </div>                       
+                        </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12 text-center">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" id="simpan" class="btn btn-primary">Simpan</button>
                             </div>
                         </div>
                     </div>
@@ -222,7 +222,7 @@
                                 <input id="editKompetensiKeahlian" name="editKompetensiKeahlian" class="form-control"
                                     type="text" placeholder="Kompetensi Keahlian" required />
                             </div>
-                        </div>                        
+                        </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -246,7 +246,7 @@
         $(document).on('click', '#editMapel', function() { //editKelas ada di class                      
             var id = $(this).data(
                 'id'
-                ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
+            ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
             $.ajax({
                 // console.log(id);
                 url: "{{ url('/mapel/editMapel') }}" + '/' + id,
@@ -262,7 +262,7 @@
                     $('#editTingkatKelasId').val(data.data.tingkatKelasId);
                     $('#editKurikulumId').val(data.data.kurikulumId);
                     $('#editStatusKurikulum').val(data.data.statusKurikulum);
-                    $('#editKompetensiKeahlian').val(data.data.kompetensiKeahlian);                  
+                    $('#editKompetensiKeahlian').val(data.data.kompetensiKeahlian);
                     $('#idMapel').val(data.data.id);
                 }
             });
@@ -301,4 +301,43 @@
                 })
         });
     </script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+  
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('simpan').addEventListener('click', function() {
+                    const inputData = document.getElementById('editKodeMapel').value;
+
+                    fetch('/tambahMapel', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content')
+                        },
+                        body: JSON.stringify({
+                            inputData: inputData
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: data.error
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Data berhasil disimpan'
+                            });
+                            document.getElementById('editKodeMapel').value = '';
+                        }
+                    })              
+                });
+            });
+        </script>
+    {{-- @endif --}}
 @endsection

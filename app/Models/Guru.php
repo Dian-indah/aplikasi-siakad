@@ -102,6 +102,22 @@ class Guru extends Authenticatable
         return $a;
     }
     
+    public function getAllKelasMapel($id)
+    {
+        $a = KelasMapel::query()               
+            ->leftJoin('kelas as k', 'k.id', 'kelas_mapel.kelasId')                             
+            ->leftJoin('mapel as m', 'm.id', 'kelas_mapel.mapelId')         
+            ->select(
+                'k.namaKelas as namaKelas',                
+                'kelas_mapel.id as kelasMapelId',                
+                'm.namaMapel as namaMapel',                
+                'k.guruId as guruId',                
+            )
+            ->where('k.guruId', $id)
+            ->get();
+            // dd($a);
+        return $a;
+    }
 
     // public function Kehadiran($id, $tgl)
     // {

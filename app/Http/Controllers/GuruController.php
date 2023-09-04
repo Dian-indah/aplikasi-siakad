@@ -54,20 +54,26 @@ class GuruController extends Controller
     public function simpanGuru(Request $request)
     {
         $request->validate([
-            'username' => 'required',
+            'username' => 'required|unique:guru',
             'nama' => '',
             'password' => 'required',
             'nik' => '',
             'noKk' => '',
-            'nuptk' => 'required',
+            'nuptk' => 'required|unique:guru',
             'jenkel' => '',
             'tempatLahir' => '',
-            'tanggalLahir' => '',           
+            'tanggalLahir' => '',
             'notelp' => '',
-            'email' => '',            
+            'email' => '',
             'agama' => '',
             'alamat' => '',
-            'kewarganegaraan' => '',            
+            'kewarganegaraan' => '',
+        ], [
+            'username.required' => 'Username Harus Diisi',
+            'username.unique' => 'Username Telah Ada',
+            'password.required' => 'Password Harus Diisi',
+            'nuptk.required' => 'NUPTK Harus Diisi',
+            'nuptk.unique' => 'NUPTK Telah Ada',
         ]);
 
         $Id = Guru::create([
@@ -79,12 +85,12 @@ class GuruController extends Controller
             'nuptk' => $request->nuptk,
             'jenkel' => $request->jenkel,
             'tempatLahir' => $request->tempatLahir,
-            'tanggalLahir' => $request->tanggalLahir,          
+            'tanggalLahir' => $request->tanggalLahir,
             'notelp' => $request->notelp,
-            'email' => $request->email,            
+            'email' => $request->email,
             'agama' => $request->agama,
             'alamat' => $request->alamat,
-            'kewarganegaraan' => $request->kewarganegaraan,            
+            'kewarganegaraan' => $request->kewarganegaraan,
         ]);
         // dd($Id);
         // $data = Guru::Create($request->post());
@@ -95,6 +101,26 @@ class GuruController extends Controller
     public function updateGuru(Request $request)
     {
         $id = $request->idGuru;
+        $request->validate([
+            'username' => 'required',
+            'nama' => '',
+            'password' => 'required',
+            'nik' => '',
+            'noKk' => '',
+            'nuptk' => 'required',
+            'jenkel' => '',
+            'tempatLahir' => '',
+            'tanggalLahir' => '',
+            'notelp' => '',
+            'email' => '',
+            'agama' => '',
+            'alamat' => '',
+            'kewarganegaraan' => '',
+        ], [
+            'username.required' => 'Username Harus Diisi',          
+            'password.required' => 'Password Harus Diisi',
+            'nuptk.required' => 'NUPTK Harus Diisi',            
+        ]);
         $data = Guru::where('id', $id)
             ->update([
                 'username' => $request->username,
@@ -105,9 +131,9 @@ class GuruController extends Controller
                 'nuptk' => $request->nuptk,
                 'jenkel' => $request->jenkel,
                 'tempatLahir' => $request->tempatLahir,
-                'tanggalLahir' => $request->tanggalLahir,          
+                'tanggalLahir' => $request->tanggalLahir,
                 'notelp' => $request->notelp,
-                'email' => $request->email,            
+                'email' => $request->email,
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'kewarganegaraan' => $request->kewarganegaraan,
@@ -163,31 +189,40 @@ class GuruController extends Controller
     }
 
     //GURU KEHADIRAN    
-    public function tambahKehadiran($id)
-    {
-        $ks = KelasMapel::find($id);
-        $kh = $this->model->viewKehadiran($id);
-        $now = Carbon::now();
-        $tglKehadiran = $now->toDateString();
-        // $today = date('Y-m-d');
-        // $attendanceData = Kehadiran::where('tglKehadiran', $today)->get();
-        return view('guru.inputKehadiran', compact('ks', 'kh','tglKehadiran'));
-    }
-    public function processInputKehadiran(Request $request)
-    {        
-        $id = $request->idKehadiran;
-        $data = Kehadiran::where('id', $id)
-            ->update([
-                'status' => $request->status,
-                'tglKehadiran' => $request->tglKehadiran,
-            ]);          
-        return back();
-    }
+    // public function tambahKehadiran($id)
+    // {
+    //     $ks = KelasMapel::find($id);
+    //     $kh = $this->model->viewKehadiran($id);
+    //     $now = Carbon::now();
+    //     $tglKehadiran = $now->toDateString();
+    //     // $today = date('Y-m-d');
+    //     // $attendanceData = Kehadiran::where('tglKehadiran', $today)->get();
+    //     return view('guru.inputKehadiran', compact('ks', 'kh','tglKehadiran'));
+    // }
+    // public function processInputKehadiran(Request $request)
+    // {        
+    //     $id = $request->idKehadiran;
+    //     $data = Kehadiran::where('id', $id)
+    //         ->update([
+    //             'status' => $request->status,
+    //             'tglKehadiran' => $request->tglKehadiran,
+    //         ]);          
+    //     return back();
+    // }
 
     public function tampilKehadiran($id)
     {
         $ks = KelasMapel::find($id);
         $kehadiran = $this->model->viewKehadiran($id);
         return view('guru.viewKehadiran', compact('ks', 'kehadiran'));
+    }
+
+    //WaliKelas
+    public function indexWaliKelas($id)
+    {
+        $g = Guru::find($id);
+        $km = $this->model->getAllKelasMapel($id);
+        // dd($km);
+        return view('guru.guruWaliKelas', compact('km'));
     }
 }

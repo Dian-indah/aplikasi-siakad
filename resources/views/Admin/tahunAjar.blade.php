@@ -1,4 +1,3 @@
-
 @extends('Layouts.siakad')
 
 @section('content')
@@ -40,9 +39,9 @@
                                     <a href="javascript:;" data-id="<?= $row->id ?>" class="btn btn-warning editTahunAjar"
                                         type="button">
                                         <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
-                                        <a href="javascript:;" data-id="<?= $row->id ?>" id="btn-hapus"
-                                            class="btn btn-danger"><i class="fa fa-trash"></i>
-                                    
+                                    <a href="javascript:;" data-id="<?= $row->id ?>" id="btn-hapus"
+                                        class="btn btn-danger"><i class="fa fa-trash"></i>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -119,19 +118,25 @@
                             <input type="text" name="idTahunAjar" id="idTahunAjar" hidden />
                             <div class="col-sm-12 col-md-12">
                                 <label for="tahunAjar">Tahun Ajar</label>
-                                <input id="editTahunAjar" name="tahunAjar" placeholder="Tahun Ajar" class="form-control"
-                                    type="text" required />
+                                <input id="editTahunAjar" name="tahunAjar" placeholder="Tahun Ajar"
+                                    class="form-control @error('tahunAjar') is-invalid @enderror" type="text" required />
+                                @error('tahunAjar')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="semester">Semester</label>
                                 <div class="col-sm-12 col-md-12">
-                                    <select id="editSemester" name="semester" class="custom-select col-12" required>
+                                    <select id="editSemester" name="semester" class="custom-select col-12 @error('semester') is-invalid @enderror" required>
                                         <option disabled selected="">Pilih..</option>
                                         <option value="Ganjil">Ganjil</option>
                                         <option value="Genap">Genap</option>
                                     </select>
+                                    @error('semester')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 </div>
                             </div>
                         </div>

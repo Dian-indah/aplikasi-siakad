@@ -11,9 +11,9 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-md-6 col-sm-12 title">
-                    <h4>Kehadiran Siswa Tahun ajar 2023</h4>
+                    <h4>Kehadiran Siswa Tahun ajar 2023</h4>                    
                 </div>
-                <div class="col-md-12 col-sm-6 m-3">                   
+                <div class="col-md-12 col-sm-6 m-3">
 
                     <table id="example" class="table table-bordered">
                         <thead>
@@ -22,7 +22,7 @@
                                 <th>No</th>
                                 <th scope="col">Kode Mapel</th>
                                 <th scope="col">Mata Pelajaran</th>
-                                <th scope="col">Nama Kelas</th>                              
+                                <th scope="col">Nama Kelas</th>
                                 <th scope="col">Kehadiran</th>
                             </tr>
                         </thead>
@@ -32,7 +32,7 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $row->kodeMapel }}</td>
                                     <td>{{ $row->namaMapel }}</td>
-                                    <td>{{ $row->namaKelas }}</td>                              
+                                    <td>{{ $row->namaKelas }}</td>
                                     <td>
                                         <label for="userImage">
                                             <a href="{{ url('/guru/viewKehadiran/' . $row->kelasMapelId) }}"
@@ -40,9 +40,17 @@
                                                 <i class="icon-copy fa fa-address-card" aria-hidden="true"></i></a>
                                         </label>
                                         <label for="userImage">
-                                            <a href="{{url('/guru/tambahKehadiran/'.$row->kelasMapelId)}}"
-                                                class="btn btn-outline-success" rel="nofollow">
-                                                <i class="icon-copy fa fa-plus" aria-hidden="true"></i></a>
+
+                                            {{-- @if ($row == true) --}}
+                                                <a href="{{ url('/guru/tampilKehadiran?kelasMapelId='.$row->kelasMapelId.'&kelasId='.$row->kelasId) }}"
+                                                    class="btn btn-outline-success" rel="nofollow">
+                                                    <i class="icon-copy fa fa-plus" aria-hidden="true"></i></a>
+                                            {{-- @else
+                                                <a href="{{ url('/guru/tambahKehadiran/' . $row->kelasMapelId) }}"
+                                                    class="btn btn-outline-warning" rel="nofollow">
+                                                    <i class="icon-copy fa fa-plus" aria-hidden="true"></i></a>
+                                            @endif --}}
+
                                         </label>
                                     </td>
                                 </tr>
@@ -54,10 +62,10 @@
         </div>
     </div>
 @endsection
-@section('js')  
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>     
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
 @endsection

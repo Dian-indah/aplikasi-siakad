@@ -16,8 +16,7 @@ class Mapel extends Model
         'tingkatKelasId',
         'kurikulumId',
         'statusKurikulum',
-        'kompetensiKeahlian',
-        'namaPtk',
+        'kompetensiKeahlian',  
     ];
 
     protected $hidden = [
@@ -29,7 +28,7 @@ class Mapel extends Model
         $q = DB::select("
         SELECT mapel.id id, mapel.kodeMapel kodeMapel, mapel.namaMapel namaMapel,
         mapel.statusKurikulum statusKurikulum, mapel.kompetensiKeahlian kompetensiKeahlian,
-        mapel.namaPtk namaPtk, tingkatKelas.tingkatKelas tingkatKelas, 
+        tingkatKelas.tingkatKelas tingkatKelas, 
         kurikulum.namaKurikulum namaKurikulum FROM mapel
         JOIN tingkatKelas on tingkatKelas.id = mapel.tingkatKelasId
         join kurikulum on kurikulum.id = mapel.kurikulumId
