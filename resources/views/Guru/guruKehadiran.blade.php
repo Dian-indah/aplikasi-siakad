@@ -11,7 +11,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-md-6 col-sm-12 title">
-                    <h4>Kehadiran Siswa Tahun ajar 2023</h4>                    
+                    <h4>Kehadiran Siswa</h4>                    
                 </div>
                 <div class="col-md-12 col-sm-6 m-3">
 
@@ -33,23 +33,11 @@
                                     <td>{{ $row->kodeMapel }}</td>
                                     <td>{{ $row->namaMapel }}</td>
                                     <td>{{ $row->namaKelas }}</td>
-                                    <td>
+                                    <td>                                       
                                         <label for="userImage">
-                                            <a href="{{ url('/guru/viewKehadiran/' . $row->kelasMapelId) }}"
-                                                class="btn btn-outline-success" rel="nofollow">
-                                                <i class="icon-copy fa fa-address-card" aria-hidden="true"></i></a>
-                                        </label>
-                                        <label for="userImage">
-
-                                            {{-- @if ($row == true) --}}
                                                 <a href="{{ url('/guru/tampilKehadiran?kelasMapelId='.$row->kelasMapelId.'&kelasId='.$row->kelasId) }}"
                                                     class="btn btn-outline-success" rel="nofollow">
-                                                    <i class="icon-copy fa fa-plus" aria-hidden="true"></i></a>
-                                            {{-- @else
-                                                <a href="{{ url('/guru/tambahKehadiran/' . $row->kelasMapelId) }}"
-                                                    class="btn btn-outline-warning" rel="nofollow">
-                                                    <i class="icon-copy fa fa-plus" aria-hidden="true"></i></a>
-                                            @endif --}}
+                                                    <i class="icon-copy fa fa-plus" aria-hidden="true"></i></a>                                           
 
                                         </label>
                                     </td>

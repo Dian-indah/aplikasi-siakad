@@ -108,6 +108,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label for="notelp" class="col-sm-12 col-md-12 col-form-label">Nomor Telepon</label>
@@ -287,47 +288,60 @@
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="username">Username</label>
-                                <input id="editusername" name="editusername" class="form-control" type="text"
+                                <input id="editUsername" name="editUsername" class="form-control" type="text"
                                     required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="password">Password</label>
-                                <input id="editpassword" name="editpassword" class="form-control" type="password"
+                                <input id="editPassword" name="editPassword" class="form-control" type="password"
                                     required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="name">Nama Lengkap</label>
-                                <input id="editname" name="editname" class="form-control" type="text" required />
+                                <input id="editName" name="editName" class="form-control" type="text" required />
+                            </div>
+                        </div>                                             
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="notelp">No Telepon</label>
+                                <input id="editNoTelp" name="editNoTelp" class="form-control" type="text" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="tglLahir">Tanggal Lahir</label>
-                                <input id="edittanggalLahir" name="edittanggalLahir" class="form-control" type="date"
+                                <input id="editTanggalLahir" name="editTanggalLahir" class="form-control" type="date"
+                                    required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="tempatLahir">Tempat Lahir</label>
+                                <input id="editTempatLahir" name="editTempatLahir" class="form-control" type="text"
                                     required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="email">Email</label>
-                                <input id="editemail" name="editemail" class="form-control" type="email" required />
+                                <input id="editEmail" name="editEmail" class="form-control" type="email" required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label class="col-sm-12 col-md-12">Status Kepegawaian</label>
-                                <input class="form-control" id="editstatusKepegawaian" name="editstatusKepegawaian"
+                                <input class="form-control" id="editStatusKepegawaian" name="editStatusKepegawaian"
                                     type="text" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12">
                                 <label for="alamat">Alamat</label>
-                                <textarea id="editalamat" name="editalamat" class="form-control" type="text" required></textarea>
+                                <textarea id="editAlamat" name="editAlamat" class="form-control" type="text" required></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -389,16 +403,16 @@
                     console.log(data.data)
                     $('#showEditPegawai').modal('show'); //menampilkan modal
                     $('#idPegawai').val(data.data.id);
-                    $('#editpassword').val(data.data.password);
-                    $('#editusername').val(data.data.username);
-                    $('#editname').val(data.data.name);
-                    $("div.jenkel select").val(data.data.jenkel).change();
-                    $('#edittempatLahir').val(data.data.tempatLahir);
-                    $('#edittanggalLahir').val(data.data.tglLahir);
-                    $('#editnotelp').val(data.data.notelp);
-                    $('#editemail').val(data.data.email);
-                    $('#editstatusKepegawaian').val(data.data.statusKepegawaian);
-                    $('#editalamat').val(data.data.alamat);
+                    $('#editPassword').val(data.data.password);
+                    $('#editUsername').val(data.data.username);
+                    $('#editName').val(data.data.name);
+                    $("div.editJenkel select").val(data.data.jenkel).change();
+                    $('#editTempatLahir').val(data.data.tempatLahir);
+                    $('#editTanggalLahir').val(data.data.tglLahir);
+                    $('#editNotelp').val(data.data.notelp);
+                    $('#editEmail').val(data.data.email);
+                    $('#editStatusKepegawaian').val(data.data.statusKepegawaian);
+                    $('#editAlamat').val(data.data.alamat);
                 }
             });
         });

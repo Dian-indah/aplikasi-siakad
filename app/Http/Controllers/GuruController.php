@@ -47,6 +47,7 @@ class GuruController extends Controller
     public function showGuruById($id)
     {
         $guru = Guru::find($id);
+        // dd($guru);
         $response['success'] = true;
         $response['data'] = $guru;
         return response()->json($response);
@@ -117,9 +118,9 @@ class GuruController extends Controller
             'alamat' => '',
             'kewarganegaraan' => '',
         ], [
-            'username.required' => 'Username Harus Diisi',          
+            'username.required' => 'Username Harus Diisi',
             'password.required' => 'Password Harus Diisi',
-            'nuptk.required' => 'NUPTK Harus Diisi',            
+            'nuptk.required' => 'NUPTK Harus Diisi',
         ]);
         $data = Guru::where('id', $id)
             ->update([
@@ -176,9 +177,10 @@ class GuruController extends Controller
         return view('Guru.menu');
     }
 
-    public function profil()
+    public function profil($id)
     {
-        return view('Guru.guruProfil');
+        $guru = Guru::find($id);
+        return view('Guru.guruProfil', compact('guru'));
     }
     //GURU NILAI
     public function nilai($id)
@@ -218,11 +220,11 @@ class GuruController extends Controller
     }
 
     //WaliKelas
-    public function indexWaliKelas($id)
+    public function indexWaliKelas()
     {
+        $id = Auth::guard('guru')->user()->id;
         $g = Guru::find($id);
         $km = $this->model->getAllKelasMapel($id);
-        // dd($km);
-        return view('guru.guruWaliKelas', compact('km'));
+        return view('guru.guruWaliKelas', compact('km'));      
     }
 }

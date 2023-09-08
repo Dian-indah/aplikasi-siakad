@@ -22,8 +22,9 @@ class KehadiranController extends Controller
         $this->model = new Kehadiran();
     }
 
-    public function kehadiran($id) // TAMPILAN AWAL
+    public function kehadiran() // TAMPILAN AWAL
     {
+        $id = Auth::guard('guru')->user()->id;
         $g = Guru::find($id);
         $kehadiran = $this->model->getKehadiranByIdGuru($id);
         $st = $this->model->statusKehadiran($id);
@@ -45,23 +46,9 @@ class KehadiranController extends Controller
         // $h = $this->model->tampilKehadiran($id); 
         // dd($h);
         return view('sisor.kehadiran', compact('km', 'kh'));
-    }
-    public function viewKehadiran(Request $request) //Admin
-    {
-        // $idKelasMapel = $request->get('kelasMapelId');
-        // $tgl = $request->get('tgl');
-        // $idKelas = $request->get('kelasId');
-        // // ([
-        // //     'tgl' => 'required',
-        // // ]);
-        // // $ks = KelasMapel::find($id);
-        // // $test = Kehadiran::find($id);
-        // $kehadiran = $this->model->viewKehadiranLama($idKelasMapel, $tgl,$idKelas);
-        // return view('guru.viewKehadiran', compact('kehadiran','idKelasMapel','idKelas' ));
-    }
+    }   
     public function tampilKehadiran(Request $request) //Admin
-    {
-        // dd($request);
+    {       
         $status = $request->get('status');
         $idKelasMapel = $request->get('kelasMapelId');
         $tgl = $request->get('tgl');

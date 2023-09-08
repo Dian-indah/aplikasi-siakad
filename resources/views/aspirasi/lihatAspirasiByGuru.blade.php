@@ -88,7 +88,7 @@
             ); //data dan id diperoleh dari button "data-id" baris 38. serta di controller $response['data'] = $kur;
             $.ajax({
                 // console.log(id);
-                url: "{{ url('/aspirasiAdmin/showAspirasiById') }}" + '/' + id,
+                url: "{{ url('/guru/showAspirasi') }}" + '/' + id,
                 type: 'get',
                 dataType: 'json',
                 data: {},

@@ -32,7 +32,7 @@
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">NUPTK</th>
-                            <th scope="col">Nama</th>                          
+                            <th scope="col">Nama</th>
                             <th scope="col">No Handphone</th>
                             <th scope="col">Email</th>
                             <th scope="col">Action</th>
@@ -43,7 +43,7 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $row->nuptk }}</td>
-                                <td>{{ $row->username }}</td>                          
+                                <td>{{ $row->username }}</td>
                                 <td>{{ $row->notelp }}</td>
                                 <td>{{ $row->email }}</td>
                                 <td class="text-center">
@@ -104,7 +104,7 @@
                     </button>
                 </div>
                 <form>
-                    <input id="idGuru" name="idGuru" hidden />                     
+                    <input id="idGuru" name="idGuru" hidden />
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">Username</label>
@@ -113,7 +113,7 @@
                                     type="text" />
                             </div>
                         </div>
-                    </div>                
+                    </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">Nama</label>
@@ -176,7 +176,7 @@
                                     placeholder="Tanggal Lahir" type="text" />
                             </div>
                         </div>
-                    </div>                   
+                    </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-2 col-form-label">No Telepon</label>
@@ -194,7 +194,7 @@
                                     type="email" />
                             </div>
                         </div>
-                    </div>                                                                                              
+                    </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-md-12">
                             <label class="col-sm-12 col-md-12 col-form-label">Agama</label>
@@ -219,7 +219,7 @@
                                     placeholder="Kewarganegaraan" type="text" />
                             </div>
                         </div>
-                    </div>                                                                                                  
+                    </div>
                 </form>
             </div>
         </div>
@@ -227,11 +227,11 @@
     {{-- end tampil modal --}}
 @endsection
 @section('js')
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
     <script>
         // Show Data
         $(document).on('click', '#tampilGuru', function() { //editKelas ada di class     
@@ -256,12 +256,12 @@
                     $('#nuptk').val(data.data.nuptk);
                     $('#jenkel').val(data.data.jenkel);
                     $('#tempatLahir').val(data.data.tempatLahir);
-                    $('#tanggalLahir').val(data.data.tanggalLahir);                  
+                    $('#tanggalLahir').val(data.data.tanggalLahir);
                     $('#notelp').val(data.data.notelp);
-                    $('#email').val(data.data.email);                                        
+                    $('#email').val(data.data.email);
                     $('#agama').val(data.data.agama);
                     $('#alamat').val(data.data.alamat);
-                    $('#kewarganegaraan').val(data.data.kewarganegaraan);                   
+                    $('#kewarganegaraan').val(data.data.kewarganegaraan);
                 }
             });
         });

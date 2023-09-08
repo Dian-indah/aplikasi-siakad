@@ -14,6 +14,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KelasMapelController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\SiswaKelasController;
+use App\Models\Aspirasi;
 use App\Models\KelasMapel;
 use App\Models\TahunAjar;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +37,8 @@ Route::middleware('auth:siswa')->group(function () {
 Route::middleware('auth:admin')->group(function () {
 
     Route::get('/menuAdmin', [AdminController::class, 'menuAdmin'])->name('menuAdmin');
-    Route::get('/aspirasiAdmin', [AspirasiController::class, 'index'])->name('aspirasiAdmin');    
+    Route::get('/aspirasiAdmin', [AspirasiController::class, 'index'])->name('aspirasiAdmin');   
+    Route::get('/aspirasiAdmin/showAspirasiById/{id}', [AspirasiController::class, 'showAspirasiById'])->name('showAspirasiById'); 
 
     //Pegawai
     Route::get('/pegawaiAdmin', [AdminController::class, 'index'])->name('pegawaiAdmin');
@@ -115,20 +117,20 @@ Route::middleware('auth:admin')->group(function () {
 
 Route::middleware('auth:guru')->group(function () {
     Route::get('/menuGuru', [GuruController::class, 'menu'])->name('menuGuru');
-    Route::get('/waliKelas/{id}', [GuruController::class, 'indexWaliKelas'])->name('waliKelas');
-    Route::get('/guru/nilai/{id}', [NilaiController::class, 'nilai'])->name('nilaiGuru');
-    Route::get('/guru/kehadiran/{id}', [KehadiranController::class, 'kehadiran'])->name('kehadiranGuru');
-    Route::get('/guru/profil', [GuruController::class, 'profil'])->name('profilGuru');
+    Route::get('/waliKelas', [GuruController::class, 'indexWaliKelas'])->name('waliKelas');
+    Route::get('/guru/nilai', [NilaiController::class, 'nilai'])->name('nilaiGuru');
+    Route::get('/guru/kehadiran', [KehadiranController::class, 'kehadiran'])->name('kehadiranGuru');
+    Route::get('/guru/profil/{id}', [GuruController::class, 'profil'])->name('profilGuru');
     Route::get('/guru/tambahNts/{id}', [NilaiController::class, 'tambahNts'])->name('tambahNts');
     Route::get('/guru/tambahNas/{id}', [NilaiController::class, 'tambahNas'])->name('tambahNas');
-    Route::get('/guru/tampilKehadiran', [KehadiranController::class, 'tampilKehadiran'])->name('tampilKehadiran');
-    Route::get('/guru/viewKehadiran/{id}', [KehadiranController::class, 'viewKehadiran'])->name('viewKehadiran');            
+    Route::get('/guru/tampilKehadiran', [KehadiranController::class, 'tampilKehadiran'])->name('tampilKehadiran');               
     Route::get('/guru/tambahKehadiran/{id}', [KehadiranController::class, 'tambahKehadiran'])->name('tambahKehadiran');    
     Route::post('/guru/simpanKehadiran', [KehadiranController::class, 'simpanKehadiran'])->name('simpanKehadiran');
     Route::post('/guru/updateKehadiran/{id}', [KehadiranController::class, 'simpanKehadiran'])->name('updateKehadiran');
     // Route::post('/guru/updateKehadiran ', [KehadiranController::class, 'updateKehadiran'])->name('updateKehadiran');
     Route::get('/guru/editKehadiran/{id}', [KehadiranController::class, 'editKehadiran'])->name('editKehadiran');
     // Route::post('/guru/saveKehadiran', [GuruController::class, 'processInputKehadiran'])->name('saveKehadiran');
+    Route::post('/guru/ubahGuru', [GuruController::class, 'updateGuru'])->name('ubahGuru');
 
     //WaliKelas
     Route::get('/guru/waliKelas/showNilaiByWaliKelas/{id}', [NilaiController::class, 'showNilaiByWaliKelas'])->name('showNilaiByWaliKelas');    
@@ -139,6 +141,9 @@ Route::middleware('auth:guru')->group(function () {
     Route::get('/guru/editNas/{id}', [NilaiController::class, 'nasGetById'])->name('editNas');
     Route::post('/guru/updateNas', [NilaiController::class, 'updateNas'])->name('updateNas');
     Route::get('/guru/showSiskelById/{id}', [SiswaKelasController::class, 'showSiskelById'])->name('showSiskelById');
+
+    Route::get('/guru/showAspirasi/{id}', [AspirasiController::class, 'showAspirasi'])->name('showAspirasi'); 
+    Route::get('/guru/aspirasi', [AspirasiController::class, 'lihatAspirasiByGuru'])->name('aspirasiGuru');
     
 });
 

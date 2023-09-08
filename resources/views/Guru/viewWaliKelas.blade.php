@@ -25,8 +25,8 @@
                             <th scope="col">Nama Siswa</th>
                             <th scope="col">NAS</th>
                             <th scope="col">NTS</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Tgl Kehadiran</th>                            
+                            <th scope="col">Hadir</th>
+                            <th scope="col">Tidak Hadir</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -37,10 +37,11 @@
                                 <td scope="col">{{ $item->namaSiswa }}</td>
                                 <td scope="col">{{ $item->nas }}</td>
                                 <td scope="col">{{ $item->nts }}</td>
-                                {{-- <td scope="col">{{ $item->status }}</td>
-                                <td scope="col">{{ $item->tglKehadiran }}</td> --}}                                
+                                <td scope="col">{{ $item->jmlHadir }}</td>
+                                <td scope="col">{{ $item->jmlTdkHadir }}</td>                                
                             </tr>
                         @endforeach
+                 
                     </tbody>
                 </table>
             </div>

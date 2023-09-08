@@ -27,7 +27,7 @@
                             <th scope="col">Kelas</th>
                             <th scope="col">Tgl Kehadiran</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Persen</th>
+                            {{-- <th scope="col">Persen</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -38,8 +38,7 @@
                             <td>{{ $row->namaMapel }}</td>
                             <td>{{ $row->namaKelas }}</td>
                             <td>{{ $row->tglKehadiran }}</td>                                
-                            <td>{{ $row->status }}</td>                                
-                            <td>{{ $h }}</td>                                
+                            <td>{{ $row->status }}</td>                                                                                           
                         </tr>
                         @endforeach
                     </tbody>

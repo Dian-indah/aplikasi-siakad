@@ -337,7 +337,7 @@
                 data: {},
                 beforeSend: function() {},
                 success: function(data) {
-                    // console.log(data.data)
+                    console.log(data.data)
                     $('#showDataSiswa').modal('show'); //menampilkan modal
                     $('#idSiswa').val(data.data.id);
                     $('#username').val(data.data.username);

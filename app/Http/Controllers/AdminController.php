@@ -113,16 +113,16 @@ class AdminController extends Controller
         $id = $request->idPegawai;
         $data = Admin::where('id', $id)
             ->update([
-                'name' => $request->post('name'),
-                'username' => $request->post('username'),
-                'password' => Hash::make($request['password']),
-                'email' => $request->post('email'),
-                'notelp' => $request->post('notelp'),
-                'jenkel' => $request->post('jenkel'),
-                'tempatLahir' => $request->post('tempatLahir'),
-                'tglLahir' => $request->post('tglLahir'),
-                'alamat' => $request->post('alamat'),
-                'statusKepegawaian' => $request->post('statusKepegawaian'),
+                'name' => $request->editName,
+                'username' => $request->editUsername,
+                'password' => Hash::make($request['editPassword']),
+                'email' => $request->editEmail,
+                'notelp' => $request->notelp,
+                'jenkel' => $request->jenkel,
+                'tempatLahir' => $request->editTempatLahir,
+                'tglLahir' => $request->editTglLahir,
+                'alamat' => $request->editAlamat,
+                'statusKepegawaian' => $request->editStatusKepegawaian,
             ]);
         // dd($data)   ;
 

@@ -17,7 +17,30 @@ class AspirasiController extends Controller
     
     public function index()
     {     
-        $data = $this->model->getAllAspirasi();        
-        return view('aspirasi.lihatSemuaAspirasi', compact('data'));       
+        $data = $this->model->getAllAspirasi();   
+        $ortu = $this->model->getAllOrtu();          
+        return view('aspirasi.lihatSemuaAspirasi', compact('data','ortu'));       
     }  
+    public function lihatAspirasiByGuru()
+    {     
+        $data = $this->model->getAllAspirasi();   
+        $ortu = $this->model->getAllOrtu();          
+        return view('aspirasi.lihatAspirasiByGuru', compact('data','ortu'));       
+    }  
+
+    public function showAspirasiById($id)
+    {
+        $aspirasi = Aspirasi::find($id);    
+        $response['success'] = true;
+        $response['data'] = $aspirasi;
+        return response()->json($response);
+    }
+
+    public function showAspirasi($id)
+    {
+        $aspirasi = Aspirasi::find($id);    
+        $response['success'] = true;
+        $response['data'] = $aspirasi;
+        return response()->json($response);
+    }    
 }

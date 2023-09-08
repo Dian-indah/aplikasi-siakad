@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Kehadiran;
 use App\Models\Ortu;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +20,9 @@ class NilaiController extends Controller
         $this->model = new Nilai();
     }
 
-    public function nilai($id)
+    public function nilai()
     {
+        $id = Auth::guard('guru')->user()->id;
         $g = Guru::find($id);   
         $nilai = $this->model->getNilaiByIdGuru($id);     
         return view('guru.guruNilai', compact('g', 'nilai'));
@@ -116,9 +118,10 @@ class NilaiController extends Controller
     }
 
     public function showNilaiByWaliKelas($id,Request $request)
-    {        
+    {          
+        
         $ks = KelasMapel::find($id);        
-        $siswa = $this->model->getSiswaKelas($id);     
+        $siswa = $this->model->statusKehadiranSiswa($id);     
         return view('guru.viewWaliKelas', compact('ks', 'siswa'));
     }
     

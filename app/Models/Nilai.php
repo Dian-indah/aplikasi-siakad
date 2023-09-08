@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Nilai extends Model
 {
@@ -37,15 +38,17 @@ class Nilai extends Model
         // dd($a);
         return $a;
     }
-
+   
     public function getSiswaKelas($id)
-    {
+    {   
+
         $a = KelasMapel::query()
             ->join('guru as g', 'g.id', 'kelas_mapel.guruPengajar')
             ->join('kelas as k', 'k.id', 'kelas_mapel.kelasId')
             ->join('siswa_kelas as sk', 'sk.kelasId', 'k.id')
             ->join('siswa as s', 's.id', 'sk.siswaId')
             ->leftJoin('nilai as n', 'n.siswaKelasId', 'sk.id')           
+            // ->leftJoin('kehadiran as kh', 'kh.siswaKelasId', 'sk.id')           
             ->select(
                 's.nisn as nisn',
                 's.name as namaSiswa',              
@@ -56,6 +59,8 @@ class Nilai extends Model
                 'k.namaKelas as namaKelas',            
                 'kelas_mapel.id as kelasMapelId',
                 'n.id as nilaiId',              
+                // 'kh.status as status',              
+                // 'kh.tglKehadiran as tglKehadiran',              
             )
             ->where('kelas_mapel.id', $id)           
             ->get();
@@ -122,5 +127,28 @@ class Nilai extends Model
             ->where('o.id', $id)
             ->get();
         return $a;
+    }
+
+    public function statusKehadiranSiswa($id)
+    {
+        $a = "
+        SELECT s.nisn, s.name namaSiswa, n.nts, n.nas, sk.id siswaKelasId, k.namaKelas, km.id kelasMapelId,
+        coalesce(kh.jmlHadir,0) jmlHadir, coalesce(kh.jmlTdkHadir,0) jmlTdkHadir
+        from kelas_mapel km
+        LEFT JOIN kelas k ON k.id = km.kelasId
+        LEFT JOIN siswa_kelas sk ON sk.kelasId = k.id
+        LEFT JOIN siswa s ON s.id = sk.siswaId
+        LEFT JOIN nilai n ON n.siswaKelasId = sk.id
+        LEFT JOIN (
+            SELECT siswaKelasId, 
+            SUM(case when STATUS = 'Hadir' then 1 ELSE 0 END) jmlHadir,
+            SUM(case when STATUS = 'Tidak Hadir' then 1 ELSE 0 END) jmlTdkHadir
+            FROM kehadiran k
+            GROUP BY siswaKelasId
+        ) kh ON sk.id = kh.siswaKelasId
+        WHERE km.id = '$id'
+        ";
+        $query = DB::select($a);
+        return $query;
     }
 }

@@ -103,13 +103,9 @@ class SiswaController extends Controller
             'sekolahAsal' => $request->sekolahAsal,
             'anak' => $request->anak,
             'jmlSaudara' => $request->jmlSaudara,
-        ]);
-        // dd($Id)  ;
-
-        // return view('siswa.indexSiswaAdmin');
+        ]); 
         return redirect()
-            ->route('masterSiswa');
-        // ->with('success', 'data Kurikulum telah ditambahkan');
+            ->route('masterSiswa');    
     }
 
     public function editSiswa($id)

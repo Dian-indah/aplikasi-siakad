@@ -11,7 +11,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-md-6 col-sm-12 title">
-                    <h4>Daftar Siswa Kelas Tahun ajar 2023</h4>
+                    <h4>Daftar Siswa Kelas</h4>
                 </div>
                 <div class="col-md-12 col-sm-6 m-3">
 

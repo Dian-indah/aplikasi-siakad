@@ -84,6 +84,27 @@ class Kehadiran extends Model
         return $a;
     }
 
+    public function jumlahKehadiran($idkm, $tgl, $idkl,$ids)
+    {
+        $a = "
+        SELECT COUNT k.status as status, k.tglKehadiran
+        FROM siswa_kelas sk
+        LEFT JOIN (
+            SELECT k.* FROM kehadiran k
+            LEFT JOIN kelas_mapel km ON k.kelasMapelId = km.id 
+            WHERE tglKehadiran = '$tgl'
+            AND k.kelasMapelId = '$idkm'
+        ) as k ON k.siswaKelasId = sk.id
+        LEFT JOIN siswa s ON s.id = sk.siswaId
+        WHERE sk.kelasId = '$idkl'
+        WHERE s.id = '$ids'
+        ";
+
+        $query = DB::select($a);
+        dd($query);
+        return $query;
+    }
+
     public function viewKehadiranLama($idkm, $tgl, $idkl)
     {
         $a = "
@@ -102,29 +123,8 @@ class Kehadiran extends Model
 
         $query = DB::select($a);
         return $query;
-        // $a = KelasMapel::query()
-        //     ->leftJoin('guru as g', 'g.id', 'kelas_mapel.guruPengajar')
-        //     ->leftJoin('kelas as k', 'k.id', 'kelas_mapel.kelasId')
-        //     ->leftJoin('mapel as m', 'm.id', 'kelas_mapel.mapelId')
-        //     ->leftJoin('siswa_kelas as sk', 'sk.kelasId', 'k.id')
-        //     ->leftJoin('siswa as s', 's.id', 'sk.siswaId')
-        //     ->leftJoin('kehadiran as kh', 'kh.siswaKelasId', 'sk.id')           
-        //     ->select(
-        //         's.nisn as nisn',
-        //         's.name as namaSiswa',                
-        //         'g.username as namaGuru',               
-        //         'sk.id as siswaKelasId',
-        //         'kh.status as status',
-        //         'kh.id as kehadiranId',
-        //         'kh.tglKehadiran as tglKehadiran',
-        //         'kelas_mapel.id as kelasMapelId',
-        //     )
-        //     ->where('kelasMapelId', $id)
-        //     ->where('kh.tglKehadiran', $tgl)
-        //     ->get();
-        //     // dd($a);
-        // return $a;
-    }
+    }  
+    
 
     public function lihatKehadiran($id)
     {
@@ -198,4 +198,38 @@ class Kehadiran extends Model
         // dd($a);
         return $a;
     }
+
+    // public function jumlahKehadiran($id)
+    // {
+    //     SELECT COUNT(*) total FROM  (
+    //         SELECT COUNT(*) AS total FROM kehadiran 
+    //         WHERE kelasMapelId = 3
+    //         GROUP BY tglKehadiran
+    //     ) AS a                
+    // }
+
+    // public function persenKehadiran($kmId)
+    // {
+    //     SELECT X.*, x.jmlHadir/x.totalPertemuan*100 AS persentase FROM (	
+    //         SELECT s.nisn, s.name namaSiswa, n.nts, n.nas, sk.id siswaKelasId, k.namaKelas, km.id kelasMapelId,
+    //         coalesce(kh.jmlHadir,0) jmlHadir, (
+    //             SELECT COUNT(*) total FROM  (
+    //                 SELECT COUNT(*) AS total FROM kehadiran 
+    //                 WHERE kelasMapelId = km.id
+    //                 GROUP BY tglKehadiran
+    //             ) AS a
+    //         ) totalPertemuan
+    //         from kelas_mapel km
+    //         LEFT JOIN kelas k ON k.id = km.kelasId
+    //         LEFT JOIN siswa_kelas sk ON sk.kelasId = k.id
+    //         LEFT JOIN siswa s ON s.id = sk.siswaId
+    //         LEFT JOIN nilai n ON n.siswaKelasId = sk.id
+    //         LEFT JOIN (
+    //             SELECT siswaKelasId, count(siswaKelasId) jmlHadir FROM kehadiran k
+    //             WHERE STATUS = 'Hadir'
+    //             GROUP BY siswaKelasId
+    //         ) kh ON sk.id = kh.siswaKelasId
+    //         WHERE km.id = 3
+    //     )x
+    // }
 }
