@@ -206,7 +206,7 @@
                 success: function(data) {
                     // console.log(data.data)
                     $('#editmodal').modal('show'); //menampilkan modal
-                    $('#editkelasId select').val(data.data.kelasId).change();
+                    $('#editkelasId').val(data.data.kelasId).change();
                     $('#editmapelId').val(data.data.mapelId).change();
                     $('#editguruPengajar').val(data.data.guruPengajar).change();
                     $('#idKelasMapel').val(data.data.id);

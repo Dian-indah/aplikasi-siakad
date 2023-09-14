@@ -20,11 +20,11 @@
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">
                 <div class="card-header">
-                    <a href="{{ route('exportGuru') }}" class="btn btn-success">Export Excel</a>
+                    <a href="{{ route('exportGuru') }}" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Excel</a>
                     <!-- Button trigger modal -->
-                    <a class="btn btn-primary text-white" data-toggle="modal" data-target="#exampleModal">
+                    {{-- <a class="btn btn-primary text-white" data-toggle="modal" data-target="#exampleModal">
                         Import Excel
-                    </a>
+                    </a> --}}
 
                 </div>
                 <table id="example" class="table table-bordered">

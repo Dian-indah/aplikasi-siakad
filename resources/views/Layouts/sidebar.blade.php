@@ -19,7 +19,7 @@
             </a>
         </li> --}}
         <li>
-            <a href="{{ route('kelas') }}" class="{{ request()->is('kelas') ? 'active' : '' }} dropdown-toggle no-arrow">
+            <a href="{{ route('kelas') }}" class="{{ Request::is('kelas', 'kelas/tambahSiswaKelas/*') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Kelas</span>
             </a>
         </li>
@@ -31,13 +31,13 @@
         </li>
         <li>
             <a href="{{ route('masterGuru') }}"
-                class="{{ request()->is('masterGuru', 'guru/tambahGuru') ? 'active' : '' }} dropdown-toggle no-arrow">
+                class="{{ Request::is('masterGuru', 'guru/editGuru/*','guru/tambahGuru') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon fa fa-vcard"></span><span class="mtext">Guru</span>
             </a>
         </li>
         <li>
             <a href="{{ route('masterSiswa') }}"
-                class="{{ request()->is('masterSiswa') ? 'active' : '' }} dropdown-toggle no-arrow">
+                class="{{ Request::is('masterSiswa', 'siswa/tambahSiswa','siswa/editSiswa/*') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon fa fa-graduation-cap"></span><span class="mtext">Siswa</span>
             </a>
         </li>
@@ -104,7 +104,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('aspirasiOrtu', Auth::guard('ortu')->user()->id)}}"
+            <a href="{{ route('aspirasiOrtu', Auth::guard('ortu')->user()->id) }}"
                 class="{{ Request::is('aspirasiOrtu/*') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Aspirasi</span>
             </a>

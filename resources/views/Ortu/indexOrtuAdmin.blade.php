@@ -9,7 +9,7 @@
                         <h4>Daftar Orang Tua Siswa</h4>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-2 dropdown">
+                <div class="col-md-2 col-sm-2 ">
                     {{-- <div class="dropdown">
                         <a class="btn btn-primary dropdown-toggle" href="#" role="button"
                             data-toggle="dropdown">Kelas</a>
@@ -20,7 +20,7 @@
                             <a class="dropdown-item" href="#">12</a>
                         </div>
                     </div> --}}
-                    <div class="pull-right col-md-7 col-sm-6">
+                    <div class="pull-right col-md-12 col-sm-6">
                         <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target="#small-modal"><i
                                 class="icon-copy fa fa-plus" aria-hidden="true"></i> Tambah Data</a>
                     </div> <br><br>
@@ -101,7 +101,7 @@
                                 <label>Input Nama Siswa</label>
                             </div>
                             <div class="col-sm-12 col-md-12">
-                                <select class="livesearch form-control" id="livesearch" name="livesearch" required></select>
+                                <select style="width: 100%" class="form-control livesearch" id="livesearch" name="livesearch" required></select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -154,8 +154,8 @@
                             <div class="col-sm-12 col-md-12">
                                 <label>Input Nama Siswa</label>
                             </div>
-                            <div class="col-sm-12 col-md-12">
-                                <select class="livesearch form-control" id="livesearch" name="livesearch" required></select>
+                            <div class="col-sm-12 col-md-12" >
+                                <select style="width: 100%" class="livesearch form-control" id="namaSiswa" name="namaSiswa" required></select>
                             </div>
                         </div>                                           
                         <div class="form-group row">
@@ -171,6 +171,7 @@
     {{-- end modal edit --}}
 @endsection
 @section('js')
+
     {{-- start data table --}}
     <script>
         $(document).ready(function() {
@@ -202,6 +203,7 @@
         });
     </script>
     {{-- end select 2 --}}
+
     {{-- Edit Data --}}
     <script>   
         $(document).on('click', '#edit', function() { 
@@ -221,7 +223,7 @@
                     $('#editUsername').val(data.data.username);
                     $('#editNamaOrtu').val(data.data.name);
                     $('#editPassword').val(data.data.password);
-                    $('#livesearch').val(data.data.namaSiswa);
+                    $('#namaSiswa').val(data.data.namaSiswa);
                     $('#idOrtu').val(data.data.id);
                 }
             });

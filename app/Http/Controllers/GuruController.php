@@ -139,7 +139,7 @@ class GuruController extends Controller
                 'alamat' => $request->alamat,
                 'kewarganegaraan' => $request->kewarganegaraan,
             ]);
-        return redirect()->route('masterGuru');
+        return back();
     }
     public function guruExport()
     {
