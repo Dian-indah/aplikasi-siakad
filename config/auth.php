@@ -60,6 +60,11 @@ return [
             'driver' => 'session',
             'provider' => 'ortu',
         ],
+
+        'kepsek' => [
+            'driver' => 'session',
+            'provider' => 'kepsek',
+        ],
     ],
 
     /*
@@ -103,6 +108,11 @@ return [
         'ortu' => [
             'driver' => 'eloquent',
             'model' => App\Models\Ortu::class,
+        ],
+
+        'kepsek' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Kepsek::class,
         ],
     ],
 

@@ -85,12 +85,16 @@
                             <div class="select-role">
                             </div>
                             <div class="input-group custom">
-                                <input type="text" class="form-control form-control-lg" name="username"
-                                    id="username" placeholder="Username" autofocus required />
+                                <input type="text"
+                                    class="form-control form-control-lg @error('username') is-invalid @enderror"
+                                    name="username" id="username" placeholder="Username" autofocus />
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                                 </div>
                             </div>
+                            @error('username')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             {{-- <div class="input-group custom">
 									<input
 										type="text"
@@ -106,22 +110,15 @@
 								</div> --}}
                             <div class="input-group custom">
                                 <input type="password" name="password" id="password"
-                                    class="form-control form-control-lg" placeholder="**********" />
+                                    class="form-control form-control-lg @error('password') is-invalid @enderror"
+                                    placeholder="**********" />
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                                 </div>
                             </div>
-                            <div class="row pb-30">
-                                <div class="col-6">
-                                    <div class="custom-control custom-checkbox">                                        
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="forgot-password">
-
-                                    </div>
-                                </div>
-                            </div>
+                            @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="input-group mb-0">

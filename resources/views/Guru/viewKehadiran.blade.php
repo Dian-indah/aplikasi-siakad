@@ -44,8 +44,7 @@
                             <th scope="col">No</th>
                             <th scope="col">NISN</th>
                             <th scope="col">Nama Siswa</th>
-                            <th scope="col">Keterangan</th>
-                            <th scope="col">Tanggal</th>
+                            <th scope="col">Keterangan</th>                           
                         </tr>
                     </thead>
                     <tbody>
@@ -76,7 +75,7 @@
                                             </select>
                                         @endif
                                     </td>
-                                    <td>
+                                    <td hidden>
                                         <input value="{{ $item->tglKehadiran }}" name="tglKehadiran[]" id="tglKehadiran">
                                     </td>
                                     <td hidden><input value="{{ $item->siswaKelasId }}" name="siswaKelasId[]"

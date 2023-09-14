@@ -22,6 +22,7 @@
                                 <th>No</th>
                                 <th scope="col">Nama Kelas</th>                              
                                 <th scope="col">Nama Mapel</th>                              
+                                <th scope="col">Guru Pengajar</th>                              
                                 <th scope="col">Action</th>                              
                             </tr>
                         </thead>
@@ -32,12 +33,12 @@
                                     <td>{{ $row->namaKelas }}</td>
                                     {{-- <td>{{ $row->kelasMapelId }}</td> --}}
                                     <td>{{ $row->namaMapel }}</td>
+                                    <td>{{ $row->guruPengajar }}</td>
                                     <td>
                                         <label for="userImage">
-                                            <a href="{{ url('/guru/waliKelas/showNilaiByWaliKelas/' . $row->kelasMapelId) }}"
+                                            <a href="{{ url('/showNilaiByKepsek/' . $row->kelasMapelId) }}"
                                                 class="btn btn-outline-info" rel="nofollow">
-                                                <i class="fa fa-users" aria-hidden="true"></i></a>
-                                                <a href="{{ url('/guru/nilaiPerWaliKelasExport/' . $row->kelasMapelId) }}" class="btn btn-success">Export Excel</a> 
+                                                <i class="fa fa-users" aria-hidden="true"></i></a>                                                
                                         </label>                                        
                                     </td>
                                 </tr>

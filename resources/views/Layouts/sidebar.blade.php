@@ -19,8 +19,7 @@
             </a>
         </li> --}}
         <li>
-            <a href="{{ route('kelas') }}"
-                class="{{ request()->is('kelas') ? 'active' : '' }} dropdown-toggle no-arrow">
+            <a href="{{ route('kelas') }}" class="{{ request()->is('kelas') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Kelas</span>
             </a>
         </li>
@@ -47,7 +46,7 @@
                 class="{{ request()->is('kelasMapel') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon fa fa-university"></span><span class="mtext">Kelas Mapel</span>
             </a>
-        </li>        
+        </li>
         <li>
             <a href="{{ route('ortuAdmin') }}"
                 class="{{ request()->is('ortuAdmin') ? 'active' : '' }} dropdown-toggle no-arrow">
@@ -74,7 +73,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('nilaiSiswa')}}"
+            <a href="{{ route('nilaiSiswa') }}"
                 class="{{ request()->is('nilaiSiswa') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-notebook"></span><span class="mtext">Nilai</span>
             </a>
@@ -87,22 +86,26 @@
         </li>
     @elseif (Auth::guard('ortu')->check())
         <li>
-            <a href="{{route('menuOrtu')}}" class="{{ request()->is('menuOrtu') ? 'active' : '' }} dropdown-toggle no-arrow">
+            <a href="{{ route('menuOrtu') }}"
+                class="{{ request()->is('menuOrtu') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
             </a>
         </li>
         <li>
-            <a href="{{route('nilaiSiswaOrtu')}}" class="{{ request()->is('nilaiSiswaOrtu') ? 'active' : '' }} dropdown-toggle no-arrow">
+            <a href="{{ route('nilaiSiswaOrtu') }}"
+                class="{{ Request::is('nilaiSiswaOrtu') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-notebook"></span><span class="mtext">Nilai</span>
             </a>
         </li>
         <li>
-            <a href="{{ route('kehadiranOrtu') }}" class="{{ request()->is('kehadiranOrtu') ? 'active' : '' }} dropdown-toggle no-arrow">
+            <a href="{{ route('kehadiranOrtu') }}"
+                class="{{ Request::is('kehadiranOrtu') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-calendar-4"></span><span class="mtext">Kehadiran</span>
             </a>
         </li>
         <li>
-            <a href="/aspirasiOrtu" class="dropdown-toggle no-arrow">
+            <a href="{{ route('aspirasiOrtu', Auth::guard('ortu')->user()->id)}}"
+                class="{{ Request::is('aspirasiOrtu/*') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Aspirasi</span>
             </a>
         </li>
@@ -115,31 +118,51 @@
         </li>
         <li>
             <a href="{{ route('nilaiGuru') }}"
-                class="{{ request()->is('nilaiGuru') ? 'active' : '' }} dropdown-toggle no-arrow">
+                class="{{ request()->is('guru/nilai', 'guru/tambahNts/*', 'guru/tambahNas/*') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-notebook"></span><span class="mtext">Nilai</span>
             </a>
         </li>
         <li>
             <a href="{{ route('kehadiranGuru') }}"
-            class="{{ Request::is('kehadiranGuru') ? 'active' : '' }} dropdown-toggle no-arrow">
+                class="{{ Request::is('guru/kehadiran') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-calendar-4"></span><span class="mtext">Kehadiran</span>
             </a>
-        </li>        
+        </li>
         <li>
-            <a href="{{ route('aspirasiGuru') }}" class="dropdown-toggle no-arrow">
+            <a href="{{ route('aspirasiGuru') }}"
+                class="{{ Request::is('guru/aspirasi') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-chat-1"></span><span class="mtext">Aspirasi</span>
             </a>
         </li>
         <li>
-            <a href="{{ route('profilGuru', Auth::guard('guru')->user()->id)  }}" 
-                class=" dropdown-toggle no-arrow">
+            <a href="{{ url('guru/profil', Auth::guard('guru')->user()->id) }}"
+                class="{{ Request::is('guru/profil/*') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-user-12"></span><span class="mtext">Profil</span>
             </a>
         </li>
         <li>
             <a href="{{ route('waliKelas') }}"
-                class=" dropdown-toggle no-arrow">
+                class="{{ Request::is('waliKelas', 'guru/waliKelas/showNilaiByWaliKelas/*') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon dw dw-calendar-4"></span><span class="mtext">Wali Kelas</span>
+            </a>
+        </li>
+    @elseif (Auth::guard('kepsek')->check())
+        <li>
+            <a href="{{ route('menuKepsek') }}"
+                class="{{ Request::is('menuKepsek') ? 'active' : '' }} dropdown-toggle no-arrow">
+                <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('aspirasiByKepsek') }}"
+                class="{{ Request::is('aspirasiByKepsek') ? 'active' : '' }} dropdown-toggle no-arrow">
+                <span class="micon dw dw-chat-1"></span><span class="mtext">Aspirasi</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('nilaiKelas') }}"
+                class="{{ Request::is('nilaiKelas', 'showNilaiByKepsek/*') ? 'active' : '' }} dropdown-toggle no-arrow">
+                <span class="micon dw dw-notebook"></span><span class="mtext">Nilai</span>
             </a>
         </li>
     @endif

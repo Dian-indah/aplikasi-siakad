@@ -18,6 +18,9 @@ class LoginController extends Controller
        $credentials = $request->validate([
             'username' => 'required',
             'password' => 'required'
+       ],[
+            'username.required' => 'Username Harus Diisi',        
+            'password.required' => 'Password Harus Diisi',           
         ]);
 
         // dd('berhasil login!');
@@ -37,6 +40,10 @@ class LoginController extends Controller
         }elseif (Auth::guard('ortu')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended(route('menuOrtu'));
+            // dd('berhasil login!Siswa');
+        }elseif (Auth::guard('kepsek')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('menuKepsek'));
             // dd('berhasil login!Siswa');
         }
 

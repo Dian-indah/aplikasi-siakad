@@ -38,4 +38,20 @@ class Aspirasi extends Model
         ");
         return $a;
     }
+
+    public function getAspirasiByOrtu($id)
+    {
+        $a = Aspirasi::query()
+            ->join('ortu as o', 'o.id', 'aspirasi.ortuId')           
+            ->select(                
+                'o.id as ortuId',
+                'o.name as namaOrtu',             
+                'aspirasi.tglKirim as tglKirim',
+                'aspirasi.keterangan as keterangan',
+                'aspirasi.id as aspirasiId',           
+            )          
+            ->where('o.id',$id)
+            ->get();  
+        return $a;        
+    }
 }

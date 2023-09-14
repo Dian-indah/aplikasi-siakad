@@ -28,13 +28,13 @@
     {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css"> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>       
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     {{-- datatable --}}
     <link rel="stylesheet" type="text/css" href={{ asset('plugins/datatables/css/dataTables.bootstrap4.min.css') }} />
     <link rel="stylesheet" type="text/css" href={{ asset('plugins/datatables/css/responsive.bootstrap4.min.css') }} />
     <link rel="stylesheet" type="text/css"
         href={{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }} />
-         {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
     <!-- Perpustakaan jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -95,6 +95,8 @@
                                 <img src={{ asset('vendors/images/guru.png') }} alt="" />
                             @elseif (Str::length(Auth::guard('ortu')->user()) > 0)
                                 <img src={{ asset('vendors/images/ortu.png') }} alt="" />
+                            @elseif (Str::length(Auth::guard('kepsek')->user()) > 0)
+                                <img src={{ asset('vendors/images/kepsek.png') }} alt="" />
                             @endif
                         </span>
                         <span class="user-name">
@@ -106,6 +108,8 @@
                                 {{ Auth::guard('guru')->user()->username }}
                             @elseif (Str::length(Auth::guard('ortu')->user()) > 0)
                                 {{ Auth::guard('ortu')->user()->name }}
+                            @elseif (Str::length(Auth::guard('kepsek')->user()) > 0)
+                                {{ Auth::guard('kepsek')->user()->username }}
                             @endif
 
                         </span>
@@ -215,7 +219,7 @@
     <!-- Datatable Setting js -->
     <script src="{{ asset('vendors/scripts/datatable-setting.js') }}"></script>
     {{-- new --}}
-    
+
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"
             style="display: none; visibility: hidden"></iframe></noscript>

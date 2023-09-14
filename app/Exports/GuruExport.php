@@ -17,40 +17,19 @@ class GuruExport implements FromCollection, WithHeadings
     public function collection()
     {
         $type = DB::table('guru')->select(
-            'id',
             'username',
+            'nama',           
             'nik',
             'noKk',
             'nuptk',
             'jenkel',
             'tempatLahir',
-            'tanggalLahir',
-            'nip',
+            'tanggalLahir',           
             'notelp',
-            'email',
-            'statusKepegawaian',
-            'skPengangkatan',
-            'tmpPengangkatan',
-            'lembagaPengangkatan',
-            'sumberGaji',
-            'jenisPtk',
-            'npwp',
-            'namaNpwp',
+            'email',            
             'agama',
             'alamat',
-            'kewarganegaraan',
-            'ibuKandung',
-            'statusPerkawinan',
-            'namaPasangan',
-            'nipPasangan',
-            'pekerjaanPasangan',
-            'lisensiKepsek',
-            'diklatKepegawaian',
-            'keahlianBraile',
-            'keahlianBahasaIsyarat',
-            'bank',
-            'norek',
-            'namaRek'
+            'kewarganegaraan', 
         )
             ->get();
         return $type;
@@ -58,41 +37,20 @@ class GuruExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return [
-            "id",
+        return [            
             "Username",
+            "Nama",
             "NIK",
             "Nomor KK",
             "NUPTK",
             "Jenis Kelamin",
             "Tempat Lahir",
-            "Tanggal Lahir",
-            "NIP",
+            "Tanggal Lahir",         
             "No Telepon",
-            "Email",
-            "Status Kepegawaian",
-            "SK Pengangkatan",
-            "TMP Pengangkatan",
-            "Lembaga Pengangkatan",
-            "Sumber Gaji",
-            "Jenis PTK",
-            "NPWP",
-            "Nama NPWP",
+            "Email",           
             "Agama",
             "Alamat",
-            "Kewarganegaraan",
-            "Ibu Kandung",
-            "Status Perkawinan",
-            "Nama Pasangan",
-            "NIP Pasangan",
-            "Pekerjaan Pasangan",
-            "Lisensi Kepala Sekolah",
-            "Diklat Kepegawaian",
-            "Keahlian Braile",
-            "Keahlian Bahasa Isyarat",
-            "Bank",
-            "No Rekening",
-            "Nama Rekening"
+            "Kewarganegaraan",            
         ];
     }
 
