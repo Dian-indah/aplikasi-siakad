@@ -3,7 +3,7 @@
 @section('content')
     <div class="card-box mb-30">
         <h2 class="pd-20 ">Selamat Datang Guru</h2>
-        <h6 class="pd-20">MENU Guru</h6>
+        <h6 class="pd-20">Menu Guru</h6>
         <p class="pd-20"s>Aplikasi Sistem Informasi Akademik untuk SMKI Al Futuhiyyah adalah sebuah platform yang dirancang
             khusus untuk mengelola nilai dan kehadiran siswa secara efektif. Aplikasi ini menyediakan berbagai fitur yang
             memungkinkan staf akademik untuk dengan mudah memasukkan dan mengupdate data nilai siswa, serta memantau
