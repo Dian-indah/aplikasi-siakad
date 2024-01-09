@@ -155,7 +155,7 @@
                                 <label>Input Nama Siswa</label>
                             </div>
                             <div class="col-sm-12 col-md-12" >
-                                <select style="width: 100%" class="livesearch form-control" id="namaSiswa" name="namaSiswa" required></select>
+                                <select style="width: 100%" class="livesearch form-control" id="livesearch" name="livesearch" required></select>
                             </div>
                         </div>                                           
                         <div class="form-group row">

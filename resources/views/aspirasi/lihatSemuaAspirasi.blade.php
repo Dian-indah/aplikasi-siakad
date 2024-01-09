@@ -10,6 +10,7 @@
                     </div>
                 </div>
                 <div class="pull-right col-md-2 col-sm-2">
+                    <a href="{{ url('/aspirasiExportByAdmin') }}" class="btn btn-success">Export Excel</a>
                 </div>
             </div>
         </div>

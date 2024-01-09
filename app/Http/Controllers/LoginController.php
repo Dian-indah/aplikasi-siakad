@@ -31,15 +31,15 @@ class LoginController extends Controller
             // dd('berhasil login Admin!');
         } elseif (Auth::guard('siswa')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('menuSiswa'));
+            return redirect()->intended(route('menuSiswa', Auth::guard('siswa')->user()->id));
             // dd('berhasil login!Siswa');
         }elseif (Auth::guard('guru')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('menuGuru'));
+            return redirect()->intended(route('menuGuru', Auth::guard('guru')->user()->id));
             // dd('berhasil login!Siswa');
         }elseif (Auth::guard('ortu')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('menuOrtu'));
+            return redirect()->intended(route('menuOrtu', Auth::guard('ortu')->user()->id));
             // dd('berhasil login!Siswa');
         }elseif (Auth::guard('kepsek')->attempt($credentials)) {
             $request->session()->regenerate();

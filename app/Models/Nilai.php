@@ -100,10 +100,12 @@ class Nilai extends Model
                 'm.namaMapel as namaMapel',
                 'g.username as namaGuru',
                 'n.nts as nts',
-                'n.nas as nas',       
+                'n.nas as nas',   
+                'k.namakelas as kelas',    
                 's.id as siswaId'
             )
             ->where('s.id', $id)
+            ->orderBy('k.namaKelas', 'ASC')
             ->get();
         return $a;        
     }
@@ -122,9 +124,11 @@ class Nilai extends Model
                 'g.username as namaGuru',
                 'n.nts as nts',
                 'n.nas as nas',
+                'k.namakelas as kelas',
                 's.id as siswaId',                
             )
             ->where('o.id', $id)
+            ->orderBy('k.namaKelas', 'ASC')
             ->get();
         return $a;
     }

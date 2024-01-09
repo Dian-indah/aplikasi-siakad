@@ -58,7 +58,7 @@ class KehadiranController extends Controller
         $now = Carbon::now();
         $tglKehadiran = $tgl != "" ? $tgl : $now->toDateString();
 
-        $kehadiran = $this->model->viewKehadiranLama($idKelasMapel, $tglKehadiran, $idKelas);
+        $kehadiran = $this->model->viewKehadiranLama($idKelasMapel, $tglKehadiran, $idKelas);      
         // dd($kehadiran);
         return view('guru.viewKehadiran', compact('kehadiran', 'idKelasMapel', 'idKelas', 'tglKehadiran', 'status'));
     }

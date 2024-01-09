@@ -7,9 +7,10 @@
                 <div class="col-md-9 col-sm-9">
                     <div class="title">
                         <h4>Data Aspirasi </h4>
-                    </div>
+                    </div>                    
                 </div>
                 <div class="pull-right col-md-2 col-sm-2">
+                    <a href="{{ url('/aspirasiExport') }}" class="btn btn-success">Export Excel</a>
                 </div>
             </div>
         </div>
@@ -52,8 +53,9 @@
             <div class="modal-content justify-center">
                 <div class="modal-header ">
                     <h4 class="modal-title" id="myLargeModalLabel">
-                        Detail Aspirasi
+                        Detail Aspirasi                        
                     </h4>
+                    
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         ×
 

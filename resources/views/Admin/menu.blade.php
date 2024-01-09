@@ -1,23 +1,127 @@
 @extends('Layouts.siakad')
 
 @section('content')
-    <div class="card-box mb-30">
-        <h2 class="pd-20 ">Selamat Datang Administrator</h2>
-        <h6 class="pd-20">MENU ADMIN</h6>
-        <p class="pd-20"s>Aplikasi Sistem Informasi Akademik untuk SMKI Al Futuhiyyah adalah sebuah platform yang dirancang
-            khusus untuk mengelola nilai dan kehadiran siswa secara efektif. Aplikasi ini menyediakan berbagai fitur yang
-            memungkinkan staf akademik untuk dengan mudah memasukkan dan mengupdate data nilai siswa, serta memantau
-            kehadiran mereka secara real-time. Dengan antarmuka yang intuitif dan user-friendly, staf pendidikan dapat
-            dengan cepat mengakses dan menganalisis data nilai siswa, memberikan umpan balik yang relevan, dan melacak
-            perkembangan akademik mereka. Selain itu, aplikasi ini juga memberikan laporan yang komprehensif dan
-            terstruktur, memudahkan administrasi sekolah dalam menyusun rekapitulasi nilai dan kehadiran siswa secara
-            efisien. Dengan menggunakan Sistem Informasi Akademik ini, SMKI Al Futuhiyyah dapat meningkatkan kualitas
-            pengelolaan akademik, meningkatkan transparansi, dan memberikan pengalaman yang lebih baik bagi siswa, orang
-            tua, dan staf pendidikan.
-        </p>
+    <div class="card-box pd-20 height-100-p mb-30">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h4 class="font-20 weight-500 mb-10 text-capitalize">
+                    Dashboard
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 mb-30">
+                <div id="chartA"></div>
+            </div>
+            <div class="col-xl-6 mb-30">
+                <div id="chartC">
+                </div>
+            </div>
+            {{-- <div class="col-xl-8 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <h2 class="h4 mb-20">Activity</h2>
+                    <div id="chart5"></div>
+                </div>
+            </div> --}}
+            {{-- <div class="col-xl-4 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <h2 class="h4 mb-20">Lead Target</h2>
+                    
+                </div>
+            </div> --}}
+        </div>
     </div>
     <div class="footer-wrap pd-20 mb-20 card-box">
         SMKI Al-Futuhiyyah
-        {{-- <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a> --}}
     </div>
+@endsection
+@section('footer')
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        // Data Kelas Dan Jumlah Kelas
+        Highcharts.chart('chartA', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Jumlah Siswa Setiap Kelas',
+                align: 'left'
+            },
+            xAxis: {
+                categories: [
+                    @foreach ($data as $item)
+                        '{{ $item['kelas'] }}',
+                    @endforeach
+                ],
+                crosshair: true,
+                accessibility: {
+                    description: 'Countries'
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Jumlah Siswa'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' siswa'
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Kelas',
+                data: [
+                    @foreach ($data as $item)
+                        {{ $item['jumlah_siswa'] }},
+                    @endforeach
+                ]
+            }, ]
+        });
+    </script>
+    <script>
+        // Data Jumlah Pengguna Aplikasi
+        Highcharts.chart('chartC', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Jumlah Pengguna Aplikasi SIAKAD',
+                align: 'left'
+            },
+            xAxis: {
+                categories: ['Kepala Sekolah', 'Guru', 'Siswa', 'Wali Siswa', 'Administrator'],
+                crosshair: true,
+                accessibility: {
+                    description: 'Countries'
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Jumlah Pengguna Aplikasi'
+                }
+            },
+            tooltip: {
+                valueSuffix: ' orang'
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'User',
+                data: [
+                    {!! json_encode($kepsek) !!}, {!! json_encode($guru) !!}, {!! json_encode($siswa) !!},
+                    {!! json_encode($ortu) !!}, {!! json_encode($admin) !!}
+                ]
+            }, ]
+        });
+    </script>
 @endsection

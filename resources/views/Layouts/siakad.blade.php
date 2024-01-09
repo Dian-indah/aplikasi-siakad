@@ -225,6 +225,7 @@
             style="display: none; visibility: hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     @yield('js')
+    @yield('footer')
 </body>
 
 </html>

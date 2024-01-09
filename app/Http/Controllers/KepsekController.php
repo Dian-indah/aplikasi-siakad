@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Kepsek;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
+
+
 class KepsekController extends Controller
 {
     private $model;
@@ -23,5 +26,5 @@ class KepsekController extends Controller
     {      
         $km = $this->model->getKelasMapel();
         return view('kepsek.lihatKelas', compact('km'));      
-    }
+    }    
 }

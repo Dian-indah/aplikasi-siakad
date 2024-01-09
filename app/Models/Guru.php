@@ -61,15 +61,15 @@ class Guru extends Authenticatable
     public function getDataSiswa($id)
     {
         $a = Guru::query()
-            ->leftJoin('kelas_siswa as ks', 'ks.guruPengajar', 'guru.id')
-            ->leftJoin('kelas as k', 'k.id', 'ks.kelasId')
-            ->leftJoin('mapel as m', 'm.id', 'ks.mapelId')
+            ->leftJoin('kelas_mapel as km', 'km.guruPengajar', 'guru.id')
+            ->leftJoin('kelas as k', 'k.id', 'km.kelasId')
+            ->leftJoin('mapel as m', 'm.id', 'km.mapelId')
             ->select(
                 'k.namaKelas as namaKelas',
                 'm.namaMapel as namaMapel',
                 'm.kodeMapel as kodeMapel',
                 'guru.username as guruPengajar',
-                'ks.id as kelasSiswaId'
+                'km.id as kelasMapelId'
                 
             )
             ->where('guru.id', $id)

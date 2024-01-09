@@ -41,7 +41,6 @@
                                         <i class="icon-copy fa fa-edit" aria-hidden="true"></i> Edit</a>
                                     <a href="javascript:;" data-id="<?= $row->id ?>" id="btn-hapus"
                                         class="btn btn-danger"><i class="fa fa-trash"></i>
-
                                 </td>
                             </tr>
                         @endforeach
@@ -78,7 +77,7 @@
                                 <label for="semester">Semester</label>
                                 <div class="col-sm-12 col-md-12">
                                     <select id="semester" name="semester" class="custom-select col-12" required>
-                                        <option disabled selected="">Pilih..</option>
+                                        <option value="" selected="">Pilih..</option>
                                         <option value="Ganjil">Ganjil</option>
                                         <option value="Genap">Genap</option>
                                     </select>
@@ -122,7 +121,7 @@
                                     class="form-control @error('tahunAjar') is-invalid @enderror" type="text" required />
                                 @error('tahunAjar')
                                     <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                @enderror   
                             </div>
                         </div>
                         <div class="form-group row">

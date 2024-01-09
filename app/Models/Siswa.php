@@ -66,5 +66,26 @@ class Siswa extends Authenticatable
         return $q;
     }
 
-    
+    public function getNilaiBySiswa($id)
+    {
+        $a = KelasMapel::query()                                    
+            ->leftJoin('guru as g', 'g.id', 'kelas_mapel.guruPengajar')      
+            ->leftJoin('mapel as m', 'm.id', 'kelas_mapel.mapelId')      
+            ->join('kelas as k', 'k.id', 'kelas_mapel.kelasId')
+            ->join('siswa_kelas as sk', 'sk.kelasId', 'k.id')    
+            ->leftJoin('siswa as s', 's.id', 'sk.siswaId') 
+            ->leftJoin('nilai as n', 'n.siswaKelasId', 'sk.id')
+            ->select(
+                'm.namaMapel as namaMapel',
+                'g.username as namaGuru',
+                'n.nts as nts',
+                'n.nas as nas',   
+                'k.namakelas as kelas',    
+                's.id as siswaId'
+            )
+            ->where('s.id', $id)
+            ->orderBy('k.namaKelas', 'ASC')
+            ->get();
+        return $a;        
+    }
 }

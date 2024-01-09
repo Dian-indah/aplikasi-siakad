@@ -92,12 +92,9 @@ class GuruController extends Controller
             'agama' => $request->agama,
             'alamat' => $request->alamat,
             'kewarganegaraan' => $request->kewarganegaraan,
-        ]);
-        // dd($Id);
-        // $data = Guru::Create($request->post());
+        ]);        
 
-        return redirect()->route('masterGuru');
-        // ->with('success', 'data Kurikulum telah ditambahkan');
+        return redirect()->route('masterGuru');       
     }
     public function updateGuru(Request $request)
     {
@@ -172,9 +169,12 @@ class GuruController extends Controller
     }
 
     //LOGIN GURU
-    public function menu()
+    public function menu($id)
     {
-        return view('Guru.menu');
+        $id = Auth::guard('guru')->user()->id;  
+        $guru = Guru::find($id);        
+        $nilai = $this->model->getDataSiswa($id); 
+        return view('Guru.menu', compact('guru', 'nilai'));
     }
 
     public function profil($id)
@@ -187,7 +187,7 @@ class GuruController extends Controller
     {
         $g = Guru::find($id);
         $nilai = $this->model->getDataSiswa($id);
-        return view('guru.guruNilai', compact('g', 'nilai'));
+        return view('guru.guruNilai', compact('g', 'nilai'));       
     }
 
     //GURU KEHADIRAN    

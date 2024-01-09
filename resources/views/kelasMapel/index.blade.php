@@ -142,7 +142,7 @@
                             <div class="col-sm-12 col-md-12">
                                 <label for="editkelasId">Nama Kelas</label>
                                 <select id="editkelasId" name="editkelasId" class="custom-select col-12" required>
-                                    <option disabled selected="">Pilih..</option>
+                                    <option value="" disabled selected="">Pilih..</option>
                                     @foreach ($kls as $row)
                                         <option value="{{ $row->id }}">{{ $row->namaKelas }}</option>
                                     @endforeach
@@ -153,7 +153,7 @@
                             <div class="col-sm-12 col-md-12">
                                 <label for="editguruPengajar">Nama Guru Pengajar</label>
                                 <select id="editguruPengajar" name="editguruPengajar" class="custom-select col-12" required>
-                                    <option disabled selected="">Pilih..</option>
+                                    <option value="" disabled selected="">Pilih..</option>
                                     @foreach ($guru as $item)
                                         <option value="{{ $item->id }}">{{ $item->username }}</option>
                                     @endforeach
@@ -164,7 +164,7 @@
                             <div class="col-sm-12 col-md-12">
                                 <label for="editmapelId">Nama Mapel</label>
                                 <select id="editmapelId" name="editmapelId" class="custom-select col-12" required>
-                                    <option disabled selected="">Pilih..</option>
+                                    <option value="" selected="">Pilih..</option>
                                     @foreach ($mapel as $item)
                                         <option value="{{ $item->id }}">{{ $item->namaMapel }}</option>
                                     @endforeach

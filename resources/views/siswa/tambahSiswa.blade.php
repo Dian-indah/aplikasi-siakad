@@ -14,34 +14,50 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Username</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="username" name="username" class="form-control" type="text" placeholder="siswa" required />
+                    <input id="username" name="username" class="form-control @error('username') is-invalid @enderror"
+                        type="text" placeholder="siswa" />
+                    @error('username')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Nama Lengkap</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="name" name="name" class="form-control" type="text" placeholder="Nama Lengkap" required />
+                    <input id="name" name="name" class="form-control @error('name') is-invalid @enderror"
+                        type="text" placeholder="Nama Lengkap" />
+                    @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Email</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="email" name="email" class="form-control" type="email" placeholder="dian@gmail.com" required />
+                    <input id="email" name="email" class="form-control" type="email" placeholder="dian@gmail.com" />
                 </div>
             </div>
             {{-- 3 --}}
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Password</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="password" name="password" class="form-control" type="password" placeholder="Password" required/>
+                    <input id="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                        type="password" placeholder="Password" />
+                    @error('password')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">NISN</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="nisn" name="nisn" class="form-control" type="nisn" placeholder="nisn" required />
+                    <input id="nisn" name="nisn" class="form-control @error('nisn') is-invalid @enderror"
+                        type="nisn" placeholder="nisn" />
+                    @error('nisn')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
-            </div>            
+            </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Jenis Kelamin</label>
                 <div class="col-sm-12 col-md-10">
@@ -69,7 +85,11 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">NIK</label>
                 <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="nik" name="nik" placeholder="NIK" type="text" required/>
+                    <input class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik"
+                        placeholder="NIK" type="text" />
+                    @error('nik')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
@@ -118,11 +138,15 @@
                     <input class="form-control" id="transportasi" name="transportasi" placeholder=" transportasi"
                         type="text" />
                 </div>
-            </div>            
+            </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Nama Ayah</label>
                 <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="namaAyah" name="namaAyah" placeholder="namaAyah" type="text" required/>
+                    <input class="form-control @error('namaAyah') is-invalid @enderror" id="namaAyah" name="namaAyah"
+                        placeholder="namaAyah" type="text" />
+                    @error('namaAyah')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
@@ -131,7 +155,7 @@
                     <input class="form-control date-picker" id="tanggalLahirAyah" name="tanggalLahirAyah"
                         placeholder="Tanggal Lahir Ayah" type="date" />
                 </div>
-            </div>            
+            </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Jenjang Pendidikan Ayah</label>
                 <div class="col-sm-12 col-md-10">
@@ -178,7 +202,11 @@
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Nama Ibu</label>
                 <div class="col-sm-12 col-md-10">
-                    <input class="form-control" id="namaIbu" name="namaIbu" placeholder="namaIbu" type="text" required/>
+                    <input class="form-control @error('namaIbu') is-invalid @enderror" id="namaIbu" name="namaIbu"
+                        placeholder="namaIbu" type="text" />
+                    @error('namaIbu')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
@@ -230,27 +258,27 @@
                 <div class="col-sm-12 col-md-10">
                     <input class="form-control" id="nikIbu" name="nikIbu" placeholder="nikIbu" type="text" />
                 </div>
-            </div>           
+            </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Sekolah Asal</label>
                 <div class="col-sm-12 col-md-10">
                     <input id="sekolahAsal" name="sekolahAsal" class="form-control" type="text"
-                        placeholder="Sekolah Asal"  />
+                        placeholder="Sekolah Asal" />
                 </div>
-            </div>           
+            </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Anak Ke-</label>
                 <div class="col-sm-12 col-md-10">
-                    <input id="anak" name="anak" class="form-control" type="number" placeholder="Anak Ke-"  />
+                    <input id="anak" name="anak" class="form-control" type="number" placeholder="Anak Ke-" />
                 </div>
-            </div>        
+            </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-2 col-form-label">Jumlah Saudara Kandung</label>
                 <div class="col-sm-12 col-md-10">
                     <input id="jmlSaudara" name="jmlSaudara" class="form-control" type="number"
-                        placeholder="Jumlah Saudara Kandung"  />
+                        placeholder="Jumlah Saudara Kandung" />
                 </div>
-            </div>                                
+            </div>
             <div class="form-group row">
                 <div class="col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Simpan</button>

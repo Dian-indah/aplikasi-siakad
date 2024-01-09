@@ -76,7 +76,6 @@ class KelasController extends Controller
         $kelas = Kelas::findOrFail($id);
         $kelas->delete();
 
-
         return response()->json(['success' => true]);
         // return back()->with('berhasil', 'Berhasil Dihapus');
     }

@@ -14,6 +14,11 @@ class SiswaKelas extends Model
         'kelasId',
     ];
 
+    public function kelas()
+    {
+      return $this->belongsTo(Kelas::class, 'kelasId','id');
+    }
+
     public function getAllSiswaKelas($id)
     {
         $a = SiswaKelas::query()
@@ -22,7 +27,8 @@ class SiswaKelas extends Model
             ->select(
                 's.nisn as nisn',
                 's.name as namaSiswa',
-                'k.id'
+                'k.id',
+                'siswa_kelas.id as idSiswaKelas'
             )
             ->where('k.id', $id)
             ->get();

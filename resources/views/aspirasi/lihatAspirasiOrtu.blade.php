@@ -66,7 +66,7 @@
                     <div class="modal-body">
                         <div class="form-group row">                            
                             <div class="col-sm-12 col-md-12">                                
-                                <textarea name="keterangan" id="keterangan" class="form-control" required></textarea>                                                             
+                                <textarea name="keterangan" id="keterangan" class="form-control" required placeholder="Ketik Aspirasi Di Sini..."></textarea>                                                             
                             </div>
                         </div>
                         <div class="form-group row">                            

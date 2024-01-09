@@ -17,6 +17,11 @@ class Kelas extends Model
         'guruId',  
     ]; 
 
+    public function siswa_kelas()
+    {
+      return $this->hasMany(SiswaKelas::class, 'kelasId','id');
+    }
+
     public function getKelas()
     {
         $a = Kelas::query()

@@ -53,8 +53,8 @@
                                 <td>{{ $row->nisn }}</td>
                                 <td>{{ $row->namaSiswa }}</td>
                                 <td class="text-center">                                    
-                                    <a href="javascript:;" id="btn-hapus" data-id="<?= $row->id ?>"
-                                        class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                    <a href="javascript:;" data-id="<?= $row->idSiswaKelas ?>" id="btn-hapus"
+                                        class="btn btn-danger"><i class="fa fa-trash"></i>Hapus</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -109,7 +109,7 @@
                         });
                         $.ajax({
                             type: "POST",
-                            url: "{{ url('/kelas/hapusSiswaKelas') }}" + '/' + id,
+                            url: "{{ url('/kelas/hapusSiswaKelas/') }}" + '/' + id,
                             data: {
                                 id: id
                             },

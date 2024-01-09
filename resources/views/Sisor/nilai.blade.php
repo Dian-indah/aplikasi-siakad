@@ -22,6 +22,7 @@
                         <tr>
                             <th scope="col">Kode</th>
                             <th scope="col">Mata Pelajaran</th>
+                            <th scope="col">Kelas</th>
                             <th scope="col">Guru Pengajar</th>
                             <th scope="col">UTS</th>
                             <th scope="col">UAS</th>
@@ -33,6 +34,7 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>                              
                                 <td>{{ $row->namaMapel }}</td>
+                                <td>{{ $row->kelas }}</td>
                                 <td>{{ $row->namaGuru }}</td>
                                 <td>{{ $row->nts }}</td>
                                 <td>{{ $row->nas }}</td>                                

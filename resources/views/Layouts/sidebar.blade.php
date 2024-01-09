@@ -68,9 +68,9 @@
     @elseif (Auth::guard('siswa')->check())
         <li>
             <a href="{{ route('menuSiswa', Auth::guard('siswa')->user()->id) }}"
-                class="{{ request()->is('menuSiswa') ? 'active' : '' }} dropdown-toggle no-arrow">
+                class="{{ request()->is('menuSiswa/*') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon fa fa-home"></span><span class="mtext">Menu</span>
-            </a>
+            </a>           
         </li>
         <li>
             <a href="{{ route('nilaiSiswa') }}"
@@ -86,10 +86,14 @@
         </li>
     @elseif (Auth::guard('ortu')->check())
         <li>
-            <a href="{{ route('menuOrtu') }}"
-                class="{{ request()->is('menuOrtu') ? 'active' : '' }} dropdown-toggle no-arrow">
+            <a href="{{ route('menuOrtu', Auth::guard('ortu')->user()->id) }}"
+                class="{{ request()->is('menuOrtu/*') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
             </a>
+            {{-- <a href="{{ route('menuSiswa', Auth::guard('siswa')->user()->id) }}"
+                class="{{ request()->is('menuSiswa/*') ? 'active' : '' }} dropdown-toggle no-arrow">
+                <span class="micon fa fa-home"></span><span class="mtext">Menu</span>
+            </a>     --}}
         </li>
         <li>
             <a href="{{ route('nilaiSiswaOrtu') }}"
@@ -111,8 +115,8 @@
         </li>
     @elseif (Auth::guard('guru')->check())
         <li>
-            <a href="{{ route('menuGuru') }}"
-                class="{{ request()->is('menuGuru') ? 'active' : '' }} dropdown-toggle no-arrow">
+            <a href="{{ route('menuGuru', Auth::guard('guru')->user()->id) }}"
+                class="{{ Request::is('menuGuru/*') ? 'active' : '' }} dropdown-toggle no-arrow">
                 <span class="micon bi bi-house"></span><span class="mtext">Menu</span>
             </a>
         </li>

@@ -75,12 +75,12 @@
                                             </select>
                                         @endif
                                     </td>
-                                    <td hidden>
-                                        <input value="{{ $item->tglKehadiran }}" name="tglKehadiran[]" id="tglKehadiran">
+                                    <td >
+                                        <input value="{{ $tglKehadiran }}" name="tglKehadiran[]" id="tglKehadiran">
                                     </td>
                                     <td hidden><input value="{{ $item->siswaKelasId }}" name="siswaKelasId[]"
                                             id="siswaKelasId"></td>
-                                    <td hidden><input value="{{ $item->kelasMapelId }}" name="kelasMapelId[]"
+                                    <td ><input value="{{ $idKelasMapel }}" name="kelasMapelId[]"
                                             id="kelasMapelId"></td>
                             </tr>
                         @endforeach

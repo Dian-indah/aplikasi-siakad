@@ -29,6 +29,24 @@ class Admin extends Authenticatable
         'remember_token',
     ];
 
+    public function getSiswaKelas()
+    {
+        $a = SiswaKelas::query()                    
+            ->join('kelas as k', 'k.id', 'siswa_kelas.kelasId')            
+            ->select('k.namaKelas', 'siswa_kelas.kelasId')
+            ->get();
+        // dd($a);
+        return $a;
+    }
+
+    public function getSiswa()
+    {
+        $q = DB::select("
+        SELECT * from siswa
+        ");
+        return $q;
+    }
+
     public function getAllPegawai()
     {
         $q = DB::select("

@@ -1,27 +1,33 @@
 @extends('Layouts.siakad')
 
 @section('content')		
-        <div class="card-box mb-30">
-            <h2 class="pd-20 ">Selamat Datang</h2>														
-            <h6 class="pd-20">Bapak Ibu</h6>					
-            <p class="pd-20">Aplikasi Sistem Informasi Akademik untuk SMKI Al Futuhiyyah adalah sebuah platform yang dirancang
-                khusus untuk mengelola nilai dan kehadiran siswa secara efektif. Aplikasi ini menyediakan berbagai fitur yang
-                memungkinkan staf akademik untuk dengan mudah memasukkan dan mengupdate data nilai siswa, serta memantau
-                kehadiran mereka secara real-time. Dengan antarmuka yang intuitif dan user-friendly, staf pendidikan dapat
-                dengan cepat mengakses dan menganalisis data nilai siswa, memberikan umpan balik yang relevan, dan melacak
-                perkembangan akademik mereka. Selain itu, aplikasi ini juga memberikan laporan yang komprehensif dan
-                terstruktur, memudahkan administrasi sekolah dalam menyusun rekapitulasi nilai dan kehadiran siswa secara
-                efisien. Dengan menggunakan Sistem Informasi Akademik ini, SMKI Al Futuhiyyah dapat meningkatkan kualitas
-                pengelolaan akademik, meningkatkan transparansi, dan memberikan pengalaman yang lebih baik bagi siswa, orang
-                tua, dan staf pendidikan.
-                
-            </p>
+<div class="card-box mb-30">
+    <h2 class="pd-20 ">Dashboard</h2>
+    <div class="xs-pd-20-10 pd-ltr-20">
+
+        <div class="row pb-10">
+            @foreach ($nilai as $row)
+                <div class="col-xl-4 col-lg-4 col-md-6 mb-20">
+                    <div class="card-box height-100-p widget-style3">
+                        <div class="d-flex flex-wrap">
+                            <div class="widget-data">
+                                <div class="weight-700 font-24 text-dark">{{ $row->kelas }}</div>
+                                <div class="font-14 text-secondary weight-500">
+                                    {{ $row->namaMapel }}
+                                </div>
+                            </div>
+                            <div class="widget-icon">
+                                <div class="icon" data-color="#00eccf">
+                                    <i class="icon-copy bi bi-bookmarks-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
-        <div class="footer-wrap pd-20 mb-20 card-box">
-            DeskApp - Bootstrap 4 Admin Template By
-            <a href="https://github.com/dropways" target="_blank"
-                >Ankit Hingarajiya</a
-            >
-        </div>
+
+    </div>
+</div>
 @endsection
 

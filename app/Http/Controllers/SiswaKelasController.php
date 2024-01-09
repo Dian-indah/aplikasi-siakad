@@ -16,7 +16,7 @@ class SiswaKelasController extends Controller
         $this->model = new SiswaKelas();
     }
     public function tambahSiswaKelas($id)
-    {
+    {  
         $k = Kelas::find($id);        
         $siskel = $this->model->getAllSiswaKelas($id);
         return view('kelas.tambahSiswaKelas', compact('k', 'siskel'));
@@ -55,9 +55,8 @@ class SiswaKelasController extends Controller
 
     public function hapusSiswaKelas($id)
     {
-       
-        $sk = SiswaKelas::findOrFail($id);        
-        $sk->delete();
+        $siskel = SiswaKelas::findOrFail($id);        
+        $siskel->delete();
 
         return response()->json(['success' => true]);
         // return back()->with('berhasil', 'Berhasil Dihapus');

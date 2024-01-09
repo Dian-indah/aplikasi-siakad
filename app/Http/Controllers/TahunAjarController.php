@@ -64,8 +64,7 @@ class TahunAjarController extends Controller
     }
 
     public function destroy($id)
-    {
-       
+    {       
         $kurikulum = tahunAjar::findOrFail($id);
         $kurikulum->delete();
 

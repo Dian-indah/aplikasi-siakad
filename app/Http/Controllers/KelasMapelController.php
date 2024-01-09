@@ -61,9 +61,9 @@ class KelasMapelController extends Controller
           $data = KelasMapel::find($id)     
           ->update([
             //'kode' => $request->kode,
-            'kelasId' => $request->kelasId,                               
-            'mapelId' => $request->mapelId,                     
-            'guruPengajar' => $request->guruPengajar,   
+            'kelasId' => $request->editkelasId,                               
+            'mapelId' => $request->editmapelId,                     
+            'guruPengajar' => $request->editguruPengajar,   
           ]); 
 
           return redirect()

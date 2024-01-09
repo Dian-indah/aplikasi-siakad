@@ -17,9 +17,12 @@ class OrtuController extends Controller
         $this->model = new Ortu();
     }
 
-    public function index()
-    {        
-        return view('ortu.menu');
+    public function index($id)
+    {  
+        $id = Auth::guard('ortu')->user()->id;  
+        $ortu = Ortu::find($id);        
+        $nilai = $this->model->getNilaiByOrtu($id);    
+        return view('ortu.menu', compact('ortu','nilai'));
     }
 
     //Admin

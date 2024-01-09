@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AspirasiExport;
 use App\Models\Aspirasi;
 use App\Models\Ortu;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AspirasiController extends Controller
 {
@@ -93,5 +95,10 @@ class AspirasiController extends Controller
 
         return back();
             // ->with('success', 'data Kurikulum telah ditambahkan');
-    }    
+    }   
+    
+    public function aspirasiExport()
+    {    
+        return Excel::download(new AspirasiExport(), 'Aspirasi.xlsx');
+    }
 }

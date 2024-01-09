@@ -41,27 +41,27 @@ class SiswaController extends Controller
         // dd($request);
         $request->validate([
             'name'  => 'required',
-            'username'  => 'required',
+            'username'  => 'required|unique:siswa',
             'password'  => 'required',
-            'email'  => 'required',
-            'nisn'  => '',
+            'email'  => '',
+            'nisn'  => 'required|unique:siswa',
             'jenkel'  => '',
             'tempatLahir'  => '',
             'tanggalLahir'  => '',
-            'nik'  => '',
+            'nik'  => 'required',
             'noKk'  => '',
             'noHp'  => '',
             'agama'  => '',
             'alamat'  => '',
             'jenisTinggal'  => '',
             'transportasi'  => '',
-            'namaAyah'  => '',
+            'namaAyah'  => 'required',
             'tanggalLahirAyah'  => '',
             'pendidikanAyah'  => '',
             'pekerjaanAyah'  => '',
             'penghasilanAyah'  => '',
             'nikAyah'  => '',
-            'namaIbu'  => '',
+            'namaIbu'  => 'required',
             'tanggalLahirIbu'  => '',
             'pendidikanIbu'  => '',
             'pekerjaanIbu'  => '',
@@ -70,8 +70,17 @@ class SiswaController extends Controller
             'sekolahAsal'  => '',
             'anak'  => '',
             'jmlSaudara'  => '',
+        ],[
+            'username.required' => 'Username Harus Diisi',
+            'name.required' => 'Nama Harus Diisi',
+            'username.unique' => 'Username Telah Ada',
+            'password.required' => 'Password Harus Diisi',
+            'nisn.required' => 'NUPTK Harus Diisi',
+            'nisn.unique' => 'NUPTK Telah Ada',
+            'nik.required' => 'NIK Harus Diisi',
+            'namaAyah.required' => 'Nama Ayah Harus Diisi',
+            'namaIbu.required' => 'Nama Ibu Harus Diisi',
         ]);
-
         $Id = Siswa::create([
             'name' => $request->name,
             'username' => $request->username,
@@ -117,6 +126,46 @@ class SiswaController extends Controller
     public function updateSiswa(Request $request)
     {
         $id = $request->idSiswa;
+        $request->validate([
+            'name'  => 'required',
+            'username'  => 'required',
+            'password'  => 'required',
+            'email'  => '',
+            'nisn'  => 'required',
+            'jenkel'  => '',
+            'tempatLahir'  => '',
+            'tanggalLahir'  => '',
+            'nik'  => 'required',
+            'noKk'  => '',
+            'noHp'  => '',
+            'agama'  => '',
+            'alamat'  => '',
+            'jenisTinggal'  => '',
+            'transportasi'  => '',
+            'namaAyah'  => 'required',
+            'tanggalLahirAyah'  => '',
+            'pendidikanAyah'  => '',
+            'pekerjaanAyah'  => '',
+            'penghasilanAyah'  => '',
+            'nikAyah'  => '',
+            'namaIbu'  => 'required',
+            'tanggalLahirIbu'  => '',
+            'pendidikanIbu'  => '',
+            'pekerjaanIbu'  => '',
+            'penghasilanIbu'  => '',
+            'nikIbu'  => '',
+            'sekolahAsal'  => '',
+            'anak'  => '',
+            'jmlSaudara'  => '',
+        ], [
+            'username.required' => 'Username Harus Diisi',
+            'name.required' => 'Nama Harus Diisi',            
+            'password.required' => 'Password Harus Diisi',
+            'nisn.required' => 'NUPTK Harus Diisi',          
+            'nik.required' => 'NIK Harus Diisi',
+            'namaAyah.required' => 'Nama Ayah Harus Diisi',
+            'namaIbu.required' => 'Nama Ibu Harus Diisi',
+        ]);
         $data = Siswa::where('id', $id)
             ->update([
                 'name' => $request->name,
@@ -156,9 +205,12 @@ class SiswaController extends Controller
         // ->with('success', 'data Kurikulum telah ditambahkan');
     }
 
-    public function menuSiswa()
-    {
-        return view('siswa.menu');
+    public function menuSiswa($id)
+    {      
+        $id = Auth::guard('siswa')->user()->id;  
+        $siswa = Siswa::find($id);        
+        $nilai = $this->model->getNilaiBySiswa($id);
+        return view('siswa.menu', compact('siswa','nilai'));
     }
 
     public function selectSearch(Request $request)

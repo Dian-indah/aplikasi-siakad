@@ -3,9 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\KelasMapel;
+use App\Models\Kepsek;
+use App\Models\Ortu;
+use App\Models\Siswa as ModelsSiswa;
+use App\Models\SiswaKelas;
+use App\Models\TahunAjar;
+use App\Models\TingkatKelas as ModelsTingkatKelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Siswa;
+use TingkatKelas;
 
 class AdminController extends Controller
 {
@@ -18,13 +29,44 @@ class AdminController extends Controller
 
     public function index()
     {
-        $pegawai = $this->model->getAllPegawai();       
+        $pegawai = $this->model->getAllPegawai();
         return view('administrator.index', compact('pegawai'));
     }
 
     public function menuAdmin()
     {
-        return view('admin.menu');
+        $sk = SiswaKelas::all();
+        $k = Kelas::all();
+        $tk = ModelsTingkatKelas::all();
+        $g = Guru::all();
+        $gr = Guru::count();
+        $sw = ModelsSiswa::count();
+        $ad = Admin::count();
+        $or = Ortu::count();
+        $ks = Kepsek::count();
+        $categories = [];
+        $data = [];
+        $tingket = [];
+        $data1 = [];
+              
+        foreach ($k as $kl) {
+            $categories[] = $kl->namaKelas;
+            $jumlahSiswa = SiswaKelas::where('kelasId', $kl->id)->count();
+            $data[] = [
+                'kelas' => $kl->namaKelas,
+                'jumlah_siswa' => $jumlahSiswa,
+            ];
+        }
+        foreach ($g as $guru) {
+            $jumlahGuru = Guru::where('id', $guru->id)->count();
+            $dataGuru[] = [
+                'jumlah_guru' => $jumlahGuru,
+            ];
+        }
+        // dd($gr)   ;
+        return view('admin.menu', ['categories' => $categories, 
+        'data' => $data, 'guru' => $gr, 'siswa' => $sw,'admin' => $ad,
+        'ortu' => $or,'kepsek' => $ks,]);
     }
 
     public function showPegawaiById($id)
@@ -34,6 +76,7 @@ class AdminController extends Controller
         $response['data'] = $pegawai;
         return response()->json($response);
     }
+
     public function simpaPegawai(Request $request)
     {
         $request->validate([
@@ -117,8 +160,8 @@ class AdminController extends Controller
                 'username' => $request->editUsername,
                 'password' => Hash::make($request['editPassword']),
                 'email' => $request->editEmail,
-                'notelp' => $request->notelp,
-                'jenkel' => $request->jenkel,
+                'notelp' => $request->editnotelp,
+                'jenkel' => $request->editjenkel,
                 'tempatLahir' => $request->editTempatLahir,
                 'tglLahir' => $request->editTglLahir,
                 'alamat' => $request->editAlamat,
@@ -159,5 +202,4 @@ class AdminController extends Controller
     {
         return view('Admin.aspirasi');
     }
- 
 }
